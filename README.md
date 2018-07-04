@@ -43,6 +43,7 @@ WOMBAT provides a single point of access to existing WECs. Each plain text WEC f
 
 <h3>Importing Pre-Trained Embeddings to WOMBAT: GloVe</h3>
 One of the main uses of WOMBAT is as a wrapper for accessing existing, off-the-shelf word embeddings like e.g. GloVe. (The other use involves access to self-trained embeddings, including tokenization and handling of multi-word-expressions, cf. below.)
+
 The following code is sufficient to import a sub set of the GloVe embeddings. 
 <pre>
 from wombat_api.core import connector as wb_conn
