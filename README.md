@@ -31,5 +31,6 @@ Key features of WOMBAT are
 1. transparent identification of WECs by means of a clean syntax and human-readable features, 
 2. efficient lazy, on-demand retrieval of word vectors, and 
 3. increased robustness by systematic integration of executable preprocessing code. 
+
 WOMBAT implements some Best Practices for research reproducibility and complements existing approaches towards WEC standardization and sharing. 
 WOMBAT provides a single point of access to existing WECs. Each plain text WEC file has to be imorted into WOMBAT once, receiving in the process a set of ATT:VAL identifiers consisting of five system attributes (algo, dims, dataset, unit, fold) plus arbitrarily many user-defined ones.
