@@ -56,7 +56,7 @@ for d in ['50', '100', '200', '300']:
 </pre>
 
 <p>
-To run this code, run 
+To execute this code, run 
 <pre>
 python tools/import_to_wombat.py
 </pre>
@@ -64,7 +64,7 @@ from the WOMBAT directory.
 </p>
 
 <p>
-The required GloVe embeddings can be obtained from Stanford <a href="http://nlp.stanford.edu/data/wordvecs/glove.6B.zip">here</a>, and need to be extracted into "data/embeddings/".
+The required GloVe embeddings are <b>not part of WOMBAT</b> and can be obtained from Stanford <a href="http://nlp.stanford.edu/data/wordvecs/glove.6B.zip">here</a>. Extract them into "data/embeddings/".
 The WOMBAT master and embeddings data bases will be created in "data/wombat-data". 
 </p>
 <p>
