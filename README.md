@@ -90,7 +90,7 @@ wbpath="data/wombat-data/"
 wec_ids="algo:glove;dataset:6b;dims:{50,100};fold:1;unit:token"
 wbc = wb_conn(path=wbpath, create_if_missing=False)
 
-vecs = wbc.get_vectors(wec_ids, {}, for_input=[['this','is','a', 'test'], ['yet', 'another', 'test']], raw=False)
+vecs = wbc.get_vectors(wec_ids, {}, for_input=[['this','is','a', 'test'], ['yet', 'another', 'test']])
 
 # One wec_result for each wec specified in wec_identifier
 for wec_index in range(len(vecs)):
