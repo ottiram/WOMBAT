@@ -329,3 +329,7 @@ Vector: [ 0.069143 -0.13195  -0.86449  -0.62174   0.18645  -0.42145   0.71741
  -0.78377   0.55204   0.60143  -0.94121   0.11934   0.14358   0.061115
   0.17102 ]
 </pre>
+
+<p>
+In order to process raw input, WOMBAT supports the integration of arbitray python code right into the word embedding database. If WOMBAT is then accessed with the attribute raw=True, this code is automatically executed in the background. 
+</p>
