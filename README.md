@@ -80,6 +80,25 @@ The above import assigns only the minimally required ATT:VAL pairs to the embedd
 </p>
 
 <p>
-After import, the embedding vectors are available for efficient of <b>already preprocessed</b> words. 
+After import, the embedding vectors are immediately available for efficient lookup of <b>already preprocessed</b> words. 
 The following code accesses two of the four GloVe WECs and looks up &lt;unit, vector&gt; tuples for two sequences of words.
 </p>
+
+<pre>
+from wombat_api.core import connector as wb_conn
+wbpath="data/wombat-data/"
+wec_ids="algo:glove;dataset:6b;dims:{50,100};fold:1;unit:token"
+wbc = wb_conn(path=wbpath, create_if_missing=False)
+
+vecs = wbc.get_vectors(wec_ids, {}, for_input=[['this','is','a', 'test'], ['yet', 'another', 'test']], raw=False)
+
+# One wec_result for each wec specified in wec_identifier
+for wec_index in range(len(vecs)):
+    print("\nWEC: %s"%vecs[wec_index][0])               # Index 0 element is the wec_id
+    for (raw, prepro, tuples) in vecs[wec_index][1]:    # Index 1 element is the list of all results for this wec
+                                                        # Result list contains tuples of ([raw],[prepro],[(w,v) tuples])
+        print("Raw:    '%s'"%str(raw))
+        print("Prepro: %s"%str(prepro))
+        for (w,v) in tuples:
+            print("Unit:   %s\nVector: %s\n"%(w,str(v)))
+</pre>
