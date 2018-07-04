@@ -78,3 +78,8 @@ The above import assigns only the minimally required ATT:VAL pairs to the embedd
 <tr><td>unit</td><td>Unit of representation used in the embedding vectors. Works as a descriptive label with pre-trained embeddings for which no custom preprocessing has been integrated into WOMBAT. If custom preprocessing exists, the value of this attribute is passed to the process() method. The current preprocessor modules support the values <b>stem</b> and <b>token</b>.</td></tr>
 </table>
 </p>
+
+<p>
+After import, the embedding vectors are available for efficient of <b>already preprocessed</b> words. 
+The following code accesses two of the four GloVe WECs and looks up &lt;unit, vector&gt; tuples for two sequences of words.
+</p>
