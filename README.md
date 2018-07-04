@@ -42,11 +42,11 @@ WOMBAT implements some Best Practices for research reproducibility and complemen
 WOMBAT provides a single point of access to existing WECs. Each plain text WEC file has to be imorted into WOMBAT once, receiving in the process a set of ATT:VAL identifiers consisting of five system attributes (algo, dims, dataset, unit, fold) plus arbitrarily many user-defined ones.
 
 <h3>Import to WOMBAT:</h3>
-`from wombat_api.core import connector as wb_conn
+` from wombat_api.core import connector as wb_conn
 wbpath="data/wombat-data/"
 importpath="data/rawembeddings/"
 
 wbc = wb_conn(path=wbpath, create_if_missing=True)
 
 for d in ['50', '100', '200', '300']:
-    wbc.import_from_file(importpath+"glove.6B."+d+"d.txt", "algo:glove;dataset:6b;dims:"+d+";fold:1;unit:token")`
+    wbc.import_from_file(importpath+"glove.6B."+d+"d.txt", "algo:glove;dataset:6b;dims:"+d+";fold:1;unit:token") `
