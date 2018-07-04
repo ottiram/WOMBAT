@@ -62,10 +62,10 @@ The WOMBAT master and embeddings data bases will be created in "data/wombat-data
 The above import assigns only the minimally required ATT:VAL pairs to the embeddings.
 <table>
 <tr><td>ATT</td><td>Meaning</td></tr>
-<tr><td>algo</td><td>Descriptive label for the algorithm used for training.</td></tr>
-<tr><td>dataset</td><td>Descriptive label for the data set used for training.</td></tr>
-<tr><td>dims</td><td>Dimensionality of the embedding vectors. Required for description and for creating right-sized empty vectors for oov words.</td></tr>
+<tr><td>algo</td><td>Descriptive label for the algorithm used for training these embeddding vectors.</td></tr>
+<tr><td>dataset</td><td>Descriptive label for the data set used for training these embedding vectors.</td></tr>
+<tr><td>dims</td><td>Dimensionality of these embedding vectors. Required for description and for creating right-sized <b>empty</b> vectors for OOV words.</td></tr>
 <tr><td>fold</td><td>Indicates whether the embedding vectors are case-sensitive (fold=0) or not (fold=1). If fold=1, input words are lowercased before lookup.</td></tr>
-<tr><td>unit</td><td>Unit of representation used in the embedding vectors. Works as a descriptive label with pre-trained embeddings for which no custom preprocessing has been integrated into WOMBAT. If custom preprocessing exists, the value of this attribute is passed to the process() method. The current preprocessor modules support the values stem and token.</td></tr>
+<tr><td>unit</td><td>Unit of representation used in the embedding vectors. Works as a descriptive label with pre-trained embeddings for which no custom preprocessing has been integrated into WOMBAT. If custom preprocessing exists, the value of this attribute is passed to the process() method. The current preprocessor modules support the values <b>stem</b> and <b>token</b>.</td></tr>
 </table>
 </p>
