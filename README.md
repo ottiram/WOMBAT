@@ -25,7 +25,7 @@ Word Embedding Database
  |            http://wombat.ascii.uk |
 </pre>
 
-WOMBAT, the WOrd eMBedding dATabase, is a light-weight Python tool for more transparent, efficient, and robust access to potentially large numbers of word embedding collections (WECs). 
+<b>WOMBAT</b>, the WOrd eMBedding dATabase, is a light-weight Python tool for more transparent, efficient, and robust access to potentially large numbers of word embedding collections (WECs). 
 It supports NLP researchers and practitioners in developing compact, efficient, and reusable code. 
 Key features of WOMBAT are
 1. transparent identification of WECs by means of a clean syntax and human-readable features, 
