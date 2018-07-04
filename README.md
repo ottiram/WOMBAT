@@ -48,9 +48,11 @@ The following code is sufficient to import a sub set of the GloVe embeddings.
 <pre>
 from wombat_api.core import connector as wb_conn
 wbpath="data/wombat-data/"
-importpath="data/rawembeddings/"
+importpath="data/embeddings/"
 wbc = wb_conn(path=wbpath, create_if_missing=True)
 for d in ['50', '100', '200', '300']:
     wbc.import_from_file(importpath+"glove.6B."+d+"d.txt", 
                          "algo:glove;dataset:6b;dims:"+d+";fold:1;unit:token")
 </pre>
+
+The required GloVe embeddings can be obtained from Stanford <a href="http://nlp.stanford.edu/data/wordvecs/glove.6B.zip">here</a>, and need to be extracted into "data/embeddings/".
