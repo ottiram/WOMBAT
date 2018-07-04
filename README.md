@@ -54,6 +54,15 @@ for d in ['50', '100', '200', '300']:
     wbc.import_from_file(importpath+"glove.6B."+d+"d.txt", 
                          "algo:glove;dataset:6b;dims:"+d+";fold:1;unit:token")
 </pre>
+
+<p>
+To run this code, run 
+<pre>
+python tools/import_to_wombat.py
+</pre>
+from the WOMBAT directory.
+</p>
+
 <p>
 The required GloVe embeddings can be obtained from Stanford <a href="http://nlp.stanford.edu/data/wordvecs/glove.6B.zip">here</a>, and need to be extracted into "data/embeddings/".
 The WOMBAT master and embeddings data bases will be created in "data/wombat-data". 
