@@ -56,3 +56,12 @@ for d in ['50', '100', '200', '300']:
 </pre>
 
 The required GloVe embeddings can be obtained from Stanford <a href="http://nlp.stanford.edu/data/wordvecs/glove.6B.zip">here</a>, and need to be extracted into "data/embeddings/".
+
+The WOMBAT master and embeddings data bases will be created in "data/wombat-data". 
+
+The above import assigns only the minimally required ATT:VAL pairs to the embeddings:
+<table>
+<tr>
+<td>hh</td>
+</tr>
+</table>
