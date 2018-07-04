@@ -1,9 +1,8 @@
 # WOMBAT
 Word Embedding Database
 
-<br/>
-See <a href="http://arxiv.org/abs/1807.00717" target="_new">this paper</a> (to appear at <a href="http://coling2018.org/accepted-demo-papers/" target="_new">COLING 2018</a>) for more details.
-<br/>
+See <a href="http://arxiv.org/abs/1807.00717" target=_new>this paper</a> (to appear at <a href="http://coling2018.org/accepted-demo-papers/" target=_new>COLING 2018</a>) for more details.
+
 
 <pre>
  |                                   | 
