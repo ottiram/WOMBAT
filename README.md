@@ -41,5 +41,6 @@ Key features of WOMBAT are
 WOMBAT implements some Best Practices for research reproducibility and complements existing approaches towards WEC standardization and sharing. 
 WOMBAT provides a single point of access to existing WECs. Each plain text WEC file has to be imorted into WOMBAT once, receiving in the process a set of ATT:VAL identifiers consisting of five system attributes (algo, dims, dataset, unit, fold) plus arbitrarily many user-defined ones.
 
-<h3>Import to WOMBAT:</h3>
+<h3>Importing Pre-Trained Embeddings to WOMBAT: GloVe</h3>
+One of the main uses of WOMBAT is as a wrapper for accessing existing, off-the-shelf word embeddings like e.g. GloVe. (The other use involves access to self-trained embeddings, including tokenization and handling of multi-word-expressions, cf. below.)
 
