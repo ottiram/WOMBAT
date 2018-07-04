@@ -83,7 +83,7 @@ The above import assigns only the minimally required ATT:VAL pairs to the embedd
 
 <p>
 After import, the embedding vectors are immediately available for efficient lookup of <b>already preprocessed</b> words. 
-The following code accesses two of the four GloVe WECs and looks up &lt;unit, vector&gt; tuples for two sequences of words.
+The following code accesses one of the four GloVe WECs and looks up &lt;unit, vector&gt; tuples for two sequences of words.
 </p>
 
 <pre>
@@ -199,6 +199,10 @@ Vector: [ 0.6935   -0.13892  -0.10862  -0.18671   0.56311   0.070388 -0.52788
  -0.28682   0.12492   0.49278  -0.57784  -0.75677  -0.47876  -0.083749
  -0.013377  0.19862  -0.14819   0.21787  -0.30472   0.54255  -0.20916
   0.14965 ]
-
 </pre>
 
+
+<p>
+WOMBAT also supports the selection of embedding vectors for words <b>matching a particular string pattern</b>.
+The follwing code looks up embedding vectors matching the supplied pattern. The pattern uses the GLOB syntax described <a href=http://www.sqlitetutorial.net/sqlite-glob/">here</a>. In a nut shell, it allows the use of ?, *, [], [^], and ranges.
+</p>
