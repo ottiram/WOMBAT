@@ -59,10 +59,13 @@ The required GloVe embeddings can be obtained from Stanford <a href="http://nlp.
 The WOMBAT master and embeddings data bases will be created in "data/wombat-data". 
 </p>
 <p>
-The above import assigns only the minimally required ATT:VAL pairs to the embeddings:
+The above import assigns only the minimally required ATT:VAL pairs to the embeddings.
 <table>
-<tr>
-<td>hh</td>
-</tr>
+<tr><td>ATT</td><td>Meaning</td></tr>
+<tr><td>algo</td><td>Descriptive label for the algorithm used for training.</td></tr>
+<tr><td>dataset</td><td>Descriptive label for the data set used for training.</td></tr>
+<tr><td>dims</td><td>Dimensionality of the embedding vectors. Required for description and creating right-sized empty vectors for oov words.</td></tr>
+
+
 </table>
 </p>
