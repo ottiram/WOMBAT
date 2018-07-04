@@ -42,7 +42,7 @@ WOMBAT implements some Best Practices for research reproducibility and complemen
 WOMBAT provides a single point of access to existing WECs. Each plain text WEC file has to be imorted into WOMBAT once, receiving in the process a set of ATT:VAL identifiers consisting of five system attributes (algo, dims, dataset, unit, fold) plus arbitrarily many user-defined ones.
 
 <h3>Importing Pre-Trained Embeddings to WOMBAT: GloVe</h3>
-One of the main uses of WOMBAT is as a wrapper for accessing existing, off-the-shelf word embeddings like e.g. GloVe. (The other use involves access to self-trained embeddings, including tokenization and handling of multi-word-expressions, cf. below.)
+One of the main uses of WOMBAT is as a wrapper for accessing existing, off-the-shelf word embeddings like e.g. GloVe. (The other use involves access to self-trained embeddings, including preprocessing and handling of multi-word-expressions, cf. below.)
 
 The following code is sufficient to import a sub set of the GloVe embeddings. 
 <pre>
@@ -94,9 +94,11 @@ vecs = wbc.get_vectors(wec_ids, {}, for_input=[['this','is','a', 'test'], ['yet'
 
 # One wec_result for each wec specified in wec_identifier
 for wec_index in range(len(vecs)):
-    print("\nWEC: %s"%vecs[wec_index][0])               # Index 0 element is the wec_id
-    for (raw, prepro, tuples) in vecs[wec_index][1]:    # Index 1 element is the list of all results for this wec
-                                                        # Result list contains tuples of ([raw],[prepro],[(w,v) tuples])
+    # Index 0 element is the wec_id
+    print("\nWEC: %s"%vecs[wec_index][0])
+    # Index 1 element is the list of all results for this wec
+    # Result list contains tuples of ([raw],[prepro],[(w,v) tuples])
+    for (raw, prepro, tuples) in vecs[wec_index][1]: 
         print("Raw:    '%s'"%str(raw))
         print("Prepro: %s"%str(prepro))
         for (w,v) in tuples:
