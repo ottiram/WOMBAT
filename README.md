@@ -70,7 +70,7 @@ The WOMBAT master and embeddings data bases will be created in "data/wombat-data
 <p>
 The above import assigns only the minimally required ATT:VAL pairs to the embeddings.
 <table>
-<tr><td>ATT</td><td>Meaning</td></tr>
+<tr><td><b>Attribute</b></td><td><b>Meaning</b></td></tr>
 <tr><td>algo</td><td>Descriptive label for the <b>algorithm</b> used for training these embeddding vectors.</td></tr>
 <tr><td>dataset</td><td>Descriptive label for the <b>data set</b> used for training these embedding vectors.</td></tr>
 <tr><td>dims</td><td><b>Dimensionality</b> of these embedding vectors. Required for description and for creating right-sized <b>empty</b> vectors for OOV words.</td></tr>
