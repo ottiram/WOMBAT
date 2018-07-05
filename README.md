@@ -86,7 +86,7 @@ After import, the embedding vectors are immediately available for efficient look
 The following code accesses one of the four GloVe WECs and looks up &lt;unit, vector&gt; tuples for two sequences of words.
 </p>
 
-<pre>
+```python
 from wombat_api.core import connector as wb_conn
 
 wbpath="data/wombat-data/"
@@ -107,13 +107,13 @@ for wec_index in range(len(vecs)):
         print("Prepro: %s"%str(prepro))
         for (w,v) in tuples:
             print("Unit:   %s\nVector: %s\n"%(w,str(v)))
-</pre>
+```
 
 <p>
 To execute this code, run 
-<pre>
-python tools/test_get_vectors.py
-</pre>
+```python
+$ python tools/test_get_vectors.py
+```
 from the WOMBAT directory.
 </p>
 
@@ -235,7 +235,7 @@ for wec_index in range(len(vecs)):
 <p>
 Executing this code with
 ```python
-python tools/test_get_matching_vectors.py street-*
+$ python tools/test_get_matching_vectors.py street-*
 ```
 from the WOMBAT directory
 returns
