@@ -234,9 +234,9 @@ for wec_index in range(len(vecs)):
 
 <p>
 Executing this code with
-<pre>
+```python
 python tools/test_get_matching_vectors.py street-*
-</pre>
+```
 from the WOMBAT directory
 returns
 </p>
@@ -336,6 +336,7 @@ In order to process raw input, WOMBAT supports the integration of arbitrary pyth
 
 ```python
 >>> from wombat_api.preprocessors.standard_preprocessor import preprocessor
+
 ```
 
 
