@@ -339,9 +339,46 @@ Vector: [ 0.069143 -0.13195  -0.86449  -0.62174   0.18645  -0.42145   0.71741
 In order to process raw input, WOMBAT supports the integration of arbitrary python code right into the word embedding database. Then, if WOMBAT is accessed with the attribute raw=True, this code is automatically executed in the background. 
 </p>
 
+<p>
+WOMBAT provides the class wombat_api.preprocessors.preprocessor_stub.py to be used as a base for customized preprocessing code.
+</p>
+
+```python
+import pickle
+
+# Stop-word replacement
+SW_SYMBOL="*sw*"
+
+class preprocessor(object):
+    def __init__(self, name=__name__, phrasefile="", verbose=False):
+
+        if verbose: print("Initializing preprocessor %s"%name)
+
+    """ This method is called from WOMBAT.
+        'line' is the raw string to be processed,
+        'unit' is the processing unit to be used. 
+    """
+    def process(self, line, unit, fold=True, sw_symbol=SW_SYMBOL, conflate=False, no_phrases=False, verbose=False): 
+
+        # Lowercase if fold==True
+        if fold: line=line.lower()
+        # This does the most rudimentary preprocessing only
+        return line.split(" ")        
+
+    def pickle(self, picklefile):
+        pickle.dump(self, open(picklefile,"wb"), protocol=pickle.HIGHEST_PROTOCOL)
+```
+
+
+
+<p>
+WOMBAT provides a standard preprocessor (based on NLTK) in wombat_api.preprocessors, 
+</p>
+
 ```python
 >>> from wombat_api.preprocessors.standard_preprocessor import preprocessor
-
+>>> prepro=preprocessor(name="my_standard_preprocessor", phrasefile="")
+>>> prepro.pickle("pickled/my_standard_preprocessor.pkl")
 ```
 
 
