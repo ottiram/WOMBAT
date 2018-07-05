@@ -356,9 +356,10 @@ class preprocessor(object):
 
     """ This method is called from WOMBAT.
         'line' is the raw string to be processed,
-        'unit' is the processing unit to be used. 
+        'unit' is the processing unit to be used (e.g. token, stem). 
     """
-    def process(self, line, unit, fold=True, sw_symbol=SW_SYMBOL, conflate=False, no_phrases=False, verbose=False): 
+    def process(self, line, unit, fold=True, sw_symbol=SW_SYMBOL, conflate=False, 
+                no_phrases=False, verbose=False): 
 
         # Lowercase if fold==True
         if fold: line=line.lower()
