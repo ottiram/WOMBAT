@@ -239,7 +239,7 @@ for wec_index in range(len(vecs)):
 <p>
 Executing this code with
 
-```shell-script
+```shell
 $ python tools/test_get_matching_vectors.py street-*
 ```
 
