@@ -415,7 +415,9 @@ wbc = wb_conn(path=wbpath, create_if_missing=False)
 wec_ids="algo:glove;dataset:6b;dims:50;fold:1;unit:token"
 rawfile="data/text/STS.input.track5.en-en.txt"
 
-vecs = wbc.get_vectors(wec_ids, {}, for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=0)], raw=True)
+vecs = wbc.get_vectors(wec_ids, {}, 
+            for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=0)], 
+            raw=True)
 
 # One wec_result for each wec specified in wec_identifier
 for wec_index in range(len(vecs)):
