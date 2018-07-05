@@ -47,7 +47,7 @@ WOMBAT provides a single point of access to existing WECs. Each plain text WEC f
 One of the main uses of WOMBAT is as a wrapper for accessing existing, off-the-shelf word embeddings like e.g. GloVe. (The other use involves access to self-trained embeddings, including preprocessing and handling of multi-word-expressions, cf. below.)
 
 The following code is sufficient to import a sub set of the GloVe embeddings. 
-<pre>
+```python
 from wombat_api.core import connector as wb_conn
 wbpath="data/wombat-data/"
 importpath="data/embeddings/"
@@ -55,13 +55,13 @@ wbc = wb_conn(path=wbpath, create_if_missing=True)
 for d in ['50', '100', '200', '300']:
     wbc.import_from_file(importpath+"glove.6B."+d+"d.txt", 
                          "algo:glove;dataset:6b;dims:"+d+";fold:1;unit:token")
-</pre>
+```
 
 <p>
 To execute this code, run 
-<pre>
-python tools/import_to_wombat.py
-</pre>
+```
+$ python tools/import_to_wombat.py
+```
 from the WOMBAT directory.
 </p>
 
