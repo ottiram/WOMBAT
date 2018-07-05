@@ -1,8 +1,6 @@
 # WOMBAT
 Word Embedding Database
 
-<b>Under construction!</b>
-
 See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to appear at <a href="http://coling2018.org/accepted-demo-papers/" target="_blank">COLING 2018</a>) for more details.
 
 
@@ -52,7 +50,7 @@ WOMBAT provides a single point of access to existing WECs. Each plain text WEC f
 <h3>Installation</h3>
 <p>
 WOMBAT does not have a lot of special requirements. The basic functionality only requires sqlite3, numpy, and tqdm. Note that sqlite3 is commonly available as a default package, e.g. with conda.
-A minimal working environment can be set up like this.
+A minimal working environment can be set up like this:
 </p>
 
 <p>
