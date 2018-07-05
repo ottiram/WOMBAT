@@ -60,7 +60,7 @@ for d in ['50', '100', '200', '300']:
 <p>
 To execute this code, run 
 
-```
+```shell
 $ python tools/import_to_wombat.py
 ```
 
