@@ -211,7 +211,7 @@ WOMBAT also supports the selection of embedding vectors for words <b>matching a 
 The following code looks up embedding vectors matching the supplied pattern. The pattern uses the GLOB syntax described <a href=http://www.sqlitetutorial.net/sqlite-glob/">here</a>. In a nut shell, it allows the use of placeholders like ?, *, [], [^], and ranges.
 </p>
 
-<pre>
+```python
 import sys
 from wombat_api.core import connector as wb_conn
 
@@ -234,17 +234,16 @@ for wec_index in range(len(vecs)):
         print("Prepro: %s"%str(prepro))
         for (w,v) in tuples:
             print("Unit:   %s\nVector: %s\n"%(w,str(v)))
-</pre>
+```
 
 <p>
 Executing this code with
 
-```sh
+```shell-script
 $ python tools/test_get_matching_vectors.py street-*
 ```
 
-from the WOMBAT directory
-returns
+from the WOMBAT directory returns
 </p>
 
 <pre>
