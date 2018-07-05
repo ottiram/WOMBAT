@@ -56,6 +56,7 @@ A minimal working environment can be set up like this.
 </p>
 
 <p>
+
 ```shell
 $ conda create --name wombat python=3.6 numpy tqdm
 $ source activate wombat
