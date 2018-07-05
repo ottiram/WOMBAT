@@ -358,8 +358,12 @@ Vector: [ 0.069143 -0.13195  -0.86449  -0.62174   0.18645  -0.42145   0.71741
   0.17102 ]
 </pre>
 
+
+<h3>Integrating preprocessing</h3>
+<h4>Simple</h4>
+
 <p>
-In order to process raw input, WOMBAT supports the integration of arbitrary python code right into the word embedding database. Then, if WOMBAT is accessed with the attribute raw=True, this code is automatically executed in the background. 
+In order to process raw input, WOMBAT supports the integration of arbitrary preprocessing python code right into the word embedding database. Then, if WOMBAT is accessed with the attribute raw=True, this code is automatically executed in the background. 
 </p>
 
 <p>
