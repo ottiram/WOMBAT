@@ -49,6 +49,20 @@ WOMBAT implements some Best Practices for research reproducibility and complemen
 WOMBAT provides a single point of access to existing WECs. Each plain text WEC file has to be imorted into WOMBAT once, receiving in the process a set of ATT:VAL identifiers consisting of five system attributes (algo, dims, dataset, unit, fold) plus arbitrarily many user-defined ones.
 </p>
 
+<h3>Installation</h3>
+<p>
+WOMBAT does not have a lot of special requirements. The basic functionality only requires sqlite3, numpy, and tqdm. Note that sqlite3 is commonly available as a default package, e.g. with conda.
+A minimal working environment can be set up like this.
+</p>
+```shell
+$ conda create --name wombat python=3.6 numpy tqdm
+$ source activate wombat
+$ git clone https://github.com/nlpAThits/WOMBAT.git
+$ cd WOMBAT
+$ pip install .
+```
+
+
 <h3>Importing Pre-Trained Embeddings to WOMBAT: GloVe</h3>
 <p>
 One of the main uses of WOMBAT is as a wrapper for accessing existing, off-the-shelf word embeddings like e.g. GloVe. (The other use involves access to self-trained embeddings, including preprocessing and handling of multi-word-expressions, cf. below.)
