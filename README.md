@@ -59,9 +59,11 @@ for d in ['50', '100', '200', '300']:
 
 <p>
 To execute this code, run 
+
 ```
 $ python tools/import_to_wombat.py
 ```
+
 from the WOMBAT directory.
 </p>
 
@@ -111,9 +113,11 @@ for wec_index in range(len(vecs)):
 
 <p>
 To execute this code, run 
-```python
+
+```
 $ python tools/test_get_vectors.py
 ```
+
 from the WOMBAT directory.
 </p>
 
