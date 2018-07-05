@@ -54,6 +54,8 @@ WOMBAT provides a single point of access to existing WECs. Each plain text WEC f
 WOMBAT does not have a lot of special requirements. The basic functionality only requires sqlite3, numpy, and tqdm. Note that sqlite3 is commonly available as a default package, e.g. with conda.
 A minimal working environment can be set up like this.
 </p>
+
+<p>
 ```shell
 $ conda create --name wombat python=3.6 numpy tqdm
 $ source activate wombat
@@ -61,6 +63,7 @@ $ git clone https://github.com/nlpAThits/WOMBAT.git
 $ cd WOMBAT
 $ pip install .
 ```
+</p>
 
 
 <h3>Importing Pre-Trained Embeddings to WOMBAT: GloVe</h3>
