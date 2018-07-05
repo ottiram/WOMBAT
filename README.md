@@ -373,15 +373,30 @@ class preprocessor(object):
 
 
 <p>
-WOMBAT also provides a ready-to-use standard preprocessor (based on NLTK) in wombat_api.preprocessors. In order to link it (or any other preprocessing code based on the above stub) to one or more WECs in WOMBAT, a pickled instance has to be created first. 
+WOMBAT also provides the ready-to-use standard preprocessor standard_preprocessor (based on NLTK) in wombat_api.preprocessors. In order to link it (or <b>any other preprocessing code</b> based on the above stub!!) to one or more WECs in WOMBAT, a pickled instance has to be created first. 
 </p>
 
 ```python
 >>> from wombat_api.preprocessors.standard_preprocessor import preprocessor
 >>> prepro=preprocessor(name="my_standard_preprocessor", phrasefile="")
->>> prepro.pickle("pickled/my_standard_preprocessor.pkl")
->>> Written to pickled/my_standard_preprocessor.pkl
+>>> prepro.pickle("temp/my_standard_preprocessor.pkl")
+>>> Written to temp/my_standard_preprocessor.pkl
 >>>
 ```
 
+<p>
+Then, it is linked to one ore more WECs like this.
+</p>
 
+```python
+>>> from wombat_api.core import connector as wb_conn
+>>> wbpath="data/wombat-data/"
+>>> importpath="data/embeddings/"
+>>> wbc = wb_conn(path=wbpath, create_if_missing=True)
+>>> wbc.assign_preprocessor("algo:glove;dataset:6b;dims:{50,100,200,300};fold:1;unit:token", "temp/my_standard_preprocessor.pkl")
+>>> Assigning my_standard_preprocessor.pkl to ['algo:glove', 'dataset:6b', 'dims:50', 'fold:1', 'unit:token'] ... 
+>>> Assigning my_standard_preprocessor.pkl to ['algo:glove', 'dataset:6b', 'dims:100', 'fold:1', 'unit:token'] ... 
+>>> Assigning my_standard_preprocessor.pkl to ['algo:glove', 'dataset:6b', 'dims:200', 'fold:1', 'unit:token'] ... 
+>>> Assigning my_standard_preprocessor.pkl to ['algo:glove', 'dataset:6b', 'dims:300', 'fold:1', 'unit:token'] ... 
+
+```
