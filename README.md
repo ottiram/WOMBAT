@@ -114,7 +114,7 @@ for wec_index in range(len(vecs)):
 <p>
 To execute this code, run 
 
-```
+```shell
 $ python tools/test_get_vectors.py
 ```
 
@@ -238,9 +238,11 @@ for wec_index in range(len(vecs)):
 
 <p>
 Executing this code with
-```python
+
+```shell
 $ python tools/test_get_matching_vectors.py street-*
 ```
+
 from the WOMBAT directory
 returns
 </p>
