@@ -373,13 +373,15 @@ class preprocessor(object):
 
 
 <p>
-WOMBAT provides a standard preprocessor (based on NLTK) in wombat_api.preprocessors, 
+WOMBAT also provides a ready-to-use standard preprocessor (based on NLTK) in wombat_api.preprocessors. In order to link it (or any other preprocessing code based on the above stub) to one or more WECs in WOMBAT, a pickled instance has to be created first. 
 </p>
 
 ```python
 >>> from wombat_api.preprocessors.standard_preprocessor import preprocessor
 >>> prepro=preprocessor(name="my_standard_preprocessor", phrasefile="")
 >>> prepro.pickle("pickled/my_standard_preprocessor.pkl")
+>>> Written to pickled/my_standard_preprocessor.pkl
+>>>
 ```
 
 
