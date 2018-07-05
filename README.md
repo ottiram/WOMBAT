@@ -373,7 +373,7 @@ class preprocessor(object):
 
 
 <p>
-WOMBAT also provides the ready-to-use standard preprocessor standard_preprocessor (based on NLTK) in wombat_api.preprocessors. In order to link it (or <b>any other preprocessing code</b> based on the above stub!!) to one or more WECs in WOMBAT, a pickled instance has to be created first. 
+However, WOMBAT also provides the ready-to-use standard preprocessor standard_preprocessor (based on NLTK) in wombat_api.preprocessors. In order to link it (or <b>any other preprocessing code</b> based on the above stub!!) to one or more WECs in WOMBAT, a pickled instance has to be created first. 
 </p>
 
 ```python
@@ -385,7 +385,7 @@ WOMBAT also provides the ready-to-use standard preprocessor standard_preprocesso
 ```
 
 <p>
-Then, it is linked to one ore more WECs like this.
+Then, it is linked to one ore more WECs like this:
 </p>
 
 ```python
@@ -400,3 +400,138 @@ Then, it is linked to one ore more WECs like this.
 >>> Assigning my_standard_preprocessor.pkl to ['algo:glove', 'dataset:6b', 'dims:300', 'fold:1', 'unit:token'] ... 
 
 ```
+
+<p>
+After that, raw, unprocessed input data can be streamed directly into WOMBAT's vector retrieval methods.
+</p>
+
+```python
+import numpy as np
+from wombat_api.core import connector as wb_conn
+
+wbpath="data/wombat-data/"
+wbc = wb_conn(path=wbpath, create_if_missing=False)
+
+wec_ids="algo:glove;dataset:6b;dims:50;fold:1;unit:token"
+rawfile="data/text/STS.input.track5.en-en.txt"
+
+vecs = wbc.get_vectors(wec_ids, {}, for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=0)], raw=True)
+
+# One wec_result for each wec specified in wec_identifier
+for wec_index in range(len(vecs)):
+    # Index 0 element is the wec_id
+    print("\nWEC: %s"%vecs[wec_index][0])
+    # Index 1 element is the list of all results for this wec
+    # Result list contains tuples of ([raw],[prepro],[(w,v) tuples])
+    for (raw, prepro, tuples) in vecs[wec_index][1]: 
+        print("Raw:    '%s'"%str(raw))
+        print("Prepro: %s"%str(prepro))
+        for (w,v) in tuples:
+            print("Unit:   %s\nVector: %s\n"%(w,str(v)))
+```
+
+<p>
+Executing this code with
+
+```shell
+$ python tools/test_get_vectors_from_raw.py
+```
+
+from the WOMBAT directory returns (abbreviated)
+</p>
+
+<pre>
+WEC: algo:glove;dataset:6b;dims:50;fold:1;unit:token
+Raw:    'A person is on a baseball team.'
+Prepro: ['*sw*', 'person', '*sw*', '*sw*', '*sw*', 'baseball', 'team']
+Unit:   baseball
+Vector: [-1.9327    1.0421   -0.78515   0.91033   0.22711  -0.62158  -1.6493
+  0.07686  -0.5868    0.058831  0.35628   0.68916  -0.50598   0.70473
+  1.2664   -0.40031  -0.020687  0.80863  -0.90566  -0.074054 -0.87675
+ -0.6291   -0.12685   0.11524  -0.55685  -1.6826   -0.26291   0.22632
+  0.713    -1.0828    2.1231    0.49869   0.066711 -0.48226  -0.17897
+  0.47699   0.16384   0.16537  -0.11506  -0.15962  -0.94926  -0.42833
+ -0.59457   1.3566   -0.27506   0.19918  -0.36008   0.55667  -0.70315
+  0.17157 ]
+
+Unit:   person
+Vector: [ 0.61734    0.40035    0.067786  -0.34263    2.0647     0.60844
+  0.32558    0.3869     0.36906    0.16553    0.0065053 -0.075674
+  0.57099    0.17314    1.0142    -0.49581   -0.38152    0.49255
+ -0.16737   -0.33948   -0.44405    0.77543    0.20935    0.6007
+  0.86649   -1.8923    -0.37901   -0.28044    0.64214   -0.23549
+  2.9358    -0.086004  -0.14327   -0.50161    0.25291   -0.065446
+  0.60768    0.13984    0.018135  -0.34877    0.039985   0.07943
+  0.39318    1.0562    -0.23624   -0.4194    -0.35332   -0.15234
+  0.62158    0.79257  ]
+
+Unit:   team
+Vector: [-0.62801    0.12254   -0.3914     0.87937    0.28572   -0.41953
+ -1.4265     0.80463   -0.27045   -0.82499    1.0277     0.18546
+ -1.7605     0.18552    0.56819   -0.38555    0.61609    0.51209
+ -1.5153    -0.45689   -1.1929     0.33886    0.18038    0.10788
+ -0.35567   -1.5701    -0.02989   -0.38742   -0.60838   -0.59189
+  2.9911     1.2022    -0.52598   -0.76941    0.63006    0.63828
+  0.30773    1.0123     0.0050781 -1.0326    -0.29736   -0.77504
+ -0.27015   -0.18161    0.04211    0.32169    0.018298   0.85202
+  0.038442  -0.050767 ]
+
+Raw:    'Our current vehicles will be in museums when everyone has their own aircraft.'
+Prepro: ['*sw*', 'current', 'vehicles', '*sw*', '*sw*', '*sw*', 'museums', '*sw*', 'everyone', '*sw*', '*sw*', '*sw*', 'aircraft']
+Unit:   aircraft
+Vector: [ 1.7714    -0.75714    1.0217    -0.26717   -0.36311    0.29269
+ -0.79656   -0.49746    0.41422   -1.0602     1.2215     0.41672
+ -0.40249    0.70013   -1.0695    -0.19489   -1.0886     1.2409
+ -2.1505    -1.1609     0.10969    0.1729    -0.82806   -0.97654
+ -0.14616   -1.2641    -0.13635   -0.041624   1.0939     0.7116
+  2.474     -0.16225   -0.26348    0.15532    1.1995     0.0076471
+  0.76388   -0.071138  -1.3869     0.88787    0.36175   -0.33419
+  1.6512    -0.52295   -0.30657    0.17399   -0.55383    0.46204
+ -0.59634    0.41802  ]
+
+Unit:   current
+Vector: [-9.7534e-02  7.9739e-01  4.5293e-01  8.8687e-03 -5.1178e-02  1.8178e-02
+ -1.1791e-01 -6.9793e-01 -1.5940e-01 -3.3886e-01  2.1386e-01  1.1945e-01
+ -3.3078e-01  7.0846e-02  5.3858e-01  5.2766e-01 -9.7989e-02  3.4390e-02
+  6.6567e-02 -2.7172e-01  1.1587e-01 -7.7042e-01 -2.3377e-01 -8.5757e-02
+ -2.7538e-01 -1.2693e+00  1.5670e-01 -4.5892e-02 -3.4532e-01  1.3033e+00
+  3.6207e+00  9.1328e-03 -1.2680e-01 -6.1576e-01  6.6010e-02 -2.5451e-01
+  1.3535e-03 -5.1221e-02 -2.2177e-01 -4.4328e-01 -5.4152e-01  1.9691e-01
+ -3.3034e-01  3.7052e-03 -8.5744e-01  1.6703e-01  4.1405e-02  5.9579e-01
+ -9.7806e-02  1.8642e-01]
+
+Unit:   everyone
+Vector: [ 4.7246e-02  4.2534e-02  1.1150e-01 -5.3334e-01  1.1487e+00 -4.1835e-01
+ -4.1667e-01  4.6632e-01 -3.9396e-02  2.1353e-01 -1.6719e-01  2.3585e-01
+ -3.4603e-01 -3.8585e-02  1.0645e+00  4.6839e-01  4.4521e-01  3.3946e-01
+  2.9733e-01 -9.3541e-01 -2.7267e-01  9.1747e-01 -2.6640e-02  4.9671e-01
+  1.2452e+00 -1.8388e+00 -5.4239e-01  4.7746e-01  9.3603e-01 -9.2198e-01
+  2.7160e+00  1.1366e+00 -2.2590e-01 -3.8464e-01 -6.0182e-01 -2.2687e-01
+  1.1669e-01  3.2993e-02  2.3049e-01 -4.9548e-01 -2.5239e-01  6.3638e-02
+ -8.7472e-02  5.5913e-01 -7.1459e-05  2.4938e-01 -2.1032e-01 -2.3587e-01
+ -1.0124e-01  7.5840e-01]
+
+Unit:   museums
+Vector: [ 9.8518e-01  1.1344e+00 -6.2976e-01 -3.3453e-01  3.5321e-02 -1.2801e+00
+ -1.0494e+00 -6.9263e-01 -1.5120e-02 -6.1263e-02 -1.9171e-01 -1.3570e-03
+  5.4254e-01  1.7061e-01  5.3629e-01  3.4711e-02  8.7502e-01  4.1138e-03
+ -4.1096e-02  7.3491e-02  1.2865e+00 -2.0661e-01 -8.3286e-01  3.6639e-01
+ -6.3374e-01 -2.2028e-01 -1.3518e+00 -3.8629e-01 -5.3463e-01 -1.2197e+00
+  1.5524e+00  6.9474e-01  1.0281e+00 -1.5287e+00 -5.2155e-01  8.3129e-01
+  8.5204e-02  8.9238e-01 -4.5974e-01  5.4429e-01  1.5087e-01 -6.4565e-01
+  1.7007e+00  6.5024e-01 -1.6995e-01  9.4863e-01 -1.0720e+00  7.9241e-02
+ -5.7654e-01 -7.3065e-01]
+
+Unit:   vehicles
+Vector: [ 0.75982  -0.76559   2.0944   -0.37478  -0.34947   0.18489  -1.1152
+ -1.0155    0.24493  -0.71603   0.60359  -1.0472   -0.28302  -0.36222
+  0.29956   0.043537 -0.31847   1.4753   -0.49762  -2.1802    0.52873
+ -0.3492   -0.7874   -0.058825 -0.11986  -0.59238  -0.19368   0.42545
+  1.2132    0.19446   2.6633    0.30815  -0.1981   -0.28798   1.1756
+  0.682     0.4655   -0.3504   -1.0034    0.83025  -0.2051   -0.24585
+  1.1062   -0.8197    0.26461  -0.73376  -0.53285   0.035146  0.25134
+ -0.60158 ]
+
+############################## cut ###################################
+
+</pre>
