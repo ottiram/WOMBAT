@@ -570,7 +570,7 @@ Vector: [ 0.75982  -0.76559   2.0944   -0.37478  -0.34947   0.18489  -1.1152
   1.1062   -0.8197    0.26461  -0.73376  -0.53285   0.035146  0.25134
  -0.60158 ]
 
-############################## cut ###################################
+- - - - - - - - - - - - - - - - - - cut - - - - - - - - - - - - - - - -
 
 </pre>
 
@@ -587,7 +587,19 @@ For pretrained WECs, like GloVe above, the preprocessing code is often not avail
 <p>
 Preprocessing code to be integrated into WOMBAT supports an optional <b>phrasespotter.py</b> module, which can be initialized with a list of phrases / multi-word expressions that you want to be treated as tokens. For custom, self-trained WECs, the procedure is ideally the following:
 <ol>
-<li>Obtain a list or dictionary of phrases / multi-word expressions. This can either be a preexisting, manually curated resource (e.g. based on the <a href="https://cso.kmi.open.ac.uk/downloads">Computer Science Ontology</a>, or a list of phrases mined automatically from some text (e.g. with <a href="http://elkishk2.web.engr.illinois.edu/">ToPMine</a>).</li>
+<li>Obtain a list or dictionary of phrases / multi-word expressions. This can either be a preexisting, manually curated resource (e.g. based on the <a href="https://cso.kmi.open.ac.uk/downloads">Computer Science Ontology</a>, or a list of phrases mined automatically from some text (e.g. with <a href="http://elkishk2.web.engr.illinois.edu/">ToPMine</a>)).</li>
+<li>Create a preprocessor as above, providing the name of the file containing the phrases (one per line) as value to the phrasefile parameter.
+
+```python
+from wombat_api.preprocessors import standard_preprocessor
+
+prepro=standard_preprocessor.preprocessor(name="my_cs_savvy_standard_preprocessor", phrasefile="text/")
+prepro.pickle("temp/my_standard_preprocessor.pkl")
+
+
+```
+
+</li>
 </ol>
 </p>
 
