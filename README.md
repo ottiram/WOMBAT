@@ -594,7 +594,7 @@ Preprocessing code to be integrated into WOMBAT supports an optional <b>phrasesp
 from wombat_api.preprocessors import standard_preprocessor
 
 prepro=standard_preprocessor.preprocessor(name="my_cs_savvy_standard_preprocessor", 
-                                        phrasefile="text/mwes/cso-mwes-stemmed.txt")
+                                          phrasefile="data/mwes/cso-mwes-stemmed.txt")
 prepro.pickle("temp/my_cs_savvy_standard_preprocessor.pkl")
 
 ```
