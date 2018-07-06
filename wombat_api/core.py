@@ -493,6 +493,6 @@ class embeddingdb(object):
             return self.preprocess(string, prepro_cache, verbose=verbose, no_phrases=no_phrases)
         else:
             print("No preprocessing code available")
-            return string
+            return string.split(" ")
 
 
