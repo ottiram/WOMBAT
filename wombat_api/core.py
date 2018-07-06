@@ -1,8 +1,6 @@
 import sys, sqlite3, os, itertools, io, re, pickle, base64
 import numpy as np
 from tqdm import tqdm
-from wombat_api.preprocessors import *
-
 from wombat_api.lib import *
 
 sqlite3.register_adapter(np.ndarray, input_array_adapter)
@@ -62,15 +60,27 @@ class connector(object):
     def assign_preprocessor(self, wec_identifier, prepro_picklefile=""):
         we_param_dict_list,_,_,_,_ = expand_parameter_grids(wec_identifier)
         prepro_file_name=os.path.basename(prepro_picklefile)
-        with open(prepro_picklefile, 'rb') as f:
-            # No need to unpickle here ...
-            prepro_bin_string = base64.encodestring(f.read())
+        if prepro_picklefile !="":
+            with open(prepro_picklefile, 'rb') as f:
+                # No need to unpickle here ...
+                prepro_bin_string = base64.encodestring(f.read())
+            message="Trying to assign "+prepro_file_name+" to "
+        else:            
+            prepro_bin_string=""
+            message="Trying to remove prepro_code from "
         
         for we_param_dict in we_param_dict_list:
             desc=dict_to_sorted_string(we_param_dict)
-            print("Assigning %s to %s ... "%(prepro_file_name, desc))
-            self.WM.DB.cursor().execute("update we_meta set prepro_name = ?, prepro_code = ? where descriptor = ?",(prepro_file_name, prepro_bin_string, desc))
-            self.WM.DB.cursor().execute("commit")
+            print(message+desc)
+            #print("Assigning %s to %s ... "%(prepro_file_name, desc))
+            # Check for existence
+            (exists,)= self.WM.DB.cursor().execute("select count(*) from we_meta where descriptor = ?",(desc, ))
+            if exists[0] == 1:
+                self.WM.DB.cursor().execute("update we_meta set prepro_name = ?, prepro_code = ? where descriptor = ?",(prepro_file_name, prepro_bin_string, desc))
+                self.WM.DB.cursor().execute("commit")
+                print("\tDone!")
+            else:
+                print("\tNot found, skipping!")
     # end assign_prepro_code
 
 
@@ -484,7 +494,5 @@ class embeddingdb(object):
         else:
             print("No preprocessing code available")
             return string
-
-
 
 
