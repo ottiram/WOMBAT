@@ -472,7 +472,7 @@ vecs = wbc.get_vectors(wec_ids, {},
             for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=0)], 
             raw=True)
 
-# One wec_result for each wec specified in wec_identifier
+# One wec_result for each wec specified in wec_ids
 for wec_index in range(len(vecs)):
     # Index 0 element is the wec_id
     print("\nWEC: %s"%vecs[wec_index][0])
