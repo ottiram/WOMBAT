@@ -585,9 +585,9 @@ For pretrained WECs, like GloVe above, the preprocessing code is often not avail
 </p>
 
 <p>
-Preprocessing code to be integrated into WOMBAT supports an optional "phrasespotter" module, which can be initialized with a list of phrases / multi-word expressions that you want to be treated as tokens. For custom, self-trained WECs, the procedure is ideally the following:
+Preprocessing code to be integrated into WOMBAT supports an optional <b>phrasespotter.py</b> module, which can be initialized with a list of phrases / multi-word expressions that you want to be treated as tokens. For custom, self-trained WECs, the procedure is ideally the following:
 <ol>
-<li>Obtain a list or dictionary of phrases / multi-word expressions </li>
+<li>Obtain a list or dictionary of phrases / multi-word expressions. This can either be a preexisting, manually curated resource (e.g. based on the <a href="https://cso.kmi.open.ac.uk/downloads">Computer Science Ontology</a>, or a list of phrases mined automatically from some text (e.g. with <a href="http://elkishk2.web.engr.illinois.edu/">ToPMine</a>).</li>
 </ol>
 </p>
 
