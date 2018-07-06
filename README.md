@@ -72,7 +72,7 @@ $ pip install -e .
 Note: Depending on your environment, you might have to install NLTK 3.2.5 with
 
 ```shell
-conda install -c conda-forge nltk
+conda install -c conda-forge nltk==3.2.5
 ```
 
 </p>
@@ -581,10 +581,13 @@ Preprocessing raw textual data for embedding vector lookup becomes non-trivial w
 </p>
 
 <p>
-For pretrained WECs, like GloVe above, the preprocessing code is often not available, or preprocessing is considered trivial. In these cases, it is possible with reasonable effort to inspect the WEC vocabulary and derive preprocessing rules which more or less imitate the original preprocessing. 
+For pretrained WECs, like GloVe above, the preprocessing code is often not available, or preprocessing is considered trivial. In these cases, it is possible with reasonable effort to inspect the WEC vocabulary and derive preprocessing rules which more or less imitate the original preprocessing. The standard_preprocessor class used above is an example of this.
 </p>
 
 <p>
-For custom-trained WECs, preprocessing code 
+Preprocessing code to be integrated into WOMBAT supports an optional "phrasespotter" module, which can be initialized with a list of phrases / multi-word expressions that you want to be treated as tokens. For custom, self-trained WECs, the procedure is ideally the following:
+<ol>
+<li>Obtain a list or dictionary of phrases / multi-word expressions </li>
+</ol>
 </p>
 
