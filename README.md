@@ -364,7 +364,7 @@ Vector: [ 0.069143 -0.13195  -0.86449  -0.62174   0.18645  -0.42145   0.71741
 </pre>
 
 
-<h3>Integrating preprocessing</h3>
+<h3>Integrating automatic preprocessing</h3>
 <h4>Simple preprocessing (no MWEs)</h4>
 
 <p>
@@ -565,4 +565,6 @@ Vector: [ 0.75982  -0.76559   2.0944   -0.37478  -0.34947   0.18489  -1.1152
 </pre>
 
 <h4>Advanced preprocessing with MWEs</h4>
-
+<p>
+Preprocessing raw textual data for embedding vector lookup becomes non-trivial when the <b>WEC training data</b> itself was processed in a non-trivial way: When the training data was <b>stemmed</b>, the WEC <b>vocabulary</b> also consists of stems, and 
+</p>
