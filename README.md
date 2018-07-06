@@ -427,33 +427,6 @@ wbc.assign_preprocessor("algo:glove;dataset:6b;dims:{50,100,200,300};fold:1;unit
 
 ```
 
-<!--
-```python
->>> from wombat_api.preprocessors.standard_preprocessor import preprocessor
->>> prepro=preprocessor(name="my_standard_preprocessor", phrasefile="")
->>> prepro.pickle("temp/my_standard_preprocessor.pkl")
->>> Written to temp/my_standard_preprocessor.pkl
->>>
-```
-
-<p>
-Then, it is linked to one ore more WECs like this:
-</p>
-
-```python
->>> from wombat_api.core import connector as wb_conn
->>> wbpath="data/wombat-data/"
->>> importpath="data/embeddings/"
->>> wbc = wb_conn(path=wbpath, create_if_missing=False)
->>> wbc.assign_preprocessor("algo:glove;dataset:6b;dims:{50,100,200,300};fold:1;unit:token", "temp/my_standard_preprocessor.pkl")
->>> Assigning my_standard_preprocessor.pkl to ['algo:glove', 'dataset:6b', 'dims:50', 'fold:1', 'unit:token'] ... 
->>> Assigning my_standard_preprocessor.pkl to ['algo:glove', 'dataset:6b', 'dims:100', 'fold:1', 'unit:token'] ... 
->>> Assigning my_standard_preprocessor.pkl to ['algo:glove', 'dataset:6b', 'dims:200', 'fold:1', 'unit:token'] ... 
->>> Assigning my_standard_preprocessor.pkl to ['algo:glove', 'dataset:6b', 'dims:300', 'fold:1', 'unit:token'] ... 
-
-```
--->
-
 <p>
 After that, raw, unprocessed input data can be streamed directly into WOMBAT's vector retrieval methods.
 </p>
@@ -590,3 +563,6 @@ Vector: [ 0.75982  -0.76559   2.0944   -0.37478  -0.34947   0.18489  -1.1152
 ############################## cut ###################################
 
 </pre>
+
+<h4>Advanced preprocessing with MWEs</h4>
+
