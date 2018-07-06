@@ -68,6 +68,16 @@ $ pip install -e .
 ```
 </p>
 
+<p>
+Note: Depending on your environment, you might have to install NLTK 3.2.5 with
+
+```shell
+conda install -c conda-forge nltk
+```
+
+</p>
+
+
 
 
 <h3>Importing Pre-Trained Embeddings to WOMBAT: GloVe</h3>
@@ -565,6 +575,16 @@ Vector: [ 0.75982  -0.76559   2.0944   -0.37478  -0.34947   0.18489  -1.1152
 </pre>
 
 <h4>Advanced preprocessing with MWEs</h4>
+
 <p>
-Preprocessing raw textual data for embedding vector lookup becomes non-trivial when the <b>WEC training data</b> itself was processed in a non-trivial way: When the training data was <b>stemmed</b>, the WEC <b>vocabulary</b> also consists of stems, and 
+Preprocessing raw textual data for embedding vector lookup becomes non-trivial when the <b>WEC training data</b> itself was processed in a non-trivial way: When the training data was <b>stemmed</b>, the WEC <b>vocabulary</b> also consists of stems, and turning raw textual data into compatible units for lookup requires -- ideally -- that the exact same stemming algorithm be applied to it. The same is true for any other word-level normalization / modification that might have been applied to the WEC training data. Integrating preprocessing code into embedding vector lookup, as described above, is a first step towards acknowledging the importance of preprocessing.
 </p>
+
+<p>
+For pretrained WECs, like GloVe above, the preprocessing code is often not available, or preprocessing is considered trivial. In these cases, it is possible with reasonable effort to inspect the WEC vocabulary and derive preprocessing rules which more or less imitate the original preprocessing. 
+</p>
+
+<p>
+For custom-trained WECs, preprocessing code 
+</p>
+
