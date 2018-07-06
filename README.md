@@ -50,19 +50,24 @@ WOMBAT provides a single point of access to existing WECs. Each plain text WEC f
 <h3>Installation</h3>
 <p>
 WOMBAT does not have a lot of special requirements. The basic functionality only requires sqlite3, numpy, and tqdm. Note that sqlite3 is commonly available as a default package, e.g. with conda.
+</p>
+
+<p>
+In addition, the standard_preprocessor (see below) requires NLTK 3.2.5. 
 A minimal working environment can be set up like this:
 </p>
 
 <p>
 
 ```shell
-$ conda create --name wombat python=3.6 numpy tqdm
+$ conda create --name wombat python=3.6 numpy tqdm nltk==3.2.5
 $ source activate wombat
 $ git clone https://github.com/nlpAThits/WOMBAT.git
 $ cd WOMBAT
 $ pip install .
 ```
 </p>
+
 
 
 <h3>Importing Pre-Trained Embeddings to WOMBAT: GloVe</h3>
@@ -121,7 +126,7 @@ wec_ids="algo:glove;dataset:6b;dims:50;fold:1;unit:token"
 
 vecs = wbc.get_vectors(wec_ids, {}, for_input=[['this','is','a', 'test'], ['yet', 'another', 'test']])
 
-# One wec_result for each wec specified in wec_identifier
+# One wec_result for each wec specified in wec_ids
 for wec_index in range(len(vecs)):
     # Index 0 element is the wec_id
     print("\nWEC: %s"%vecs[wec_index][0])
@@ -246,7 +251,7 @@ pattern=sys.argv[1]
 
 vecs = wbc.get_matching_vectors(wec_ids, pattern=pattern, label=pattern)
 
-# One wec_result for each wec specified in wec_identifier
+# One wec_result for each wec specified in wec_ids
 for wec_index in range(len(vecs)):
     # Index 0 element is the wec_id
     print("\nWEC: %s"%vecs[wec_index][0])
@@ -360,7 +365,7 @@ Vector: [ 0.069143 -0.13195  -0.86449  -0.62174   0.18645  -0.42145   0.71741
 
 
 <h3>Integrating preprocessing</h3>
-<h4>Simple</h4>
+<h4>Simple preprocessing (no MWEs)</h4>
 
 <p>
 In order to process raw input, WOMBAT supports the integration of arbitrary preprocessing python code right into the word embedding database. Then, if WOMBAT is accessed with the attribute raw=True, this code is automatically executed in the background. 
@@ -397,12 +402,25 @@ class preprocessor(object):
         pickle.dump(self, open(picklefile,"wb"), protocol=pickle.HIGHEST_PROTOCOL)
 ```
 
-
-
 <p>
-However, WOMBAT also provides the ready-to-use standard preprocessor standard_preprocessor (based on NLTK) in wombat_api.preprocessors. In order to link it (or <b>any other preprocessing code</b> based on the above stub!!) to one or more WECs in WOMBAT, a pickled instance has to be created first. 
+However, WOMBAT also provides the ready-to-use standard preprocessor standard_preprocessor (based on NLTK 3.2.5) in wombat_api.preprocessors. In order to link it (or <b>any other preprocessing code</b> based on the above stub!!) to one or more WECs in WOMBAT, a pickled instance has to be created first, and then linked to one or more WECs. 
 </p>
 
+```python
+from wombat_api.preprocessors import standard_preprocessor
+from wombat_api.core import connector as wb_conn
+
+prepro=standard_preprocessor.preprocessor(name="my_standard_preprocessor", phrasefile="")
+prepro.pickle("temp/my_standard_preprocessor.pkl")
+
+wbpath="data/wombat-data/"
+wbc = wb_conn(path=wbpath, create_if_missing=True)
+
+wbc.assign_preprocessor("algo:glove;dataset:6b;dims:{50,100,200,300};fold:1;unit:token", "temp/my_standard_preprocessor.pkl")
+
+```
+
+<!--
 ```python
 >>> from wombat_api.preprocessors.standard_preprocessor import preprocessor
 >>> prepro=preprocessor(name="my_standard_preprocessor", phrasefile="")
@@ -419,7 +437,7 @@ Then, it is linked to one ore more WECs like this:
 >>> from wombat_api.core import connector as wb_conn
 >>> wbpath="data/wombat-data/"
 >>> importpath="data/embeddings/"
->>> wbc = wb_conn(path=wbpath, create_if_missing=True)
+>>> wbc = wb_conn(path=wbpath, create_if_missing=False)
 >>> wbc.assign_preprocessor("algo:glove;dataset:6b;dims:{50,100,200,300};fold:1;unit:token", "temp/my_standard_preprocessor.pkl")
 >>> Assigning my_standard_preprocessor.pkl to ['algo:glove', 'dataset:6b', 'dims:50', 'fold:1', 'unit:token'] ... 
 >>> Assigning my_standard_preprocessor.pkl to ['algo:glove', 'dataset:6b', 'dims:100', 'fold:1', 'unit:token'] ... 
@@ -427,6 +445,7 @@ Then, it is linked to one ore more WECs like this:
 >>> Assigning my_standard_preprocessor.pkl to ['algo:glove', 'dataset:6b', 'dims:300', 'fold:1', 'unit:token'] ... 
 
 ```
+-->
 
 <p>
 After that, raw, unprocessed input data can be streamed directly into WOMBAT's vector retrieval methods.
