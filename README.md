@@ -108,12 +108,14 @@ from the WOMBAT directory.
 <p>
 The required GloVe embeddings are <b>not part of WOMBAT</b> and can be obtained from Stanford <a href="http://nlp.stanford.edu/data/wordvecs/glove.6B.zip">here</a>. 
 
-Extract them into ```data/embeddings ``` .
+Extract them into ```data/embeddings ```.The WOMBAT master and embeddings data bases will be created in ```data/wombat-data```. 
 
-The WOMBAT master and embeddings data bases will be created in ```data/wombat-data``` . 
 </p>
+
 <p>
+
 The above import assigns only the minimally required ```ATT:VAL``` pairs to the embeddings.
+
 <table>
 <tr><td><b>Attribute</b></td><td><b>Meaning</b></td></tr>
 <tr><td>algo</td><td>Descriptive label for the <b>algorithm</b> used for training these embeddding vectors.</td></tr>
