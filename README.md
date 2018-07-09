@@ -628,11 +628,16 @@ $ python tools/apply_preprocessor.py data/text/dblp-titles.txt
 to produce the following output
 
 ```shell
-data/text/dblp-titles.txt.conf.
+data/text/dblp-titles.txt.conflated_sys.nophrases.stem
+data/text/dblp-titles.txt.conflated_sys.repeat_phrases.stem
+data/text/dblp-titles.txt.conflated_sys.nophrases.stem.idf
+data/text/dblp-titles.txt.conflated_sys.repeat_phrases.stem.idf
 
 ```
-
 </li>
+
+
+
 </ol>
 </p>
 
