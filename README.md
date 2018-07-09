@@ -106,11 +106,11 @@ from the WOMBAT directory.
 </p>
 
 <p>
-The required GloVe embeddings are <b>not part of WOMBAT</b> and can be obtained from Stanford <a href="http://nlp.stanford.edu/data/wordvecs/glove.6B.zip">here</a>. Extract them into "data/embeddings/".
-The WOMBAT master and embeddings data bases will be created in "data/wombat-data". 
+The required GloVe embeddings are <b>not part of WOMBAT</b> and can be obtained from Stanford <a href="http://nlp.stanford.edu/data/wordvecs/glove.6B.zip">here</a>. Extract them into ```data/embeddings/```.
+The WOMBAT master and embeddings data bases will be created in ```data/wombat-data```. 
 </p>
 <p>
-The above import assigns only the minimally required ATT:VAL pairs to the embeddings.
+The above import assigns only the minimally required ```ATT:VAL``` pairs to the embeddings.
 <table>
 <tr><td><b>Attribute</b></td><td><b>Meaning</b></td></tr>
 <tr><td>algo</td><td>Descriptive label for the <b>algorithm</b> used for training these embeddding vectors.</td></tr>
@@ -378,11 +378,11 @@ Vector: [ 0.069143 -0.13195  -0.86449  -0.62174   0.18645  -0.42145   0.71741
 <h4>Simple preprocessing (no MWEs)</h4>
 
 <p>
-In order to process raw input, WOMBAT supports the integration of arbitrary preprocessing python code right into the word embedding database. Then, if WOMBAT is accessed with the attribute raw=True, this code is automatically executed in the background. 
+In order to process raw input, WOMBAT supports the integration of arbitrary preprocessing python code right into the word embedding database. Then, if WOMBAT is accessed with the attribute ```raw=True```, this code is automatically executed in the background. 
 </p>
 
 <p>
-WOMBAT provides the class wombat_api.preprocessors.preprocessor_stub.py to be used as a base for customized preprocessing code.
+WOMBAT provides the class ```wombat_api.preprocessors.preprocessor_stub.py``` to be used as a base for customized preprocessing code.
 </p>
 
 ```python
@@ -413,7 +413,7 @@ class preprocessor(object):
 ```
 
 <p>
-However, WOMBAT also provides the ready-to-use standard preprocessor standard_preprocessor (based on NLTK 3.2.5) in wombat_api.preprocessors. In order to link it (or <b>any other preprocessing code</b> based on the above stub!!) to one or more WECs in WOMBAT, a pickled instance has to be created first, and then linked to one or more WECs. 
+However, WOMBAT also provides the ready-to-use standard preprocessor ```wombat_api.preprocessors.standard_preprocessor.py``` (based on NLTK 3.2.5). In order to link it (or <b>any other preprocessing code</b> based on the above stub!!) to one or more WECs in WOMBAT, a pickled instance has to be created first, and then linked to one or more WECs. 
 </p>
 
 ```python
