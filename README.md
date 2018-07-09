@@ -385,11 +385,15 @@ Vector: [ 0.069143 -0.13195  -0.86449  -0.62174   0.18645  -0.42145   0.71741
 <h4>Simple preprocessing (no MWEs)</h4>
 
 <p>
+
 In order to process raw input, WOMBAT supports the integration of arbitrary preprocessing python code right into the word embedding database. Then, if WOMBAT is accessed with the attribute ```raw=True```, this code is automatically executed in the background. 
+
 </p>
 
 <p>
+
 WOMBAT provides the class ```wombat_api.preprocessors.preprocessor_stub.py``` to be used as a base for customized preprocessing code.
+
 </p>
 
 ```python
@@ -420,7 +424,9 @@ class preprocessor(object):
 ```
 
 <p>
+
 However, WOMBAT also provides the ready-to-use standard preprocessor ```wombat_api.preprocessors.standard_preprocessor.py``` (based on NLTK 3.2.5). In order to link it (or <b>any other preprocessing code</b> based on the above stub!!) to one or more WECs in WOMBAT, a pickled instance has to be created first, and then linked to one or more WECs. 
+
 </p>
 
 ```python
