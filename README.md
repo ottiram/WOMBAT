@@ -615,7 +615,26 @@ prepro.pickle("temp/my_cs_savvy_standard_preprocessor.pkl")
 </li>
 <li>
 
-Apply the preprocessor to the raw WEC training data <b>before training the WECs</b>. WOMBAT provides the script ```tools/apply_preprocessor.py``` for that purpose, which can be called like this
+Apply the preprocessor to the raw WEC training data <b>before training the WECs</b>. WOMBAT provides the script ```tools/apply_preprocessor.py``` for that purpose. 
+
+We provide a plain text file of CS publication titles from DBLP in ``` data/text/dblp-titles.txt```
+
+```
+Parallel Integer Sorting and Simulation Amongst CRCW Models.
+Pattern Matching in Trees and Nets.
+NP-complete Problems Simplified on Tree Schemas.
+On the Power of Chain Rules in Context Free Grammars.
+Schnelle Multiplikation von Polynomen &uuml;ber K&ouml;rpern der Charakteristik 2.
+A characterization of rational D0L power series.
+The Derivation of Systolic Implementations of Programs.
+Fifo Nets Without Order Deadlock.
+On the Complementation Rule for Multivalued Dependencies in Database Relations.
+Equational weighted tree transformations.
+
+```
+
+
+Using this data set as input, it can be called like this:
 
 ```shell
 $ python tools/apply_preprocessor.py data/text/dblp-titles.txt 
@@ -625,7 +644,7 @@ $ python tools/apply_preprocessor.py data/text/dblp-titles.txt
                                      unit:stem 
                                      repeat_phrases
 ```
-to produce the following output
+to produce the following output:
 
 ```shell
 data/text/dblp-titles.txt.conflated_sys.nophrases.stem
@@ -634,6 +653,12 @@ data/text/dblp-titles.txt.conflated_sys.nophrases.stem.idf
 data/text/dblp-titles.txt.conflated_sys.repeat_phrases.stem.idf
 
 ```
+
+
+
+
+*.nophrases.stem contains
+
 </li>
 
 
