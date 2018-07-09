@@ -615,12 +615,17 @@ prepro.pickle("temp/my_cs_savvy_standard_preprocessor.pkl")
 </li>
 <li>
 
-Apply the preprocessor to the raw WEC training data <b>before training the WECs</b>. WOMBAT provides the script ```tools/apply_preprocessor.py``` for that purpose.
+Apply the preprocessor to the raw WEC training data <b>before training the WECs</b>. WOMBAT provides the script ```tools/apply_preprocessor.py``` for that purpose, which can be called like this
 
 ```shell
-$ python tools/apply_preprocessor.py data/text/dblp-titles.txt temp/my_cs_savvy_standard_preprocessor.pkl
+$ python tools/apply_preprocessor.py data/text/dblp-titles.txt 
+                                     temp/my_cs_savvy_standard_preprocessor.pkl
+                                     stopwords:*sws* 
+                                     conflate 
+                                     unit:stem 
+                                     repeat_phrases
 ```
-The script produces the following output
+to produce the following output
 
 ```shell
 data/text/dblp-titles.txt.conf.
