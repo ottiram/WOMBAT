@@ -716,7 +716,10 @@ context	6.643567696197766
 free	6.902846235916237
 grammar	7.977968014707456
 ```
+</li>
 
+<li>
+Train embedding vectors on the preprocessed training data, using your favourite training algorithm and setup.
 </li>
 
 
