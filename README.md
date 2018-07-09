@@ -263,8 +263,8 @@ from wombat_api.core import connector as wb_conn
 wbpath="data/wombat-data/"
 wbc = wb_conn(path=wbpath, create_if_missing=False)
 
-wec_ids="algo:glove;dataset:6b;dims:50;fold:1;unit:token"
-pattern=sys.argv[1]
+wec_ids=sys.argv[1]
+pattern=sys.argv[2]
 
 vecs = wbc.get_matching_vectors(wec_ids, pattern=pattern, label=pattern)
 
@@ -285,7 +285,7 @@ for wec_index in range(len(vecs)):
 Executing this code with
 
 ```shell
-$ python tools/test_get_matching_vectors.py street-*
+$ python tools/test_get_matching_vectors_from_wec.py "algo:glove;dataset:6b;dims:50;fold:1;unit:token" street-*
 ```
 
 from the WOMBAT directory returns
