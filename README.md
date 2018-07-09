@@ -633,7 +633,7 @@ Equational weighted tree transformations.
 ```
 
 
-Using this data set as input, it can be called like this:
+Using this data set as input, the script can be called like this:
 
 ```shell
 $ python tools/apply_preprocessor.py data/text/dblp-titles.txt 
@@ -653,10 +653,38 @@ data/text/dblp-titles.txt.conflated_sys.repeat_phrases.stem.idf
 
 ```
 
+```data/text/dblp-titles.txt.conflated_sys.nophrases.stem``` contains the plain, stemmed version of the input files:
 
+```
+parallel integ sort *sws* simul amongst crcw model 
+pattern match *sws* tree *sws* net 
+NP complet problem simplifi *sws* tree schema 
+*sws* power *sws* chain rule *sws* context free grammar 
+schnell multiplik von polynomen über körpern der charakteristik 0 
+*sws* character *sws* ration d0l power seri 
+*sws* deriv *sws* systol implement *sws* program 
+fifo net without order deadlock 
+*sws* complement rule *sws* multivalu depend *sws* databas relat 
+equat weight tree transform 
+```
 
+```data/text/dblp-titles.txt.conflated_sys.repeated_phrases.stem``` contains the stemmed version of the input files, with identified phrases.
+In addition, due to the ```repeat_phrases``` switch, it contains a plain copy of each line in which at least one phrase was detected.
 
-*.nophrases.stem contains
+```
+parallel integ sort *sws* simul amongst crcw model 
+pattern_match *sws* tree *sws* net 
+pattern match *sws* tree *sws* net 
+NP complet problem simplifi *sws* tree schema 
+*sws* power *sws* chain rule *sws* context_free_grammar 
+*sws* power *sws* chain rule *sws* context free grammar 
+schnell multiplik von polynomen über körpern der charakteristik 0 
+*sws* character *sws* ration d0l power seri 
+*sws* deriv *sws* systol implement *sws* program 
+fifo net without order deadlock 
+*sws* complement rule *sws* multivalu depend *sws* databas relat 
+equat weight tree transform 
+```
 
 </li>
 
