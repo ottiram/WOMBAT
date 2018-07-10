@@ -56,48 +56,50 @@ def compute_distance_matrix(vector_result1, vector_result2, metric=dist.cosine, 
 
     tuples1,tuples2,matrix,xwords,ywords=[],[],[],[],[]
     for p in range (len(vector_result1)):
-        tuples1=vector_result1[p][1]
-        tuples2=vector_result2[p][1]
+        f1=vector_result1[p][1]
+        f2=vector_result2[p][1]
 
-        print(tuples1)
+        assert len(f1) == len(f2)
+        for t in range(len(f1)):
+            tuples1=f1[t][2]
+            tuples2=f2[t][2]
 
+            ignorable = numpy.intersect1d([v[0] for v in tuples1], [v[0] for v in tuples2]).tolist() if ignore_matching else []
+            ignorable.extend(ignore)
+            # Remove all ignorable items from both lists first
+            # This might be inefficient ... 
+            to_del1, to_del2=[],[]
+            for w in ignorable:
+                for d in range(len(tuples1)):
+                    if w == tuples1[d][0]: to_del1.append(d)
+                for d in range(len(tuples2)):
+                    if w == tuples2[d][0]: to_del2.append(d)
+            for i in reversed(to_del1):
+                del tuples1[i]
+            for i in reversed(to_del2):
+                del tuples2[i]
 
-        ignorable = numpy.intersect1d([v[0] for v in tuples1], [v[0] for v in tuples2]).tolist() if ignore_matching else []
-        ignorable.extend(ignore)
-        # Remove all ignorable items from both lists first
-        # This might be inefficient ... 
-        to_del1, to_del2=[],[]
-        for w in ignorable:
-            for d in range(len(tuples1)):
-                if w == tuples1[d][0]: to_del1.append(d)
-            for d in range(len(tuples2)):
-                if w == tuples2[d][0]: to_del2.append(d)
-        for i in reversed(to_del1):
-            del tuples1[i]
-        for i in reversed(to_del2):
-            del tuples2[i]
-
-        rownum=len(tuples2)-1
-        while rownum>=0:
-            row=[]
-            (word2,vector2) = tuples2[rownum]
-            if numpy.isnan(vector2).any() or word2 in ignorable:
-                rownum-=1
-                continue
-            ywords.append(word2)
-            for colnum in range(len(tuples1)):
-                (word1,vector1) = tuples1[colnum]
-                if numpy.isnan(vector1).any() or word1 in ignorable:
+            rownum=len(tuples2)-1
+            while rownum>=0:
+                row=[]
+                (word2,vector2) = tuples2[rownum]
+                if numpy.isnan(vector2).any() or word2 in ignorable:
+                    rownum-=1
                     continue
-                if len(xwords) < len(tuples1):#-len(ignorable)):
-                    xwords.append(word1)
-                if invert:  
-                    row.append(1-metric(vector1,vector2))
-                else:
-                    row.append(metric(vector1,vector2))
-            matrix.append(row)
-            rownum-=1
-        return ((np.array(matrix), xwords, ywords))
+                ywords.append(word2)
+                for colnum in range(len(tuples1)):
+                    (word1,vector1) = tuples1[colnum]
+                    if numpy.isnan(vector1).any() or word1 in ignorable:
+                        continue
+                    if len(xwords) < len(tuples1):#-len(ignorable)):
+                        xwords.append(word1)
+                    if invert:  
+                        row.append(1-metric(vector1,vector2))
+                    else:
+                        row.append(metric(vector1,vector2))
+                matrix.append(row)
+                rownum-=1
+            return ((np.array(matrix), xwords, ywords))
 
 
 
