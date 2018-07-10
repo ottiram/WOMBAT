@@ -3,13 +3,17 @@ Word Embedding Database
 
 **TOC**
 
-<h3>[**Introduction**](https://github.com/nlpAThits/WOMBAT#introduction)</h3>
+[**Introduction**](#introduction)
 
-[**Installation**](https://github.com/nlpAThits/WOMBAT#installation)
+[**Installation**](#installation)
 
 [**Importing Pre-Trained Embeddings to WOMBAT: GloVe**](#importing-pre-trained-embeddings-to-wombat-glove)
 
 [**Integrating automatic preprocessing**](#integrating-automatic-preprocessing)
+
+[**Simple preprocessing (no MWEs)**](#simple-preprocessing-no-mwes)
+
+[**Advanced preprocessing with MWE)**](#advanced-preprocessing-with-mwes)
 
 
 
