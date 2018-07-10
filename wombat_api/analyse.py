@@ -59,7 +59,7 @@ def compute_distance_matrix(vector_result1, vector_result2, metric=dist.cosine, 
         tuples1=vector_result1[p][1]
         tuples2=vector_result2[p][1]
 
-        ignorable = numpy.intersect1d([v[0] for v in tuples1], [v[0] for v in tuples2]) if ignore_matching else []
+        ignorable = numpy.intersect1d([v[0] for v in tuples1], [v[0] for v in tuples2]).tolist() if ignore_matching else []
         ignorable.extend(ignore)
         # Remove all ignorable items from both lists first
         # This might be inefficient ... 
