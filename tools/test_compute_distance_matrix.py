@@ -11,4 +11,7 @@ rawfile="data/text/STS.input.track5.en-en.txt"
 vecs1 = wbc.get_vectors(wec_ids, {}, for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=0, skiprows=245)], raw=True)
 vecs2 = wbc.get_vectors(wec_ids, {}, for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=1, skiprows=245)], raw=True)
 
-print(compute_distance_matrix(vecs1, vecs2))
+distance_matrices = compute_distance_matrix(vecs1, vecs2)
+for r in distance_matrices:
+    for matrix in r:
+        print(matrix)
