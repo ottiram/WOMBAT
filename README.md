@@ -3,11 +3,14 @@ Word Embedding Database
 
 **TOC**
 
-[**Introduction**](https://github.com/nlpAThits/WOMBAT#introduction)
+<h3>[**Introduction**](https://github.com/nlpAThits/WOMBAT#introduction)</h3>
 
 [**Installation**](https://github.com/nlpAThits/WOMBAT#installation)
 
 [**Importing Pre-Trained Embeddings to WOMBAT: GloVe**](#importing-pre-trained-embeddings-to-wombat-glove)
+
+[**Integrating automatic preprocessing**](#integrating-automatic-preprocessing)
+
 
 
 See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to appear at <a href="http://coling2018.org/accepted-demo-papers/" target="_blank">COLING 2018</a>) for more details.
