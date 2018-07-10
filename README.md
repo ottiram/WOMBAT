@@ -636,7 +636,9 @@ prepro.pickle("temp/my_cs_savvy_standard_preprocessor.pkl")
 
 Apply the preprocessor to the raw WEC training data <b>before training the WECs</b>. WOMBAT provides the script ```tools/apply_preprocessor.py``` for that purpose. 
 
-We provide a plain text file of CS publication titles from <a href="https://dblp.org">DBLP</a> in ``` data/text/dblp-titles.txt```. 
+We provide a plain text file of CS publication titles from the <a href="https://dblp.org">DBLP</a> site <a href="http://cosyne.h-its.org/dblp/dblp-titles.txt.tar.gz">here</a>.
+
+Unzip it to ``` data/text/dblp-titles.txt```. 
 
 ```
 Parallel Integer Sorting and Simulation Amongst CRCW Models.
