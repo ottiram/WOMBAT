@@ -100,7 +100,7 @@ def compute_distance_matrix(vector_result1, vector_result2, metric=dist.cosine, 
                     if len(xwords) < len(tuples1):#-len(ignorable)):
                         xwords.append(word1)
                     if invert:  
-                        row.append(1/metric(vector1,vector2))
+                        row.append(1-metric(vector1,vector2))
                     else:
                         row.append(metric(vector1,vector2))
                 matrix.append(row)
