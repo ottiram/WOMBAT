@@ -11,7 +11,7 @@ rawfile="data/text/STS.input.track5.en-en.txt"
 vecs1 = wbc.get_vectors(wec_ids, {}, for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=0, skiprows=0)], raw=True)
 vecs2 = wbc.get_vectors(wec_ids, {}, for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=1, skiprows=0)], raw=True)
 
-distance_matrices = compute_distance_matrix(vecs1, vecs2)
+distance_matrices = compute_distance_matrix(vecs1, vecs2, invert=True)
 for mi, r in enumerate(distance_matrices):
     for ti, (matrix, xwords, ywords, xstring, ystring) in enumerate(r):
         plot_heatmap(matrix, xwords, ywords, xstring=xstring, ystring=ystring, plot_name="temp/"+str(mi)+"_"+str(ti)+".png")
