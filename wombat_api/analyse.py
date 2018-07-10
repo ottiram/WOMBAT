@@ -107,11 +107,11 @@ def compute_distance_matrix(vector_result1, vector_result2, metric=dist.cosine, 
         result.append(result_for_wec)
     return result
 
-def plot_heatmap(matrix, xwords, ywords, string1="", string2="", verbose=False, plot_name="",  cmap="RdYlGn", default=0.0, 
+def plot_heatmap(matrix, xwords, ywords, string1="", string2="", plot_name="", cmap="RdYlGn", default=0.0, title="",
     suptitle_props={'fontsize':12, 'fontweight':'bold'}, 
     plottitle_props={'fontsize':12, 'fontweight':'normal'}, 
     ticklabel_props={'fontsize':12, 'fontweight':'bold'},
-    title=""):
+    verbose=False):
     if plot_name=="":
         plot_name="heatmap-"+str(os.getpid())+".png"
         

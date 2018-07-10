@@ -12,6 +12,6 @@ vecs1 = wbc.get_vectors(wec_ids, {}, for_input=[np.loadtxt(rawfile, dtype=str, d
 vecs2 = wbc.get_vectors(wec_ids, {}, for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=1, skiprows=245)], raw=True)
 
 distance_matrices = compute_distance_matrix(vecs1, vecs2)
-for r in distance_matrices:
+for i,r in enumerate(distance_matrices):
     for (matrix, xwords, ywords) in r:
-        plot_heatmap(matrix, xwords, ywords)
+        plot_heatmap(matrix, xwords, ywords,plot_name=str(i)+".png")
