@@ -129,8 +129,8 @@ def plot_heatmap(matrix, xwords, ywords, xstring="", ystring="", plot_name="", c
         plt.colorbar(heatplot, ax=axes[0,0])
         axes[0,0].set_xticks(range(len(xwords)))
         axes[0,0].set_xticklabels(xwords, rotation=90, **ticklabel_props)
-        axes[0,0].set_xlabel("\n".join(wrap(xstring, 500)), fontsize=14, fontweight="bold")
-        axes[0,0].set_ylabel("\n".join(wrap(ystring, 500)), fontsize=14, fontweight="bold")
+        axes[0,0].set_xlabel("\n".join(wrap(xstring, 500)), fontsize=8, fontweight="normal")
+        axes[0,0].set_ylabel("\n".join(wrap(ystring, 500)), fontsize=8, fontweight="normal")
         axes[0,0].set_yticks(range(len(ywords)))
         axes[0,0].set_yticklabels(ywords, **ticklabel_props)
 
@@ -143,7 +143,7 @@ def plot_heatmap(matrix, xwords, ywords, xstring="", ystring="", plot_name="", c
                     axes[0,0].text(j, i, '{0:.3f}'.format(matrix[i, j]), ha="center", va="center", color=c, fontweight="bold")
                 except IndexError:
                     pass
-        plt.tight_layout()
+        #plt.tight_layout()
         plt.savefig(plot_name)
     plt.close()
 
