@@ -54,12 +54,15 @@ def compute_distance_matrix(vector_result1, vector_result2, metric=dist.cosine, 
     # Each input must contain data from the same number of WECs (optimally just one)
     assert len(vector_result1) == len(vector_result2)
 
-    tuples1,tuples2,matrix,xwords,ywords=[],[],[],[],[]
+    tuples1,tuples2,matrix,xwords,ywords,result=[],[],[],[],[],[]
+    # Iterate over results for each WEC
     for p in range (len(vector_result1)):
+        result_for_wec=[]
         f1=vector_result1[p][1]
         f2=vector_result2[p][1]
 
         assert len(f1) == len(f2)
+        # Iterate over results for all sentences, creating pairs
         for t in range(len(f1)):
             tuples1=f1[t][2]
             tuples2=f2[t][2]
@@ -99,8 +102,9 @@ def compute_distance_matrix(vector_result1, vector_result2, metric=dist.cosine, 
                         row.append(metric(vector1,vector2))
                 matrix.append(row)
                 rownum-=1
-            return ((np.array(matrix), xwords, ywords))
-
+            result_for_wec.append((np.array(matrix), xwords, ywords))
+        result.append(result_for_wec)
+    return result
 
 
 
