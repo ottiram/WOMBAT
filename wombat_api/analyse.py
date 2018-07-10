@@ -120,10 +120,9 @@ def plot_heatmap(matrix, xwords, ywords, string1="", string2="", verbose=False, 
 
     # Create contents for current page
     fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(w,b), squeeze=False)
-#    (matrix, xwords, ywords) = distance_matrix(tuples1, tuples2, metric=metric, ignore_matching=ignore_matching, invert=True)
     if matrix!=[]:
-#        t=("Measure: "+metric.__name__.upper()+"\n\n")+"\n".join(wrap(title, TITLE_WRAP))
-#        fig.suptitle(t, **suptitle_props)
+        t=("Measure: "+metric.__name__.upper()+"\n\n")+"\n".join(wrap(title, TITLE_WRAP))
+        fig.suptitle(t, **suptitle_props)
         heatplot = axes[0,0].imshow(matrix, cmap=cmap, vmin=0, vmax=1)
         plt.colorbar(heatplot, ax=axes[0,0])
         axes[0,0].set_xticks(range(len(xwords)))
