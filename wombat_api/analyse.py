@@ -50,7 +50,6 @@ def plot_tsne(vector_result, pdf_name="", iters=250, size=(10,10), share_axes=('
 
 
 def compute_distance_matrix(vector_result1, vector_result2, metric=dist.cosine, ignore_matching=True, invert=False, ignore=['*sw*']):
-
     # Each input must contain data from the same number of WECs (optimally just one)
     assert len(vector_result1) == len(vector_result2)
 
@@ -107,6 +106,53 @@ def compute_distance_matrix(vector_result1, vector_result2, metric=dist.cosine, 
         result.append(result_for_wec)
     return result
 
+def plot_heatmap(
+    matrix,
+    xwords,
+    ywords,
+    string1="",
+    string2="",
+    verbose=False, 
+    plot_name="", 
+    cmap="RdYlGn", 
+    default=0.0, 
+    suptitle_props={'fontsize':12, 'fontweight':'bold'}, 
+    plottitle_props={'fontsize':12, 'fontweight':'normal'}, 
+    ticklabel_props={'fontsize':12, 'fontweight':'bold'},
+    title=""):
+    if plot_name=="":
+        plot_name="heatmap-"+str(os.getpid())+".png"
+        
+    w=max(len(xwords),4)
+    b=max(len(ywords),4)
+
+    # Create contents for current page
+    fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(w,b), squeeze=False)
+#    (matrix, xwords, ywords) = distance_matrix(tuples1, tuples2, metric=metric, ignore_matching=ignore_matching, invert=True)
+    if matrix!=[]:
+#        t=("Measure: "+metric.__name__.upper()+"\n\n")+"\n".join(wrap(title, TITLE_WRAP))
+#        fig.suptitle(t, **suptitle_props)
+        heatplot = axes[0,0].imshow(matrix, cmap=cmap, vmin=0, vmax=1)
+        plt.colorbar(heatplot, ax=axes[0,0])
+        axes[0,0].set_xticks(range(len(xwords)))
+        axes[0,0].set_xticklabels(xwords, rotation=90, **ticklabel_props)
+        axes[0,0].set_xlabel("\n".join(wrap(string1, 500)), fontsize=14, fontweight="bold")
+        axes[0,0].set_ylabel("\n".join(wrap(string2, 500)), fontsize=14, fontweight="bold")
+        axes[0,0].set_yticks(range(len(ywords)))
+        axes[0,0].set_yticklabels(ywords, **ticklabel_props)
+
+        # Loop over data dimensions and create text annotations.
+        for i in range(len(ywords)):
+            for j in range(len(xwords)):
+                try:
+                    c="white"
+                    if matrix[i, j] >= 0.3 and matrix[i, j] <= 0.7: c="black"
+                    axes[0,0].text(j, i, '{0:.3f}'.format(matrix[i, j]), ha="center", va="center", color=c, fontweight="bold")
+                except IndexError:
+                    pass
+        plt.tight_layout()
+        plt.savefig(plot_name)
+    plt.close()
 
 
 

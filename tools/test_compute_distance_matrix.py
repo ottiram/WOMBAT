@@ -1,6 +1,6 @@
 import numpy as np
 from wombat_api.core import connector as wb_conn
-from wombat_api.analyse import compute_distance_matrix
+from wombat_api.analyse import compute_distance_matrix, plot_heatmap
 
 wbpath="data/wombat-data/"
 wbc = wb_conn(path=wbpath, create_if_missing=False)
@@ -13,5 +13,5 @@ vecs2 = wbc.get_vectors(wec_ids, {}, for_input=[np.loadtxt(rawfile, dtype=str, d
 
 distance_matrices = compute_distance_matrix(vecs1, vecs2)
 for r in distance_matrices:
-    for matrix in r:
-        print(matrix)
+    for (matrix, xwords, ywords) in r:
+        plot_heatmap(matrix, xwords, ywords)
