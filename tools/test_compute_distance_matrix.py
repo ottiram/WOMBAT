@@ -5,7 +5,7 @@ from wombat_api.analyse import compute_distance_matrix
 wbpath="data/wombat-data/"
 wbc = wb_conn(path=wbpath, create_if_missing=False)
 
-wec_ids="algo:glove;dataset:6b;dims:50;fold:1;unit:token"
+wec_ids="algo:glove;dataset:6b;dims:{50,100};fold:1;unit:token"
 rawfile="data/text/STS.input.track5.en-en.txt"
 
 vecs1 = wbc.get_vectors(wec_ids, {}, for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=0, skiprows=245)], raw=True)
