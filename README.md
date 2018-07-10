@@ -1,8 +1,12 @@
 # WOMBAT
 Word Embedding Database
 
+**TOC**
+
 [**Introduction**](https://github.com/nlpAThits/WOMBAT#introduction)
+
 [**Installation**](https://github.com/nlpAThits/WOMBAT#installation)
+
 [**Importing Pre-Trained Embeddings to WOMBAT: GloVe**](#importing-pre-trained-embeddings-to-wombat-glove)
 
 
