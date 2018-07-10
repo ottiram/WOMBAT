@@ -64,6 +64,7 @@ def compute_distance_matrix(vector_result1, vector_result2, metric=dist.cosine, 
         assert len(f1) == len(f2)
         # Iterate over results for all sentences, creating pairs
         for t in range(len(f1)):
+            matrix,xwords,ywords=[],[],[]
             tuples1=f1[t][2]
             tuples2=f2[t][2]
 
