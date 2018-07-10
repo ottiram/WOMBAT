@@ -54,7 +54,7 @@ def compute_distance_matrix(vector_result1, vector_result2, metric=dist.cosine, 
     assert len(vector_result1) == len(vector_result2)
 
     tuples1,tuples2,matrix,xwords,ywords=[],[],[],[],[]
-    for p in range (len(vector_result1):
+    for p in range (len(vector_result1)):
         tuples1=vector_result1[p][1]
         tuples2=vector_result2[p][1]
 
