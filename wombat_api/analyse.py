@@ -143,7 +143,7 @@ def plot_heatmap(matrix, xwords, ywords, xstring="", ystring="", plot_name="", c
                     axes[0,0].text(j, i, '{0:.3f}'.format(matrix[i, j]), ha="center", va="center", color=c, fontweight="bold")
                 except IndexError:
                     pass
-        #plt.tight_layout()
+        plt.tight_layout()
         plt.savefig(plot_name)
     plt.close()
 
