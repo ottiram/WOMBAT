@@ -54,6 +54,8 @@ if __name__ == "__main__":
         elif a.lower()=="repeat_phrases":
             repeat_phrases=True
             repeat_phrases_label=".repeat_phrases"
+        elif a.lower()=="fold":
+            fold=True
 
 
     if (sw_symbol=="None" or sw_symbol=="") and conflate_sws==True:
