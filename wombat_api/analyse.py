@@ -121,7 +121,7 @@ def plot_heatmap(matrix, xwords, ywords, string1="", string2="", verbose=False, 
     # Create contents for current page
     fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(w,b), squeeze=False)
     if matrix!=[]:
-        t=("Measure: "+metric.__name__.upper()+"\n\n")+"\n".join(wrap(title, TITLE_WRAP))
+        t=("".join(wrap(title, TITLE_WRAP)) if title!="" else ""
         fig.suptitle(t, **suptitle_props)
         heatplot = axes[0,0].imshow(matrix, cmap=cmap, vmin=0, vmax=1)
         plt.colorbar(heatplot, ax=axes[0,0])
