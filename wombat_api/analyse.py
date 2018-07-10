@@ -129,8 +129,8 @@ def plot_heatmap(matrix, xwords, ywords, xstring="", ystring="", plot_name="", c
         plt.colorbar(heatplot, ax=axes[0,0])
         axes[0,0].set_xticks(range(len(xwords)))
         axes[0,0].set_xticklabels(xwords, rotation=90, **ticklabel_props)
-        axes[0,0].set_xlabel("\n".join(wrap(xstring, 40)), fontsize=10, fontweight="normal")
-        axes[0,0].set_ylabel("\n".join(wrap(ystring, 40)), fontsize=10, fontweight="normal")
+        axes[0,0].set_xlabel("\n".join(wrap(xstring, 40*(w/10))), fontsize=10, fontweight="normal")
+        axes[0,0].set_ylabel("\n".join(wrap(ystring, 40*(w/10))), fontsize=10, fontweight="normal")
         axes[0,0].set_yticks(range(len(ywords)))
         axes[0,0].set_yticklabels(ywords, **ticklabel_props)
 
