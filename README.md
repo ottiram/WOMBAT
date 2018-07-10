@@ -62,7 +62,7 @@ A minimal working environment can be set up like this:
 <p>
 
 ```shell
-$ conda create --name wombat python=3.6 numpy tqdm nltk==3.2.5
+$ conda create --name wombat python=3.6 numpy tqdm psutil nltk==3.2.5
 $ source activate wombat
 $ git clone https://github.com/nlpAThits/WOMBAT.git
 $ cd WOMBAT
