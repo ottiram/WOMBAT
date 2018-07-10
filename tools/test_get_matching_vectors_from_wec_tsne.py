@@ -11,5 +11,5 @@ pattern=sys.argv[2]
 highlight="" if len(sys.argv)<4 else sys.argv[3]
 
 vecs = wbc.get_matching_vectors(wec_ids, pattern=pattern, label=pattern)
-plot_tsne(vecs, iters=1000, fontsize=5, size=(10,10), highlight=highlight, arrange_by=wec_ids)
+plot_tsne(vecs, iters=1000, fontsize=5, size=(10,10), highlight=highlight, arrange_by=wec_ids, silent=False)
 
