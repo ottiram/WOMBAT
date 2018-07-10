@@ -65,8 +65,12 @@ def compute_distance_matrix(vector_result1, vector_result2, metric=dist.cosine, 
         # Iterate over results for all sentences, creating pairs
         for t in range(len(f1)):
             matrix,xwords,ywords=[],[],[]
+            string1=f1[t][0]
+            string2=f2[t][0]
             tuples1=f1[t][2]
             tuples2=f2[t][2]
+
+            print(string1)
 
             ignorable = numpy.intersect1d([v[0] for v in tuples1], [v[0] for v in tuples2]).tolist() if ignore_matching else []
             ignorable.extend(ignore)
