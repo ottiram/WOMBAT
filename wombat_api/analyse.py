@@ -3,6 +3,7 @@ import webbrowser as wb
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 from sklearn import manifold
+import scipy.spatial.distance as dist
 
 from wombat_api.lib import *
 TITLE_WRAP=40
