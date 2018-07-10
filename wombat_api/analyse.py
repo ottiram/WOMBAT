@@ -111,8 +111,8 @@ def compute_distance_matrix(vector_result1, vector_result2, metric=dist.cosine, 
 
 def plot_heatmap(matrix, xwords, ywords, xstring="", ystring="", plot_name="", cmap="RdYlGn", default=0.0, title="",
     suptitle_props={'fontsize':12, 'fontweight':'bold'}, 
-    plottitle_props={'fontsize':12, 'fontweight':'normal'}, 
-    ticklabel_props={'fontsize':10, 'fontweight':'bold'},
+    plottitle_props={'fontsize':10, 'fontweight':'normal'}, 
+    ticklabel_props={'fontsize':10, 'fontweight':'normal'},
     verbose=False):
     if plot_name=="":
         plot_name="heatmap-"+str(os.getpid())+".png"
@@ -129,8 +129,8 @@ def plot_heatmap(matrix, xwords, ywords, xstring="", ystring="", plot_name="", c
         plt.colorbar(heatplot, ax=axes[0,0])
         axes[0,0].set_xticks(range(len(xwords)))
         axes[0,0].set_xticklabels(xwords, rotation=90, **ticklabel_props)
-        axes[0,0].set_xlabel("\n".join(wrap(xstring, 50)), fontsize=10, fontweight="normal")
-        axes[0,0].set_ylabel("\n".join(wrap(ystring, 50)), fontsize=10, fontweight="normal")
+        axes[0,0].set_xlabel("\n".join(wrap(xstring, 40)), fontsize=10, fontweight="normal")
+        axes[0,0].set_ylabel("\n".join(wrap(ystring, 40)), fontsize=10, fontweight="normal")
         axes[0,0].set_yticks(range(len(ywords)))
         axes[0,0].set_yticklabels(ywords, **ticklabel_props)
 
