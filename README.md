@@ -744,7 +744,13 @@ grammar	7.980991554950237
 Train embedding vectors on the preprocessed training data, using your favourite training algorithm and setup.
 </li>
 
+<li>
+Import the embedding vectors into WOMBAT, and assign the preprocessor, using the code above.
+</li>
 
+<li>
+Your are all set retrieve embedding vectors for arbitrary, raw input text!!
+</li>
 
 </ol>
 </p>
