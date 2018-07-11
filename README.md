@@ -1,4 +1,9 @@
 # WOMBAT
+<p>
+
+See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to appear at <a href="http://coling2018.org/accepted-demo-papers/" target="_blank">COLING 2018</a>) for additional details. Please cite the COLING paper if you use WOMBAT.
+
+</p>
 
 <h3>Introduction</h3>
 <p>
@@ -58,9 +63,6 @@ WOMBAT provides a single point of access to existing WECs. Each plain text WEC f
 </li> 
 
 </ol>
-
-
-See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to appear at <a href="http://coling2018.org/accepted-demo-papers/" target="_blank">COLING 2018</a>) for more details.
 
 
 <pre>
