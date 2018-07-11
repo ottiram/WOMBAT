@@ -36,7 +36,7 @@ See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to
 <b>WOMBAT</b>, the WOrd eMBedding dATabase, is a light-weight Python tool for more transparent, efficient, and robust access to potentially large numbers of word embedding collections (WECs). 
 It supports NLP researchers and practitioners in developing compact, efficient, and reusable code. 
 Key features of WOMBAT are
-<ol type=1>
+<ol type="1">
 <li>transparent identification of WECs by means of a clean syntax and human-readable features, </li>
 <li>efficient lazy, on-demand retrieval of word vectors, and</li> 
 <li>increased robustness by systematic integration of executable preprocessing code. </li>
