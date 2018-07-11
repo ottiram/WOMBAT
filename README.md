@@ -103,7 +103,8 @@ conda install -c conda-forge nltk==3.2.5
 
 <h3>Importing Pre-Trained Embeddings to WOMBAT: GloVe</h3>
 <p>
-One of the main uses of WOMBAT is as a wrapper for accessing existing, off-the-shelf word embeddings like e.g. GloVe. (The other use involves access to self-trained embeddings, including preprocessing and handling of multi-word-expressions, cf. below.)
+
+One of the main uses of WOMBAT is as a wrapper for accessing existing, off-the-shelf word embeddings like e.g. GloVe. (The other use involves access to self-trained embeddings, including preprocessing and handling of multi-word-expressions, cf. [below](#integrating-automatic-preprocessing))
 
 The following code is sufficient to import a sub set of the GloVe embeddings. 
 ```python
