@@ -88,6 +88,24 @@ WOMBAT provides a single point of access to existing WECs. Each plain text WEC f
 
 </li> 
 
+
+<li> 
+
+[**Use Cases**](#use-cases)
+
+<ol type="1">
+
+<li> 
+
+[**Pairwise Similarity<**](#pairwise-similarity)
+
+</li> 
+
+</ol>
+
+</li> 
+
+
 </ol>
 
 
