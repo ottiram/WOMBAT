@@ -826,9 +826,12 @@ wec_ids="algo:glove;dataset:6b;dims:50;fold:1;unit:token"
 rawfile="data/text/STS.input.track5.en-en.txt"
 
 pp_cache={}
-vecs1 = wbc.get_vectors(wec_ids, pp_cache, for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=0, skiprows=0)], raw=True)
-vecs2 = wbc.get_vectors(wec_ids, pp_cache, for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=1, skiprows=0)], raw=True)
-pd = plot_pairwise_distances(vecs1, vecs2, arrange_by=wec_ids, pdf_name="temp/sent_sim.pdf", size=(25,10), max_pairs=20)
+vecs1 = wbc.get_vectors(wec_ids, pp_cache, 
+            for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=0, skiprows=0)], raw=True)
+vecs2 = wbc.get_vectors(wec_ids, pp_cache, 
+            for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=1, skiprows=0)], raw=True)
+pd = plot_pairwise_distances(vecs1, vecs2, arrange_by=wec_ids, 
+            pdf_name="temp/sent_sim.pdf", size=(25,10), max_pairs=20)
 ```
 
 </p>
