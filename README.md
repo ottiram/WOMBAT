@@ -846,8 +846,30 @@ Calling this script produces the following output:
 
 <p>
 
+One might also be interested in finding maximally similar pairs of sentences in a plain list. WOMBAT provides the script ```tools/full_pairwise_similarity.py``` for this. The main difference to the above script is that it supplies ```None``` as the value for the second parameter. This causes the ```wombat_api.analyse.plot_pairwise_distances.py``` method to create a <b>cartesian product</b> of all sentences supplied as value to the first, obligatory parameter.
 
+```python
+import numpy as np, scipy.spatial.distance
+from wombat_api.core import connector as wb_conn
+from wombat_api.analyse import plot_pairwise_distances
+
+wbpath="data/wombat-data/"
+wbc = wb_conn(path=wbpath, create_if_missing=False)
+
+wec_ids="algo:glove;dataset:6b;dims:50;fold:1;unit:token"
+rawfile="data/text/STS.input.track5.en-en.txt"
+
+vecs1 = wbc.get_vectors(wec_ids, {}, for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=0, skiprows=0)], raw=True)
+pd = plot_pairwise_distances(vecs1, None, arrange_by=wec_ids, pdf_name="temp/full_pw_sim.pdf", size=(25,10), max_pairs=20)
+
+```
 
 </p>
 
+<p>
 
+Calling this script produces the following output:
+
+![Wombat full list similarity plot](https://github.com/nlpAThits/WOMBAT/blob/master/data/images/wombat_full_pair_similarity.png)
+
+</p>
