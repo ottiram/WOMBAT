@@ -40,11 +40,11 @@ WOMBAT provides a single point of access to existing WECs. Each plain text WEC f
 
 [**Integrating automatic preprocessing**](#integrating-automatic-preprocessing)
 
-<ol>
+<ol type="1">
 
 <li> 
 
-[**Simple preprocessing (no MWEs)**](#simple-preprocessing-no-mwes)
+[**Simple preprocessing**](#simple-preprocessing-no-mwes)
 
 </li> 
 <li> 
