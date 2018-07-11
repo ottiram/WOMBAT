@@ -804,5 +804,5 @@ Train embedding vectors on the preprocessed training data, using your favourite 
 </ol>
 </p>
 
-<h4>Use Cases</h4>
-
+<h3>Use Cases</h3>
+<h4>Pairwise Similarity</h4>
