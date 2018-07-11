@@ -811,7 +811,7 @@ Train embedding vectors on the preprocessed training data, using your favourite 
 
 <p>
 
-The computation of pairwise semantic distance is a standard task in NLP. One common application is computing the <b>similarity of pre-defined sentence pairs</b>. WOMBAT provides the script ```tools/sentence_similarity.py``` for this task, which uses the method ```wombat_api.analyse.plot_pairwise_distances.py```.
+The computation of pairwise semantic distance is a standard task in NLP. One common application is computing the <b>similarity of pre-defined sentence pairs</b>. WOMBAT provides the script ```tools/sentence_pair_similarity.py``` for this task, which uses the method ```wombat_api.analyse.plot_pairwise_distances.py```.
 
 </p>
 
@@ -824,7 +824,6 @@ Calling this script produces the following output:
 
 <p>
 
-Another, related application is short-text 
 
 </p>
 
