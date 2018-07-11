@@ -821,7 +821,8 @@ from wombat_api.analyse import plot_pairwise_distances
 wbpath="data/wombat-data/"
 wbc = wb_conn(path=wbpath, create_if_missing=False)
 
-# Use e.g. algo:glove;dataset:6b;dims:{50,100,200};fold:1;unit:token" to create three different plots in one run!
+# Note: You can use e.g. algo:glove;dataset:6b;dims:{50,100,200};fold:1;unit:token" 
+# to create three different plots in one run!
 wec_ids="algo:glove;dataset:6b;dims:50;fold:1;unit:token"
 rawfile="data/text/STS.input.track5.en-en.txt"
 
