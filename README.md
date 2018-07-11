@@ -4,9 +4,16 @@ Word Embedding Database
 **TOC**
 <ul>
 
-<li> [**Introduction**](#introduction) </li>
+<li> 
+
+[**Introduction**](#introduction) 
+
+</li>
+<li> 
 
 [**Installation**](#installation)
+
+</li> 
 
 [**Importing Pre-Trained Embeddings to WOMBAT: GloVe**](#importing-pre-trained-embeddings-to-wombat-glove)
 
