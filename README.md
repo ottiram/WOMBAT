@@ -5,7 +5,7 @@ See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to
 
 </p>
 
-![Wombat logo](https://github.com/nlpAThits/WOMBAT/blob/master/data/images/wombat.png)
+![Wombat logo](https://github.com/nlpAThits/WOMBAT/blob/master/data/images/wombat.png){:height="100px"}
 
 <!-- <pre>
  |                                   | 
