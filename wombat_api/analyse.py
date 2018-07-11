@@ -11,9 +11,16 @@ from wombat_api.lib import *
 TITLE_WRAP=40
 
 def plot_pairwise_distances(vector_result1, vector_result2, pdf_name="", size=(10,10), share_axes=('all','none'), max_pairs=20,  verbose=False, fontsize=14, metric=scipy.spatial.distance.cosine, arrange_by="", silent=False):
+    
+    cartesian_mode=False
 
-    # Each input must contain data from the same number of WECs (optimally just one)
-    assert len(vector_result1) == len(vector_result2)
+    if vector_result2 == None:
+        print("Creating cartesian product of single input list!")
+        cartesian_mode=True
+
+    if not cartesian_mode:
+        # Each input must contain data from the same number of WECs (optimally just one)
+        assert len(vector_result1) == len(vector_result2)
 
     (we_params_dict_list, plot_coords, plot_rows, plot_cols, plot_pages) = expand_parameter_grids(arrange_by)
     
@@ -38,24 +45,46 @@ def plot_pairwise_distances(vector_result1, vector_result2, pdf_name="", size=(1
             name=metric.__name__.upper()+": "+dict_to_sorted_string(we_params_dict)
             axes[row,col].set_title("\n".join(wrap(name, 100)), fontweight='bold', fontsize=14)
 
-            # f1 and f2 are complete results for WEC p
-            f1=vector_result1[p][1]
-            f2=vector_result2[p][1]
-            # Same no. of items in list to compare
-            assert len(f1) == len(f2)
-            results=[]
-            for t in range(len(f1)):
+            if not cartesian_mode:
+                # f1 and f2 are complete results for WEC p
+                f1=vector_result1[p][1]
+                f2=vector_result2[p][1]
+                # Same no. of items in list to compare
+                assert len(f1) == len(f2)
+                results=[]
+                for t in range(len(f1)):
 
-                # Todo Make this more efficient
-                vecs1,vecs2=[],[]
-                for v in f1[t][2]:
-                    vecs1.append(v[1])
-                for v in f2[t][2]:
-                    vecs2.append(v[1])
+                    # Todo Make this more efficient
+                    vecs1,vecs2=[],[]
+                    for v in f1[t][2]:
+                        vecs1.append(v[1])
+                    for v in f2[t][2]:
+                        vecs2.append(v[1])
 
-                s1_avg = np.average(vecs1, axis=0)
-                s2_avg = np.average(vecs2, axis=0)
-                results.append((t, f1[t][0], f2[t][0], float(metric(np.average(vecs1, axis=0), np.average(vecs2, axis=0)))))
+                    s1_avg = np.average(vecs1, axis=0)
+                    s2_avg = np.average(vecs2, axis=0)
+                    results.append((t, f1[t][0], f2[t][0], float(metric(np.average(vecs1, axis=0), np.average(vecs2, axis=0)))))
+            else:
+                # f1 is the complete result for WEC p
+                f1=vector_result1[p][1]
+                temp,results=[],[]
+                for t in range(len(f1)):
+                    vecs1=[]
+                    # sent1 = f1[t][0]
+                    for v in f1[t][2]:
+                        vecs1.append(v[1])
+                    s1_avg = np.average(vecs1, axis=0)
+                    temp.append((np.average(vecs1, axis=0), f1[t][0]))
+
+                c=0
+                for outer in range(len(temp)):
+                    s1_avg=temp[outer][0]
+                    sent1=temp[outer][1]
+                    for inner in range(outer+1,len(temp)):
+                        s2_avg=temp[inner][0]
+                        sent2=temp[inner][1]
+                        c+=1
+                        results.append((c, sent1, sent2, float(metric(s1_avg, s2_avg))))
 
             # Sort by distance 
             data=sorted(results, key=itemgetter(3), reverse=False)
