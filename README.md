@@ -1,14 +1,31 @@
 # WOMBAT
-Word Embedding Database
 
-**TOC**
+<h3>Introduction</h3>
+<p>
+<b>WOMBAT</b>, the WOrd eMBedding dATabase, is a light-weight Python tool for more transparent, efficient, and robust access to potentially large numbers of word embedding collections (WECs). 
+It supports NLP researchers and practitioners in developing compact, efficient, and reusable code. 
+Key features of WOMBAT are
+<ol type=1>
+<li>transparent identification of WECs by means of a clean syntax and human-readable features, </li>
+<li>efficient lazy, on-demand retrieval of word vectors, and</li> 
+<li>increased robustness by systematic integration of executable preprocessing code. </li>
+</ol>
+</p>
+
+<p>
+WOMBAT implements some Best Practices for research reproducibility and complements existing approaches towards WEC standardization and sharing. 
+
+WOMBAT provides a single point of access to existing WECs. Each plain text WEC file has to be imported into WOMBAT once, receiving in the process a set of ```ATT:VAL``` identifiers consisting of five system attributes (algo, dims, dataset, unit, fold) plus arbitrarily many user-defined ones.
+
+</p>
+
+
 <ol>
 
-<li> 
-
+<!--<li> 
 [**Introduction**](#introduction) 
-
 </li>
+-->
 <li> 
 
 [**Installation**](#installation)
@@ -66,25 +83,6 @@ See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to
  |            http://wombat.ascii.uk |
 </pre>
 
-
-<h3>Introduction</h3>
-<p>
-<b>WOMBAT</b>, the WOrd eMBedding dATabase, is a light-weight Python tool for more transparent, efficient, and robust access to potentially large numbers of word embedding collections (WECs). 
-It supports NLP researchers and practitioners in developing compact, efficient, and reusable code. 
-Key features of WOMBAT are
-<ol type=1>
-<li>transparent identification of WECs by means of a clean syntax and human-readable features, </li>
-<li>efficient lazy, on-demand retrieval of word vectors, and</li> 
-<li>increased robustness by systematic integration of executable preprocessing code. </li>
-</ol>
-</p>
-
-<p>
-WOMBAT implements some Best Practices for research reproducibility and complements existing approaches towards WEC standardization and sharing. 
-
-WOMBAT provides a single point of access to existing WECs. Each plain text WEC file has to be imported into WOMBAT once, receiving in the process a set of ```ATT:VAL``` identifiers consisting of five system attributes (algo, dims, dataset, unit, fold) plus arbitrarily many user-defined ones.
-
-</p>
 
 <h3>Installation</h3>
 <p>
