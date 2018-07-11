@@ -5,6 +5,32 @@ See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to
 
 </p>
 
+<pre>
+ |                                   | 
+ |             ,.--""""--.._         |
+ |           ."     .'      `-.      |
+ |          ;      ;           ;     |
+ |         '      ;             )    |
+ |        /     '             . ;    |
+ |       /     ;     `.        `;    |
+ |     ,.'     :         .    : )    |
+ |     ;|\'    :     `./|) \  ;/     |
+ |     ;| \"  -,-  "-./ |;  ).;      |
+ |     /\/             \/   );       |
+ |    :                \     ;       |
+ |    :     _      _     ;   )       |
+ |    `.   \;\    /;/    ;  /        |
+ |      !    :   :     ,/  ;         |
+ |       (`. : _ : ,/     ;          |
+ |        \\\`"^" ` :    ;           |   This is WOMBAT, the WOrd eMBedding dATa base API (Version 2.0)
+ |                (    )             |
+ |                 ////              |
+ |                                   |
+ | Wombat artwork by akg             |
+ |            http://wombat.ascii.uk |
+</pre>
+
+
 <h3>Introduction</h3>
 <p>
 <b>WOMBAT</b>, the WOrd eMBedding dATabase, is a light-weight Python tool for more transparent, efficient, and robust access to potentially large numbers of word embedding collections (WECs). 
@@ -65,30 +91,6 @@ WOMBAT provides a single point of access to existing WECs. Each plain text WEC f
 </ol>
 
 
-<pre>
- |                                   | 
- |             ,.--""""--.._         |
- |           ."     .'      `-.      |
- |          ;      ;           ;     |
- |         '      ;             )    |
- |        /     '             . ;    |
- |       /     ;     `.        `;    |
- |     ,.'     :         .    : )    |
- |     ;|\'    :     `./|) \  ;/     |
- |     ;| \"  -,-  "-./ |;  ).;      |
- |     /\/             \/   );       |
- |    :                \     ;       |
- |    :     _      _     ;   )       |
- |    `.   \;\    /;/    ;  /        |
- |      !    :   :     ,/  ;         |
- |       (`. : _ : ,/     ;          |
- |        \\\`"^" ` :    ;           |   This is WOMBAT, the WOrd eMBedding dATa base API (Version 2.0)
- |                (    )             |
- |                 ////              |
- |                                   |
- | Wombat artwork by akg             |
- |            http://wombat.ascii.uk |
-</pre>
 
 
 <h3>Installation</h3>
