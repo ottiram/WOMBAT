@@ -813,3 +813,10 @@ The computation of pairwise semantic distance is a standard task in NLP. One com
 
 </p>
 
+<p>
+Calling this script produces the following output:
+
+![Wombat sentence similarity plot](https://github.com/nlpAThits/WOMBAT/blob/master/data/images/wombat_sentence_similarity.png)
+
+</p>
+
