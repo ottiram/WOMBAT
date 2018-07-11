@@ -97,7 +97,7 @@ WOMBAT provides a single point of access to existing WECs. Each plain text WEC f
 
 <li> 
 
-[**Pairwise Similarity<**](#pairwise-similarity)
+[**Pairwise Similarity**](#pairwise-similarity)
 
 </li> 
 
@@ -803,4 +803,6 @@ Train embedding vectors on the preprocessed training data, using your favourite 
 
 </ol>
 </p>
+
+<h4>Use Cases</h4>
 
