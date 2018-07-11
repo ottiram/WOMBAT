@@ -662,6 +662,7 @@ $ python tools/apply_preprocessor.py data/text/dblp-titles.txt
                                      stopwords:*sws* 
                                      conflate 
                                      unit:stem 
+                                     fold
                                      repeat_phrases
 ```
 to produce the following output:
@@ -677,15 +678,15 @@ data/text/dblp-titles.txt.conflated_sys.repeat_phrases.stem.idf
 ```data/text/dblp-titles.txt.conflated_sys.nophrases.stem``` contains the plain, stemmed version of the input files:
 
 ```
-parallel integ sort *sws* simul amongst crcw model 
-pattern match *sws* tree *sws* net 
-NP complet problem simplifi *sws* tree schema 
-*sws* power *sws* chain rule *sws* context free grammar 
+parallel integ sort *sw* simul amongst crcw model 
+pattern match *sw* tree *sw* net 
+np complet problem simplifi *sw* tree schema 
+*sw* power *sw* chain rule *sw* context free grammar 
 schnell multiplik von polynomen über körpern der charakteristik 0 
-*sws* character *sws* ration d0l power seri 
-*sws* deriv *sws* systol implement *sws* program 
+*sw* character *sw* ration d0l power seri 
+*sw* deriv *sw* systol implement *sw* program 
 fifo net without order deadlock 
-*sws* complement rule *sws* multivalu depend *sws* databas relat 
+*sw* complement rule *sw* multivalu depend *sw* databas relat 
 equat weight tree transform 
 ```
 
@@ -693,17 +694,17 @@ equat weight tree transform
 In addition, due to the ```repeat_phrases``` switch, it contains a plain copy of each line in which at least one phrase was detected.
 
 ```
-parallel integ sort *sws* simul amongst crcw model 
-pattern_match *sws* tree *sws* net 
-pattern match *sws* tree *sws* net 
-NP complet problem simplifi *sws* tree schema 
-*sws* power *sws* chain rule *sws* context_free_grammar 
-*sws* power *sws* chain rule *sws* context free grammar 
+parallel integ sort *sw* simul amongst crcw model 
+pattern_match *sw* tree *sw* net 
+pattern match *sw* tree *sw* net 
+np complet problem simplifi *sw* tree schema 
+*sw* power *sw* chain rule *sw* context_free_grammar 
+*sw* power *sw* chain rule *sw* context free grammar 
 schnell multiplik von polynomen über körpern der charakteristik 0 
-*sws* character *sws* ration d0l power seri 
-*sws* deriv *sws* systol implement *sws* program 
+*sw* character *sw* ration d0l power seri 
+*sw* deriv *sw* systol implement *sw* program 
 fifo net without order deadlock 
-*sws* complement rule *sws* multivalu depend *sws* databas relat 
+*sw* complement rule *sw* multivalu depend *sw* databas relat 
 equat weight tree transform 
 ```
 
@@ -711,31 +712,31 @@ equat weight tree transform
 
 
 ```
-parallel	5.897970907169519
-integ	8.102311497626335
-sort	8.473304651238315
-*sws*	1.8091087556183325
-simul	5.717082103853617
-amongst	11.67697564595656
-crcw	13.32923355557359
-model	4.218803301915518
-pattern_match	9.382205440946752
-tree	6.384965553659295
-net	7.4220851572118525
-pattern	6.266479742008925
-match	6.709368704080969
-NP	9.186594983992531
-complet	7.382831753102521
-problem	5.397039667363945
-simplifi	8.815288155985574
-schema	8.476959180826444
-power	5.877665268873794
-chain	7.257846500323437
-rule	6.754244887532102
-context_free_grammar	10.55859986816961
-context	6.643567696197766
-free	6.902846235916237
-grammar	7.977968014707456
+parallel	5.9009944474123
+integ	8.105335037869118
+sort	8.476328191481095
+*sw*	1.8121353984487958
+simul	5.7200901939963575
+amongst	11.67999918619934
+crcw	13.33225709581637
+model	4.221747418292076
+pattern_match	9.385228981189533
+tree	6.3878685829354325
+net	7.425108697454633
+pattern	6.269503282251706
+match	6.71239224432375
+np	9.158831826956924
+complet	7.385855293345302
+problem	5.400074426355499
+simplifi	8.818311696228356
+schema	8.479982721069225
+power	5.880688809116575
+chain	7.260870040566218
+rule	6.757268427774883
+context_free_grammar	10.561623408412391
+context	6.646591236440547
+free	6.905869776159018
+grammar	7.980991554950237
 ```
 </li>
 
