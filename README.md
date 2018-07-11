@@ -5,7 +5,9 @@ See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to
 
 </p>
 
-<pre>
+![Wombat logo](https://github.com/nlpAThits/WOMBAT/blob/master/data/images/wombat.png)
+
+<!-- <pre>
  |                                   | 
  |             ,.--""""--.._         |
  |           ."     .'      `-.      |
@@ -29,7 +31,7 @@ See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to
  | Wombat artwork by akg             |
  |            http://wombat.ascii.uk |
 </pre>
-
+-->
 
 <h3>Introduction</h3>
 <p>
@@ -809,7 +811,7 @@ Train embedding vectors on the preprocessed training data, using your favourite 
 
 <p>
 
-The computation of pairwise semantic distance is a standard task in NLP. One common application is computing the similarity of pre-defined sentence pairs. WOMBAT provides the script ```tools/sentence_similarity.py``` for this task, which uses the method ```wombat_api.analyse.plot_pairwise_distances.py```.
+The computation of pairwise semantic distance is a standard task in NLP. One common application is computing the <b>similarity of pre-defined sentence pairs</b>. WOMBAT provides the script ```tools/sentence_similarity.py``` for this task, which uses the method ```wombat_api.analyse.plot_pairwise_distances.py```.
 
 </p>
 
@@ -819,4 +821,11 @@ Calling this script produces the following output:
 ![Wombat sentence similarity plot](https://github.com/nlpAThits/WOMBAT/blob/master/data/images/wombat_sentence_similarity.png)
 
 </p>
+
+<p>
+
+Another, related application is short-text 
+
+</p>
+
 
