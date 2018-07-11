@@ -745,7 +745,9 @@ Train embedding vectors on the preprocessed training data, using your favourite 
 </li>
 
 <li>
+
 [Import](#importing-pre-trained-embeddings-to-wombat-glove) the embedding vectors into WOMBAT, and [assign the preprocessor](#integrating-automatic-preprocessing), using the code above.
+
 </li>
 
 <li>
