@@ -97,7 +97,7 @@ WOMBAT provides a single point of access to existing WECs. Each plain text WEC f
 
 <li> 
 
-[**Pairwise Similarity**](#pairwise-similarity)
+[**Pairwise Distance**](#pairwise-distance)
 
 </li> 
 
@@ -805,4 +805,11 @@ Train embedding vectors on the preprocessed training data, using your favourite 
 </p>
 
 <h3>Use Cases</h3>
-<h4>Pairwise Similarity</h4>
+<h4>Pairwise Distance</h4>
+
+<p>
+
+The computation of pairwise semantic distance is a standard task in NLP. One common application is computing the similarity of pre-defined sentence pairs. WOMBAT provides the script ```tools/sentence_similarity.py``` for this task, which uses the method ```wombat_api.analyse.plot_pairwise_distances.py```.
+
+</p>
+
