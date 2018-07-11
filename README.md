@@ -745,11 +745,11 @@ Train embedding vectors on the preprocessed training data, using your favourite 
 </li>
 
 <li>
-Import the embedding vectors into WOMBAT, and assign the preprocessor, using the code above.
+[Import](#importing-pre-trained-embeddings-to-wombat-glove) the embedding vectors into WOMBAT, and [assign the preprocessor](#integrating-automatic-preprocessing), using the code above.
 </li>
 
 <li>
-Your are all set retrieve embedding vectors for arbitrary, raw input text!!
+<b>Done!</b> Your are all set now to retrieve embedding vectors for arbitrary, raw input text, and <b>fast</b>!!
 </li>
 
 </ol>
