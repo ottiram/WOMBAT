@@ -5,9 +5,9 @@ See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to
 
 </p>
 
-<img src="https://github.com/nlpAThits/WOMBAT/blob/master/data/images/wombat.png" height="300px" align="middle" />
+<!-- <img src="https://github.com/nlpAThits/WOMBAT/blob/master/data/images/wombat.png" height="300px" align="middle" /> -->
 
-<!-- <pre>
+<pre>
  |                                   | 
  |             ,.--""""--.._         |
  |           ."     .'      `-.      |
@@ -31,7 +31,7 @@ See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to
  | Wombat artwork by akg             |
  |            http://wombat.ascii.uk |
 </pre>
--->
+
 
 <h3>Introduction</h3>
 <p>
