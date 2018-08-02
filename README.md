@@ -2,7 +2,10 @@
 <p>
 
 See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to appear at <a href="http://coling2018.org/accepted-demo-papers/" target="_blank">COLING 2018</a>) for additional details. Please cite the COLING paper if you use WOMBAT.
+</p>
 
+<p>
+Note: Due to a name clash with another python package, the actual WOMBAT package structure is slightly different than that used in the COLING paper examples! The examples used in this web site are up-to-date.
 </p>
 
 <!-- <img src="https://github.com/nlpAThits/WOMBAT/blob/master/data/images/wombat.png" height="300px" align="middle" /> -->
@@ -800,7 +803,7 @@ Train embedding vectors on the preprocessed training data, using your favourite 
 </li>
 
 <li>
-<b>Done!</b> Your are all set now to retrieve embedding vectors for arbitrary, raw input text, and <b>fast</b>!!
+<b>Done!</b> You are all set now to retrieve embedding vectors for arbitrary, raw input text, and <b>fast</b>!!
 </li>
 
 </ol>
