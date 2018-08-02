@@ -814,7 +814,7 @@ Train embedding vectors on the preprocessed training data, using your favourite 
 
 <p>
 
-The computation of pairwise semantic distance is a standard task in NLP. One common application is computing the <b>similarity of pre-defined sentence pairs</b>. WOMBAT provides the script ```tools/sentence_pair_similarity.py``` for this task, which uses the method ```wombat_api.analyse.plot_pairwise_distances.py```.
+The computation of pairwise semantic distance is a standard task in NLP. One common application is computing the <b>similarity of pre-defined sentence pairs</b>. WOMBAT provides the script ```tools/sentence_pair_similarity.py``` for this task, which uses the method ```wombat_api.analyse.plot_pairwise_distances```.
 
  ```python
 import numpy as np, scipy.spatial.distance
@@ -834,8 +834,9 @@ vecs1 = wbc.get_vectors(wec_ids, pp_cache,
             for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=0, skiprows=0)], raw=True)
 vecs2 = wbc.get_vectors(wec_ids, pp_cache, 
             for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=1, skiprows=0)], raw=True)
+# Use ignore_identical=True to ignore pairs whose avg. vectors are identical (=max. similarity or min. distance)
 pd = plot_pairwise_distances(vecs1, vecs2, arrange_by=wec_ids, 
-            pdf_name="temp/sent_sim.pdf", size=(25,10), max_pairs=20)
+            pdf_name="temp/sent_sim.pdf", size=(25,10), max_pairs=20, ignore_identical=False)
 ```
 
 </p>
@@ -849,7 +850,7 @@ Calling this script produces the following output:
 
 <p>
 
-One might also be interested in finding maximally similar pairs of sentences in a plain list. WOMBAT provides the script ```tools/full_pairwise_similarity.py``` for this. The main difference to the above script is that it supplies ```None``` as the value for the second parameter. This causes the ```wombat_api.analyse.plot_pairwise_distances.py``` method to create a <b>cartesian product</b> of all sentences supplied as value to the first, obligatory parameter.
+One might also be interested in finding maximally similar pairs of sentences in a plain list. WOMBAT provides the script ```tools/full_pairwise_similarity.py``` for this. The main difference to the above script is that it supplies ```None``` as the value for the second parameter. This causes the ```wombat_api.analyse.plot_pairwise_distances``` method to create a <b>cartesian product</b> of all sentences supplied as value to the first, obligatory parameter.
 
 ```python
 import numpy as np, scipy.spatial.distance
@@ -864,8 +865,9 @@ rawfile="data/text/STS.input.track5.en-en.txt"
 
 vecs1 = wbc.get_vectors(wec_ids, {}, 
             for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=0, skiprows=0)], raw=True)
+# Use ignore_identical=True to ignore pairs whose avg. vectors are identical (=max. similarity or min. distance)
 pd = plot_pairwise_distances(vecs1, None, arrange_by=wec_ids,
-            pdf_name="temp/full_pw_sim.pdf", size=(25,10), max_pairs=20)
+            pdf_name="temp/full_pw_sim.pdf", size=(25,10), max_pairs=20, ignore_identical=False)
 
 ```
 
