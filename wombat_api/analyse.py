@@ -20,11 +20,18 @@ except ModuleNotFoundError as mne:
     print(mne)
 
 
+
 from wombat_api.lib import *
 TITLE_WRAP=40
 
-def draw_word_graph(matrix, xwords, ywords, layout="drl_3d", layout_params={'dim':3, 'weights':'weight'}, xstring="", ystring="", plot_name="", title="", verbose=False):
+def interpolate(start, end):
+    mid =  (start+end)/2
+    return([(start+mid)/2,mid,(mid+end)/2])
 
+def draw_word_graph(matrix, xwords, ywords, layout="drl_3d", layout_params={'dim':3, 'weights':'weight'}, xstring="", ystring="", plot_name="", title="", verbose=False, minw=0, maxw=0.4, silent=True):
+#    print(xwords)
+#    print(ywords)
+#    print(matrix)
     bipartite = layout.lower()=="bipartite"
 
     if plot_name=="":
@@ -37,9 +44,6 @@ def draw_word_graph(matrix, xwords, ywords, layout="drl_3d", layout_params={'dim
     else:
         igraph = ig.Graph(directed=False)
 
-    minw=0
-    maxw=10
-
     # Loop over data dimensions and create nodes
     for i in range(len(ywords)):
         node_attributes={'type':True, 'label':ywords[i]}
@@ -48,7 +52,7 @@ def draw_word_graph(matrix, xwords, ywords, layout="drl_3d", layout_params={'dim
             if i == 0:
                 node_attributes={'type':False, 'label':xwords[j]}
                 igraph.add_vertex(name=str(j)+"_b_"+xwords[j], **node_attributes)
-            print(matrix[i,j])
+            #print(matrix[i,j])
             if matrix[i,j] >= minw and matrix[i,j] <= maxw  and numpy.isinf(matrix[i,j])==False:
                 igraph.add_edge(str(i)+"_a_"+ywords[i],str(j)+"_b_"+xwords[j], **{'weight':int(matrix[i, j]), 'label':matrix[i, j]})
 
@@ -62,17 +66,19 @@ def draw_word_graph(matrix, xwords, ywords, layout="drl_3d", layout_params={'dim
 
     # Create fake trace 
     if bipartite:
-        traces.append(go.Scatter(x=[0], y=[0], marker={'color':'rgb(0, 0, 0)', 'opacity': 1, 'size': 0.1}, showlegend=False))
+        traces.append(go.Scatter(x=[0], y=[0], mode='markers', marker={'color':'rgb(0, 0, 0)', 'opacity': 1, 'size': 0.1}, showlegend=False))
     else:
-        traces.append(go.Scatter3d(x=[0], y=[0], z=[0], marker={'color':'rgb(0, 0, 0)', 'opacity': 1, 'size': 0.1}, showlegend=False))
+        traces.append(go.Scatter3d(x=[0], y=[0], z=[0], mode='markers', marker={'color':'rgb(0, 0, 0)', 'opacity': 1, 'size': 0.1}, showlegend=False))
     
-    if bipartite:
+    if bipartite:   
         word_node_trace=go.Scatter(x=[layt[igraph.vs[k].index][0] for k in range(len(igraph.vs))], 
                                  y=[layt[igraph.vs[k].index][1] for k in range(len(igraph.vs))],
                                 mode='text', 
                                 text=[igraph.vs[k]['label'] for k in range(len(igraph.vs))], 
                                 textfont=dict(size=20),
-                                hoverinfo='text')
+                                hoverinfo='none',
+                                #marker={'opacity': 1}
+                                )
         traces.append(word_node_trace)
     else:
         word_node_trace1=go.Scatter3d(x=[layt[igraph.vs[k].index][0] for k in range(len(igraph.vs)) if igraph.vs[k]['type'] == True], 
@@ -81,7 +87,8 @@ def draw_word_graph(matrix, xwords, ywords, layout="drl_3d", layout_params={'dim
                                 mode='text', 
                                 text=[igraph.vs[k]['label'] for k in range(len(igraph.vs)) if igraph.vs[k]['type'] == True], 
                                 textfont=dict(size=20, color="red"),
-                                hoverinfo='text')
+                                hoverinfo='text',
+                                marker={'opacity': 1})
 
         word_node_trace2=go.Scatter3d(x=[layt[igraph.vs[k].index][0] for k in range(len(igraph.vs)) if igraph.vs[k]['type'] == False], 
                                  y=[layt[igraph.vs[k].index][1] for k in range(len(igraph.vs)) if igraph.vs[k]['type'] == False],
@@ -89,46 +96,54 @@ def draw_word_graph(matrix, xwords, ywords, layout="drl_3d", layout_params={'dim
                                 mode='text', 
                                 text=[igraph.vs[k]['label'] for k in range(len(igraph.vs)) if igraph.vs[k]['type'] == False], 
                                 textfont=dict(size=20, color="green"),
-                                hoverinfo='text')
+                                hoverinfo='text',
+                                marker={'opacity': 1})
 
         traces.append(word_node_trace1)
         traces.append(word_node_trace2)
 
+    # Edge start and end points
     Xs,Ys,Zs=[],[],[]
+    # Edge label start and end points
     Xlabels,Ylabels,Zlabels=[],[],[]
     edge_labels=[]
     for e in igraph.es:
-        edge_labels.append(e['label'])
         Xs+=[layt[e.tuple[0]][0],layt[e.tuple[1]][0], None]
         Ys+=[layt[e.tuple[0]][1],layt[e.tuple[1]][1], None]
         if not bipartite: Zs+=[layt[e.tuple[0]][2],layt[e.tuple[1]][2], None] 
 
-        Xlabels+=[ (layt[e.tuple[0]][0] + layt[e.tuple[1]][0])/2 ]
-        Ylabels+=[ (layt[e.tuple[0]][1] + layt[e.tuple[1]][1])/2 ]  
-        if not bipartite: Zlabels+=[ (layt[e.tuple[0]][2] + layt[e.tuple[1]][2])/2 ]
+        for i in range (3):
+            edge_labels.append(e['label'])
+
+        # Get coords for nodes along the edge, for adding sim hover text to
+        Xlabels.extend(interpolate(layt[e.tuple[0]][0],layt[e.tuple[1]][0]))
+        Ylabels.extend(interpolate(layt[e.tuple[0]][1],layt[e.tuple[1]][1]))
+        if not bipartite: 
+            Zlabels.extend(interpolate(layt[e.tuple[0]][2],layt[e.tuple[1]][2]))
+
+    # Draw edges
+    if bipartite:
+        traces.append(go.Scatter(x=Xs, y=Ys, mode='lines', opacity=1, line=dict(color='rgb(125,125,125)', width=2)))
+    else:
+        traces.append(go.Scatter3d(x=Xs, y=Ys, z=Zs, mode='lines', opacity=1,  line=dict(color='rgb(125,125,125)', width=1)))
 
     if bipartite:
-        traces.append(go.Scatter(x=Xs, y=Ys, mode='lines', line=dict(color='rgb(125,125,125)', width=1), hoverinfo='text', hovertext=edge_labels))
+        label_node_trace=go.Scatter(x=Xlabels, 
+                                 y=Ylabels,
+                                mode='markers', 
+                                #text=[igraph.es[k]['label'] for k in range(len(igraph.es))], 
+                                #textfont=dict(size=20),
+                                hoverinfo='text',
+                                hovertext=edge_labels)
     else:
-        traces.append(go.Scatter3d(x=Xs, y=Ys, z=Zs, mode='lines', line=dict(color='rgb(125,125,125)', width=1), hoverinfo='text', hovertext=edge_labels))
-
-
-#    if bipartite:
-#        label_node_trace=go.Scatter(x=Xlabels, 
-#                                 y=Ylabels,
-#                                mode='text', 
-#                                text=[igraph.es[k]['label'] for k in range(len(igraph.es))], 
-#                                textfont=dict(size=20),
-#                                hoverinfo='text')
-#    else:
-#        label_node_trace=go.Scatter3d(x=Xlabels, 
-#                                 y=Ylabels,
-#                                 z=Zlabels, 
-#                                mode='text', 
-#                                text=[igraph.es[k]['label'] for k in range(len(igraph.es))], 
-#                                textfont=dict(size=20),
-#                                hoverinfo='text')
-#    traces.append(label_node_trace)
+        label_node_trace=go.Scatter3d(x=Xlabels, 
+                                 y=Ylabels,
+                                 z=Zlabels, 
+                                mode='markers', 
+                                #text=[igraph.es[k]['label'] for k in range(len(igraph.es))], 
+                                #textfont=dict(size=20),
+                                hoverinfo='text')
+    traces.append(label_node_trace)
 
 
     layout = go.Layout(
@@ -144,7 +159,7 @@ def draw_word_graph(matrix, xwords, ywords, layout="drl_3d", layout_params={'dim
              xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
              yaxis=dict(showgrid=False, zeroline=False, showticklabels=False))
     fig=go.Figure(data=traces, layout=layout)
-    plotly.offline.plot(fig, filename=plot_name)
+    plotly.offline.plot(fig, filename=plot_name, auto_open=(silent==False))
 
 
 def plot_pairwise_distances(vector_result1, vector_result2, pdf_name="", size=(10,10), share_axes=('all','none'), max_pairs=20,  verbose=False, fontsize=14, metric=scipy.spatial.distance.cosine, arrange_by="", silent=False, ignore_identical=False, bar_props={'color':'lightgreen'}, text_props={'fontsize':14}, axis_props={'labelsize':14}):
@@ -348,15 +363,17 @@ def compute_unit_distance_matrices(vector_result1, vector_result2, metric=scipy.
                 if numpy.isnan(vector2).any() or word2 in ignorable:
                     rownum-=1
                     continue
-                ywords.append(word2)
+                if word2 not in ywords:
+                    ywords.append(word2)
                 for colnum in range(len(tuples1)):
                     (word1,vector1) = tuples1[colnum]
                     if numpy.isnan(vector1).any() or word1 in ignorable:
                         continue
                     if len(xwords) < len(tuples1):#-len(ignorable)):
-                        xwords.append(word1)
+                        if word1 not in xwords:
+                            xwords.append(word1)
                     if invert:  
-                        row.append(1/metric(vector1,vector2))
+                        row.append(1-metric(vector1,vector2))
                     else:
                         row.append(metric(vector1,vector2))
                 matrix.append(row)
