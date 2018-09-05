@@ -14,4 +14,4 @@ pp_cache={}
 vecs1 = wbc.get_vectors(wec_ids, pp_cache, for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=0, skiprows=0)], raw=True)
 vecs2 = wbc.get_vectors(wec_ids, pp_cache, for_input=[np.loadtxt(rawfile, dtype=str, delimiter='\t', usecols=1, skiprows=0)], raw=True)
 
-pd = plot_pairwise_distances(vecs1, vecs2, arrange_by=wec_ids, pdf_name="temp/sent_sim.pdf", size=(25,10), max_pairs=20)
+pd = plot_pairwise_distances(vecs1, vecs2, arrange_by=wec_ids, pdf_name="temp/sent_sim.pdf", size=(25,10), max_pairs=20, ignore_identical=True)
