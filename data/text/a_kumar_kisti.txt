@@ -1,0 +1,104 @@
+Study of Canada/US Dollar Exchange Rate Movements Using Recurrent Neural Network Model of FX-Market
+Multiscale rough set data analysis with application to stock performance modeling
+Advertising data analysis using rough sets model
+The Case for Non-Cooperative Multihoming of Users to Access Points in IEEE 802.11 WLANs
+Capacity optimizing hop distance in a mobile ad hoc network with power control
+Distributed Sampling for Dense Sensor Networks : A Bit-Conservation Principle
+SCTP vs TCP  : Performance Comparison in MANETs
+Iterative Error Diffusion Halftoning Using a Zero Phase Error Filter
+Anatomical Information Science
+Ontology for Task-Based Clinical Guidelines and the Theory of Granular Partitions
+Oncology Ontology in the NCI Thesaurus
+On the Application of Formal Principles to Life Science Data : a Case Study in the Gene Ontology
+The Universal Medical Language System and the Gene Ontology : Some Critical Reflections
+Designing Access Methods for Bitemporal Databases
+Using Omnidirectional Structure from Motion for Registration of Range Images of Minimal Overlap
+Structure from Motion with Known Camera Positions
+Approximation Algorithms for the Unsplittable Flow Problem
+Primal-Dual Algorithms for Connected Facility Location Problems
+Sorting and Selection with Structured Costs
+A Constant-Factor Approximation Algorithm for the Multicommodity
+Fairness Measures for Resource Allocation
+Better Algorithms for Minimizing Average Flow-Time on Related Machines
+Linear Time Algorithms for Clustering Problems in Any Dimensions
+Exploring the trade-off between label size and stack depth in MPLS Routing
+Optimal Configuration of OSPF Aggregates
+Building Edge-Failure Resilient Networks
+Join-distinct aggregate estimation over update streams
+Deterministic Wavelet Thresholding for Maximum-Error Metrics
+Wavelength Conversion in Optical Networks
+Minimizing average flow time on related machines
+Provisioning a virtual private network : a network design problem for multicommodity flow
+Connectivity and inference problems for temporal networks
+Building Edge-Failure Resilient Networks
+Primal-Dual Algorithms for Connected Facility Location Problems
+On a bidirected relaxation for the MULTIWAY CUT problem
+Wavelength Conversion in Optical Networks
+Connectivity and Inference Problems for Temporal Networks
+Fairness Measures for Resource Allocation
+Optimal configuration of OSPF aggregates
+TRIPLES : a database of gene function in Saccharomyces cerevisiae
+The TRIPLES database : a community resource for yeast molecular biology
+Organelle DB : a cross-species database of protein localization and function
+Organelle DB : an updated resource of eukaryotic protein localization and function
+An Analysis and Taxonomy of Unstructured Workflows
+A Framework for Document-Driven Workflow Systems
+A Study of Spatial Clustering techniques
+Optimizing Voting-Type Algorithms for Replicated Data
+A Workflow-Centric Study of Organizational Knowledge Distribution
+A Performance Study of General Grid Structures for Replicated Data
+An Analysis of Borrowing Policies for Escrow Transactions in a Replicated Data Environment
+Leveraging Information Sharing to Increase Supply Chain Configurability
+Organizational Modeling in UML and XML in the Context of Workflow Systems
+A fine-grained , controllable , user-to-user delegation method in RBAC
+Semantics Based Transaction Management Techniques for Replicated Data
+A Crash Recovery Algorithm Based on Multiple Logs that Exploits Parallelism
+A Randomized Algorithm for Distributed Consensus
+Smart supply web : an application of web-based data and workflow mediation
+Performance Evaluation of an Operating System Transaction Manager
+EROICA : A Rule-Based Approach to Organizational Policy Management in Workflow Systems
+Optimizing the Costs of Hierarchical Quorum Consensus
+HPP : A Reliable Causal Broadcast Protocol for Large-Scale Replication
+Workflow Mediation using VorteXML
+Operating System Support for Data Management
+A reference model for team-enabled workflow management systems
+Meta workflows as a control and coordination mechanism for exception handling in workflow systems
+Workflow support for electronic commerce applications
+Merging workflows : A new perspective on connecting business processes
+W-RBAC - A Workflow Security Model Incorporating Controlled Overriding of Constraints
+An efficient algorithm for solving the partial sum query problem
+An Efficient SuperGrid Protocol for High Availability and Load Balancing
+Hierarchical Quorum Consensus : A New Algorithm for Managing Replicated Data
+Cost and Availability Tradeoffs in Replicated Data Concurrency Control
+Performance Considerations for an Operating System Transaction Manager
+A Stochastic Approximation Approach for Max-Min Fair Adaptive Rate Control of ABR Sessions with MCRs
+Stochastic Models for Throughput Analysis of Randomly Arriving Elastic Flows in the Internet
+Time and energy complexity of distributed computation in wireless sensor networks
+New insights from a fixed point analysis of single cell IEEE 802.11 WLANs
+Queueing Models and Stability of Message Flows in Distributed Simulators of Open Queueing Networks
+Fixed point analysis of single cell IEEE 802.11e WLANs : uniqueness , multistability and throughput differentiation
+Saturation Throughput Analysis of a System of Interfering IEEE 802.11 WLANs
+Long range dependence in network traffic and the closed loop behaviour of buffers under adaptive window control
+Instability and Performance Limits of Distributed Simulators of Feedforward Queueing Networks
+A new approach for asynchronous distributed rate control of elastic sessions in integrated packet networks
+Performance of TCP congestion control with explicit rate feedback
+Comparative performance analysis of versions of TCP in a local network with a lossy link
+Performance Analysis and Scheduling of Stochastic Fork-Join Jobs in a Multicomputer System
+Componentxchange : An E-Exchange for Software Components
+A Server Side Caching Scheme for CORBA
+Simplifying CORBA Security Service to Support Service Level Access Control
+Scalable and Efficient Data Streaming Algorithms for Detecting Common Content in Internet Traffic
+XCHOKE : Malicious Source Control for Congestion Avoidance at Internet Gateways
+Exploiting Underlying Structure for Detailed Reconstruction of an Internet-scale Event
+Space-code bloom filter for efficient traffic flow measurement
+Space-Code Bloom Filter for Efficient Per-Flow Traffic Measurement
+Efficient and scalable query routing for unstructured peer-to-peer networks
+Data streaming algorithms for efficient and accurate estimation of flow size distribution
+A data streaming algorithm for estimating subpopulation flow size distribution
+Data streaming algorithms for accurate and efficient measurement of traffic and flow matrices
+Articulatory class based spectral envelope representation for voice fonts
+Parsing News Video Using Integrated Audio-Video Features
+A Multiresolution Model of Auditory Excitation Pattern and Its Application to Objective Evaluation of Perceived Speech Quality
+Voice fonts for individuality representation and transformation
+An analytical state dependent leakage power model for FPGAs
+Dual-Vt Design of FPGAs for Subthreshold Leakage Tolerance
