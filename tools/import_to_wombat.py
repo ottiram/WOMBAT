@@ -1,6 +1,6 @@
 from wombat_api.core import connector as wb_conn
 wbpath="data/wombat-data/"
-importpath="data/embeddings/"
+importpath="data/embeddings/glove.6B/"
 
 wbc = wb_conn(path=wbpath, create_if_missing=True)
 
