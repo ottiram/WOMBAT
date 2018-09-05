@@ -171,7 +171,11 @@ class connector(object):
             we_id = dict_to_sorted_string(we_param_dict, pretty=True)
             if verbose: print(we_id)
             result_for_we = []
-            embdb=self.WM._get_embdb(we_param_dict)
+            try:
+                embdb=self.WM._get_embdb(we_param_dict)
+            except NoSuchWombatEmbeddingsException as ex:
+                print(ex)
+                continue
             if not raw:
                 for r in for_input:
                     result_for_we.append(('',r,embdb.get_vectors(prepro_cache, 
@@ -211,7 +215,8 @@ class connector(object):
     """
     def get_matching_vectors(self,
                             wec_identifier, 
-                            pattern="", 
+                            pattern="",
+                            exclude_pattern="",  
                             as_tuple=True, 
                             verbose=False,
                             label=""):
@@ -222,7 +227,7 @@ class connector(object):
             we_id = dict_to_sorted_string(we_param_dict, pretty=True)
             if verbose: print(we_id)
             embdb=self.WM._get_embdb(we_param_dict)
-            vecs=embdb.get_matching_vectors(pattern=pattern, as_tuple=as_tuple)
+            vecs=embdb.get_matching_vectors(pattern=pattern, exclude_pattern=exclude_pattern, as_tuple=as_tuple)
             we_id = we_id if label=="" else label+"@"+we_id
             result_for_we=(we_id,[('',[],vecs)])
             total_result.append(result_for_we)
@@ -291,7 +296,7 @@ class masterdb(object):
                 self.EMBDB_CACHE[unique_we_descriptor] = embdb
                 return embdb 
             else:
-                raise NoSuchWombatEmbeddingsException("WOMBAT Exception:\n"+\
+                raise NoSuchWombatEmbeddingsException("WOMBAT Exception: "+\
                     "No Embedding DB for descriptor "+C.BOLD+C.YELLOW+unique_we_descriptor+C.END)
         else:
             # This will mostly be executed upon import
@@ -460,21 +465,23 @@ class embeddingdb(object):
         return result
 
 
-    def get_matching_vectors(self, as_tuple=True, verbose=False, pattern=""):
+    def get_matching_vectors(self, as_tuple=True, verbose=False, pattern="", exclude_pattern=""):
         result = []
         if as_tuple: # Retrieve tuples of (word, vector)
             if pattern == "":
                 for res in self.DB.cursor().execute('select word, vector from vectors '):
                     result.append(res)
             else:
-                for res in self.DB.cursor().execute("select word, vector from vectors where word glob ?  ", (pattern, )):
+                #for res in self.DB.cursor().execute("select word, vector from vectors where word glob ?  ", (pattern, )):
+                for res in self.DB.cursor().execute("select word, vector from vectors where word glob ? and not word glob ?", (pattern, exclude_pattern)):
                     result.append(res)                
         else: # Retrieve vectors only
             if pattern == "":
                 for res in self.DB.cursor().execute('select vector from vectors '):
                     result.append(res)
             else:
-                for res in self.DB.cursor().execute("select vector from vectors where word glob ?  ", (pattern, )):
+                #for res in self.DB.cursor().execute("select vector from vectors where word glob ?  ", (pattern, )):
+                for res in self.DB.cursor().execute("select vector from vectors where word glob ?  and not word glob ?", (pattern, exclude_pattern )):
                     result.append(res)                
         return result
 
