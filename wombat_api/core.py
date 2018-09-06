@@ -176,7 +176,7 @@ class connector(object):
             except NoSuchWombatEmbeddingsException as ex:
                 print(ex)
                 continue
-            result_for_we.append(('','',embdb.get_all_vectors(as_tuple=as_tuple)))
+            result_for_we.append(('',[],embdb.get_all_vectors(as_tuple=as_tuple)))
 
             total_result.append((we_id, result_for_we))
         return total_result
