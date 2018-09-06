@@ -445,8 +445,10 @@ def get_most_similar(wb, we_param_grid_string, target, count=10, measure=dist.co
     (we_params_dict_list,_ ,_ ,_ ,_) = expand_parameter_grids(we_param_grid_string)
     all_results=[]
     for we_params_dict in we_params_dict_list:
-        emb_db = wb.WM.get_emb_db(we_params_dict)
-        target_tuple = emb_db.get_vectors_bulk(for_processed_units=[target], as_tuple=True, default=np.nan, verbose=verbose)
+#        emb_db = wb.WM.get_emb_db(we_params_dict)
+        target_tuple=wb.get_vectors(we_params_dict, {}, for_input=[[target]])
+        print(target_tuple)
+#        target_tuple = emb_db.get_vectors_bulk(for_processed_units=[target], as_tuple=True, default=np.nan, verbose=verbose)
         if np.isnan(target_tuple[0][1][0]):
             print("Target '%s' not found in '%s'"%(target,dict_to_sorted_string(we_params_dict, pretty=True)))
             continue
