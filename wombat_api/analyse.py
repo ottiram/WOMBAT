@@ -450,7 +450,7 @@ def get_most_similar(wb, we_param_grid_string, target, count=10, measure=dist.co
         target_tuple=target_tuple[0][1][0][2][0]
         print(target_tuple)
 #        target_tuple = emb_db.get_vectors_bulk(for_processed_units=[target], as_tuple=True, default=np.nan, verbose=verbose)
-        if np.isnan(target_tuple[1]):
+        if np.isnan(target_tuple[1][0]):
             print("Target '%s' not found in '%s'"%(target,dict_to_sorted_string(we_params_dict, pretty=True)))
             continue
         current_dist=float(0.0)
