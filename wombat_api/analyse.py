@@ -463,7 +463,8 @@ def get_most_similar(wb, we_param_grid_string, target, count=10, measure=dist.co
         for row in retrieved:
             # Each row is a flat (w,v) tuple
             if row[0] == target: continue
-#            print(row[1])
+            print(row[1])
+            print(target_tuple[1])
             current_dist = float(measure(target_tuple[1], row[1]))
             if len(result) < count:
                 # Fill result list to required length
