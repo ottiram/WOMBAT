@@ -450,15 +450,16 @@ class embeddingdb(object):
     
     def get_all_vectors(self, as_tuple=True):
         result=[]
+        cursor = self.DB.cursor()
         if as_tuple: # Retrieve tuples of (word, vector)
             query = 'select word, vector from vectors'
-            for res in cursor.execute(query, chunk):
+            for res in cursor.execute(query):
                 if res != None: 
                     result.append(res)
                 #elif not ignore_oov: result.append((t, np.full((self.DIMS,),default)))
         else: # Retrieve vectors only
             query = 'select vector from vectors'
-            for res in cursor.execute(query, chunk):
+            for res in cursor.execute(query):
                 if res != None: 
                     result.append(res)
                 #elif not ignore_oov: result.append(np.full((self.DIMS,),default))    
