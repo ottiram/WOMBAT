@@ -446,10 +446,7 @@ def get_most_similar(wb, we_param_grid_string, target, count=10, measure=dist.co
     all_results=[]
     for we_params_dict in we_params_dict_list:
         target_tuple=wb.get_vectors(we_params_dict, {}, for_input=[[target]])
-#        print(target_tuple)
         target_tuple=target_tuple[0][1][0][2][0]
-#        print(target_tuple)
-#        target_tuple = emb_db.get_vectors_bulk(for_processed_units=[target], as_tuple=True, default=np.nan, verbose=verbose)
         if np.isnan(target_tuple[1][0]):
             print("Target '%s' not found in '%s'"%(target,dict_to_sorted_string(we_params_dict, pretty=True)))
             continue
@@ -460,8 +457,8 @@ def get_most_similar(wb, we_param_grid_string, target, count=10, measure=dist.co
         else:
             #retrieved = emb_db.DB.cursor().execute('Select word, vector from VECTORS')
             retrieved = wb.get_all_vectors(we_params_dict,as_tuple=True)
+            print(retrieved)
             retrieved=retrieved[0][1]
-            #print(retrieved[0][0])
         for row in retrieved:
             print(row)
             # Each row is a flat (w,v) tuple
