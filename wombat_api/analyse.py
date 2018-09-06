@@ -440,7 +440,7 @@ If 'to_rank' is a list of strings, only their similarity to 'target' is
 computed and returned, sorted from most to least similar.
 Returns a list of <result, target, we_desc> tuples, where result is itself a list of <word, sim> tuples.
 """
-def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measures=[dist.cosine], to_rank=[], verbose=False):
+def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measures=['cosine'], to_rank=[], verbose=False):
     (we_params_dict_list,_ ,_ ,_ ,_) = expand_parameter_grids(we_param_grid_string)
     all_results=[]
     # Iterate over all wecs in the outer loop, and read each only once
@@ -470,7 +470,8 @@ def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measures=[d
                 for row in current_emb:
                     # Each row is a flat (w,v) tuple
                     if row[0] == target: continue
-                    current_dist = float(measure(target_tuple[1], row[1]))
+                    #current_dist = float(measure(target_tuple[1], row[1]))
+                    current_dist = float(dist.cdist(target_tuple[1], row[1], measure))
                     if len(result) < count:
                         # Fill result list to required length
                         result.append((row[0], current_dist))
