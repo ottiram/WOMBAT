@@ -453,7 +453,7 @@ class embeddingdb(object):
         cursor = self.DB.cursor()
         if as_tuple: # Retrieve tuples of (word, vector)
             #query = 'select word, vector from vectors where word in ("the", "a", "and")'
-            query = 'select word, vector from vectors)'
+            query = 'select word, vector from vectors'
             print("Fetching data")
             result = cursor.execute(query).fetchall()
             print("done")
