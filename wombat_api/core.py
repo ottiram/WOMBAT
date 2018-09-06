@@ -146,8 +146,8 @@ class connector(object):
             b = tqdm(total=lines_to_read, ncols=PROGBARWIDTH)
             #print(vectors)
             n=preprocessing.normalize(vectors,norm=normalize,axis=1)#,copy=True,return_norm=True)
-            print(type(n))
-            print(n.shape)
+#            print(type(n))
+#            print(n.shape)
             for word, vector in zip(words,n):
                 try: emb_db.DB.cursor().execute('INSERT INTO vectors (word, vector) values (?,?)', (word,vector))
                 except sqlite3.IntegrityError as ex:
