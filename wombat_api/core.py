@@ -452,22 +452,14 @@ class embeddingdb(object):
         result=[]
         cursor = self.DB.cursor()
         if as_tuple: # Retrieve tuples of (word, vector)
-            query = 'select word, vector from vectors where word in ("the", "a", "and")'
+            #query = 'select word, vector from vectors where word in ("the", "a", "and")'
+            query = 'select word, vector from vectors)'
             print("Fetching data")
             result = cursor.execute(query).fetchall()
             print("done")
-#            for res in cursor.execute(query):
-#                if res != None: 
-#                    print(res)
-#                    result.append(res)
-                #elif not ignore_oov: result.append((t, np.full((self.DIMS,),default)))
         else: # Retrieve vectors only
             query = 'select vector from vectors'
             result=cursor.execute(query)
-#            for res in cursor.execute(query):
-#                if res != None: 
-#                    result.append(res)
-                #elif not ignore_oov: result.append(np.full((self.DIMS,),default))    
         return result
 
     def get_vectors(self, prepro_cache, for_input=[[]], raw=True, as_tuple=True, in_order=False, ignore_oov=False, default=np.nan, verbose=False, no_phrases=False):
