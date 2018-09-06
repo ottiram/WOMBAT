@@ -447,7 +447,7 @@ def get_most_similar(wb, we_param_grid_string, target, count=10, measure=dist.co
     for we_params_dict in we_params_dict_list:
         target_tuple=wb.get_vectors(we_params_dict, {}, for_input=[[target]])
         print(target_tuple)
-        target_tuple=target_tuple[0][0][0]
+        target_tuple=target_tuple[0][0]
         print(target_tuple)
 #        target_tuple = emb_db.get_vectors_bulk(for_processed_units=[target], as_tuple=True, default=np.nan, verbose=verbose)
         if np.isnan(target_tuple[0][1][0]):
