@@ -294,10 +294,20 @@ def plot_tsne(vector_result, pdf_name="", iters=250, size=(10,10), share_axes=('
                     units.append(w)
                     vectors.append(v)
             x = np.asarray(vectors)
+#            print(x)
             sys.stdout.write("Doing tsne magic ...")
             sys.stdout.flush()
             tsne = manifold.TSNE(n_components=2, init='random', random_state=9, n_iter=iters)
+            #tsne = manifold.TSNE(n_components=2, init='pca', n_iter=iters)
+#            print(x.shape)
+#            init=np.ones((len(vectors),2))
+#            init.fill(.1)
+#            print(init)
+            #tsne = manifold.TSNE(n_components=2, init=init, n_iter=iters, n_iter_without_progress=1000, learning_rate=500)
+            print(x)
+            print(tsne.get_params())
             y = tsne.fit_transform(x)
+            print(y)
             sys.stdout.write(" done\n")
             sys.stdout.flush()
 
@@ -421,5 +431,47 @@ def plot_heatmap(matrix, xwords, ywords, xstring="", ystring="", plot_name="", c
     plt.close()
 
 
+""" 
+Return from the word embeddings specified by 'we_param_grid_string' the 'count' (default 10) items 
+most similar to 'target', from most to least similar (=least to most distant). 
+Use two-place function 'measure' (default scipy.spatial.distance.cosine) for computing the similarity.
+If 'to_rank' is a list of strings, only their similarity to 'target' is 
+computed and returned, sorted from most to least similar.
+Returns a list of <result, we_desc> tuples, where result is itself a list of <word, sim> tuples.
+"""
+def get_most_similar(wb, we_param_grid_string, target, count=10, measure=dist.cosine, to_rank=[], verbose=False):
+#    print(we_param_grid_string)
+    (we_params_dict_list,_ ,_ ,_ ,_) = expand_parameter_grids(we_param_grid_string)
+    all_results=[]
+    for we_params_dict in we_params_dict_list:
+        emb_db = wb.WM.get_emb_db(we_params_dict)
+        target_tuple = emb_db.get_vectors_bulk(for_processed_units=[target], as_tuple=True, default=np.nan, verbose=verbose)
+        if np.isnan(target_tuple[0][1][0]):
+            print("Target '%s' not found in '%s'"%(target,dict_to_sorted_string(we_params_dict, pretty=True)))
+            continue
+        current_dist=float(0.0)
+        result = []
+        if len(to_rank)>0:
+            retrieved=emb_db.get_vectors_bulk(for_processed_units=to_rank, as_tuple=True, verbose=verbose)
+        else:
+            retrieved = emb_db.DB.cursor().execute('Select word, vector from VECTORS')
+        for row in retrieved:
+            # Each row is a flat (w,v) tuple
+            if row[0] == target: continue
+            current_dist = float(measure(target_tuple[0][1], row[1]))
+            if len(result) < count:
+                # Fill result list to required length
+                result.append((row[0], current_dist))
+            else:
+                # The list is full already, assume ordering from least to most dist
+                if current_dist < result[-1][1]:
+                    # The current dist is less than the previous
+                    result.append((row[0], current_dist))
+                    result=sorted(result, key=itemgetter(1))
+                    result=result[:count]
+        # Sort once more in case we never found 'count' items
+        result=sorted(result, key=itemgetter(1))
+        all_results.append((result,dict_to_sorted_string(we_params_dict,pretty=True)))
+    return all_results
 
 
