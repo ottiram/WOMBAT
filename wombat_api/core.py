@@ -1,4 +1,5 @@
 import sys, sqlite3, os, itertools, io, re, pickle, base64
+from sklearn import preprocessing
 import numpy as np
 from tqdm import tqdm
 from wombat_api.lib import *
@@ -85,10 +86,10 @@ class connector(object):
 
 
     """ 
-    Plain streaming import for large files.
+    Plain streaming import for large files. Will be more memory-intensive if normalize is used.
     we_param_grid_string can use the list form, but must specify exactly one wec: algo:glove;dataset:6b;dims:50;fold:1;unit:token
     """
-    def import_from_file(self, import_file_name, wec_identifier, dtype=np.float32, prepro_picklefile=""):
+    def import_from_file(self, import_file_name, wec_identifier, dtype=np.float32, prepro_picklefile="", normalize=""):
 
         we_param_dict_list,_,_,_,_ = expand_parameter_grids(wec_identifier)
         if len(we_param_dict_list) > 1:
@@ -114,27 +115,71 @@ class connector(object):
         except Exception: raise 
 
         emb_db = self.WM._get_embdb(we_param_dict, create=True)
-        # Do single insert to track constraint violations
-        print("Doing DB insert ... ")
         emb_db.DB.cursor().execute('PRAGMA temp_store = 2;')
-        b = tqdm(total=lines_to_read, ncols=PROGBARWIDTH)
-        for e in in_file:
-            if len(e.split(" "))<=2: continue
-            pos = e.find(" ")
-            word = e[0:pos].strip()
-            vector = np.fromstring(e[pos+1:].strip(), dtype=dtype, sep=" ")
-            try: emb_db.DB.cursor().execute('INSERT INTO vectors (word, vector) values (?,?)', (word,vector))
-            except sqlite3.IntegrityError as ex:
-                print(str(ex)+" :"+word)
-                continue
-            b.update(1)
-        b.close()
+        if normalize=="":
+            print("Doing direct DB insert ... ")
+            b = tqdm(total=lines_to_read, ncols=PROGBARWIDTH)
+            # Do single insert to track constraint violations
+            for e in in_file:
+                if len(e.split(" "))<=2: continue
+                pos = e.find(" ")
+                word = e[0:pos].strip()
+                vector = np.fromstring(e[pos+1:].strip(), dtype=dtype, sep=" ")
+                try: emb_db.DB.cursor().execute('INSERT INTO vectors (word, vector) values (?,?)', (word,vector))
+                except sqlite3.IntegrityError as ex:
+                    print(str(ex)+" :"+word)
+                    continue
+                b.update(1)
+            b.close()
+        else:        
+            print("Normalizing to norm %s. Reading file ... "%normalize)            
+            b = tqdm(total=lines_to_read, ncols=PROGBARWIDTH)
+            vectors=[]
+            words=[]
+            for e in in_file:
+                if len(e.split(" "))<=2: continue
+                pos = e.find(" ")
+                words.append(e[0:pos].strip())
+                vectors.append(np.fromstring(e[pos+1:].strip(), dtype=dtype, sep=" "))
+                b.update(1)
+            print("\nNormalizing ...")
+            b = tqdm(total=lines_to_read, ncols=PROGBARWIDTH)
+            #print(vectors)
+            n=preprocessing.normalize(vectors,norm=normalize,axis=1)#,copy=True,return_norm=True)
+            print(type(n))
+            print(n.shape)
+            for word, vector in zip(words,n):
+                try: emb_db.DB.cursor().execute('INSERT INTO vectors (word, vector) values (?,?)', (word,vector))
+                except sqlite3.IntegrityError as ex:
+                    print(str(ex)+" :"+word)
+                    continue
+                b.update(1)            
+            b.close()    
         emb_db.DB.commit()
         in_file.close()
                 
         if prepro_picklefile != "":
             assign_preprocessor(wec_identifier, prepro_picklefile)
     # end import_from file
+
+
+    def get_all_vectors(self, wec_identifier, as_tuple=True, verbose=False):
+        (we_params_dict_list, _, _, _, _)=expand_parameter_grids(wec_identifier)
+        total_result = []
+
+        for we_param_dict in we_params_dict_list:
+            we_id = dict_to_sorted_string(we_param_dict, pretty=True)
+            if verbose: print(we_id)
+            result_for_we = []
+            try:
+                embdb=self.WM._get_embdb(we_param_dict)
+            except NoSuchWombatEmbeddingsException as ex:
+                print(ex)
+                continue
+            result_for_we.append(('','',embdb.get_all_vectors(as_tuple=as_tuple)))
+
+            total_result.append((we_id, result_for_we))
+        return total_result
 
 
     """
@@ -161,7 +206,7 @@ class connector(object):
                             verbose=False):
             
         if len(for_input)==0:
-            print("No input to get vectors for!")
+            print("No input to get vectors for! Use get_all_vectors to get all vectors!")
             return
 
         (we_params_dict_list, _, _, _, _)=expand_parameter_grids(wec_identifier)
@@ -403,6 +448,22 @@ class embeddingdb(object):
         self.MASTER=master
 
     
+    def get_all_vectors(self, as_tuple=True):
+        result=[]
+        if as_tuple: # Retrieve tuples of (word, vector)
+            query = 'select word, vector from vectors'
+            for res in cursor.execute(query, chunk):
+                if res != None: 
+                    result.append(res)
+                #elif not ignore_oov: result.append((t, np.full((self.DIMS,),default)))
+        else: # Retrieve vectors only
+            query = 'select vector from vectors'
+            for res in cursor.execute(query, chunk):
+                if res != None: 
+                    result.append(res)
+                #elif not ignore_oov: result.append(np.full((self.DIMS,),default))    
+        return result
+
     def get_vectors(self, prepro_cache, for_input=[[]], raw=True, as_tuple=True, in_order=False, ignore_oov=False, default=np.nan, verbose=False, no_phrases=False):
         """ Get word embedding vectors for the input in for_input. The result is a list of tuples.
             If raw==False, for_input must contain a list of strings that are compatible with the words in the vectors table.
