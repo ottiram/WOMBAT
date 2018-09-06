@@ -5,7 +5,7 @@ from textwrap import wrap
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 from sklearn import manifold
-import scipy.spatial.distance
+import scipy.spatial.distance as dist
 
 #####
 try:
@@ -18,6 +18,7 @@ try:
     import plotly.graph_objs as go
 except ModuleNotFoundError as mne:
     print(mne)
+    print("Skipping import for now")
 
 
 
@@ -162,7 +163,7 @@ def draw_word_graph(matrix, xwords, ywords, layout="drl_3d", layout_params={'dim
     plotly.offline.plot(fig, filename=plot_name, auto_open=(silent==False))
 
 
-def plot_pairwise_distances(vector_result1, vector_result2, pdf_name="", size=(10,10), share_axes=('all','none'), max_pairs=20,  verbose=False, fontsize=14, metric=scipy.spatial.distance.cosine, arrange_by="", silent=False, ignore_identical=False, bar_props={'color':'lightgreen'}, text_props={'fontsize':14}, axis_props={'labelsize':14}):
+def plot_pairwise_distances(vector_result1, vector_result2, pdf_name="", size=(10,10), share_axes=('all','none'), max_pairs=20,  verbose=False, fontsize=14, metric=dist.cosine, arrange_by="", silent=False, ignore_identical=False, bar_props={'color':'lightgreen'}, text_props={'fontsize':14}, axis_props={'labelsize':14}):
     
     cartesian_mode=False
 
@@ -334,7 +335,7 @@ def plot_tsne(vector_result, pdf_name="", iters=250, size=(10,10), share_axes=('
     if not silent: wb.open(pdf_name)
 
 
-def compute_unit_distance_matrices(vector_result1, vector_result2, metric=scipy.spatial.distance.cosine, ignore_matching=True, invert=False, ignore=['*sw*']):
+def compute_unit_distance_matrices(vector_result1, vector_result2, metric=dist.cosine, ignore_matching=True, invert=False, ignore=['*sw*']):
     # Each input must contain data from the same number of WECs (optimally just one)
     assert len(vector_result1) == len(vector_result2)
 
