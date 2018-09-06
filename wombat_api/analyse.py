@@ -445,6 +445,7 @@ def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measure=dis
     all_results=[]
     # Iterate over all wecs in the outer loop, and read each only once
     for we_params_dict in we_params_dict_list:
+        print("Getting vectors from %s *once*!"%dict_to_sorted_string(we_params_dict, pretty=True))
         current_emb=None
         if len(to_rank)>0:
             #retrieved=wb.get_vectors(for_input=[to_rank], as_tuple=True, verbose=verbose)
@@ -461,7 +462,6 @@ def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measure=dis
             if np.isnan(target_tuple[1][0]):
                 print("Target '%s' not found in '%s'"%(target,dict_to_sorted_string(we_params_dict, pretty=True)))
                 continue
-
 
             current_dist=float(0.0)
             result = []
@@ -481,7 +481,7 @@ def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measure=dis
                         result=result[:count]
             # Sort once more in case we never found 'count' items
             result=sorted(result, key=itemgetter(1))
-            all_results.append((result,target,dict_to_sorted_string(we_params_dict,pretty=True)))
+            all_results.append((target,dict_to_sorted_string(we_params_dict,pretty=True),result))
     return all_results
 
 
