@@ -443,26 +443,31 @@ Returns a list of <result, target, we_desc> tuples, where result is itself a lis
 def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measure=dist.cosine, to_rank=[], verbose=False):
     (we_params_dict_list,_ ,_ ,_ ,_) = expand_parameter_grids(we_param_grid_string)
     all_results=[]
-    # Iterate over all wecs in the outer loop
+    # Iterate over all wecs in the outer loop, and read each only once
     for we_params_dict in we_params_dict_list:
+        current_emb=None
+        if len(to_rank)>0:
+            #retrieved=wb.get_vectors(for_input=[to_rank], as_tuple=True, verbose=verbose)
+            pass
+            # TODO
+        else:
+            current_emb = wb.get_all_vectors(we_params_dict,as_tuple=True)[0][1][0][2]
+            #retrieved=retrieved[0][1][0][2]
+
         # Iterate over the target words
         for target in targets:
-            target_tuple=wb.get_vectors(we_params_dict, {}, for_input=[[target]])
-            target_tuple=target_tuple[0][1][0][2][0]
+            target_tuple=wb.get_vectors(we_params_dict, {}, for_input=[[target]])[0][1][0][2][0]
+            #target_tuple=target_tuple[0][1][0][2][0]
             if np.isnan(target_tuple[1][0]):
                 print("Target '%s' not found in '%s'"%(target,dict_to_sorted_string(we_params_dict, pretty=True)))
                 continue
+
+
             current_dist=float(0.0)
             result = []
-            if len(to_rank)>0:
-                retrieved=wb.get_vectors(for_input=[to_rank], as_tuple=True, verbose=verbose)
-            else:
-                retrieved = wb.get_all_vectors(we_params_dict,as_tuple=True)
-                retrieved=retrieved[0][1][0][2]
-            for row in retrieved:
+            for row in current_emb:
                 # Each row is a flat (w,v) tuple
                 if row[0] == target: continue
-    #            print(row[1])
                 current_dist = float(measure(target_tuple[1], row[1]))
                 if len(result) < count:
                     # Fill result list to required length
