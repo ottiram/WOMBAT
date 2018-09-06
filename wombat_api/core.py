@@ -455,6 +455,7 @@ class embeddingdb(object):
             query = 'select word, vector from vectors'
             for res in cursor.execute(query):
                 if res != None: 
+                    print(res)
                     result.append(res)
                 #elif not ignore_oov: result.append((t, np.full((self.DIMS,),default)))
         else: # Retrieve vectors only
