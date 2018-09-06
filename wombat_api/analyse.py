@@ -440,7 +440,7 @@ If 'to_rank' is a list of strings, only their similarity to 'target' is
 computed and returned, sorted from most to least similar.
 Returns a list of <result, target, we_desc> tuples, where result is itself a list of <word, sim> tuples.
 """
-def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measure=dist.cosine, to_rank=[], verbose=False):
+def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measures=[dist.cosine], to_rank=[], verbose=False):
     (we_params_dict_list,_ ,_ ,_ ,_) = expand_parameter_grids(we_param_grid_string)
     all_results=[]
     # Iterate over all wecs in the outer loop, and read each only once
@@ -463,25 +463,27 @@ def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measure=dis
                 print("Target '%s' not found in '%s'"%(target,dict_to_sorted_string(we_params_dict, pretty=True)))
                 continue
 
-            current_dist=float(0.0)
-            result = []
-            for row in current_emb:
-                # Each row is a flat (w,v) tuple
-                if row[0] == target: continue
-                current_dist = float(measure(target_tuple[1], row[1]))
-                if len(result) < count:
-                    # Fill result list to required length
-                    result.append((row[0], current_dist))
-                else:
-                    # The list is full already, assume ordering from least to most dist
-                    if current_dist < result[-1][1]:
-                        # The current dist is less than the previous
+            # Iterate over measures
+            for measure in measures:
+                current_dist=float(0.0)
+                result = []
+                for row in current_emb:
+                    # Each row is a flat (w,v) tuple
+                    if row[0] == target: continue
+                    current_dist = float(measure(target_tuple[1], row[1]))
+                    if len(result) < count:
+                        # Fill result list to required length
                         result.append((row[0], current_dist))
-                        result=sorted(result, key=itemgetter(1))
-                        result=result[:count]
-            # Sort once more in case we never found 'count' items
-            result=sorted(result, key=itemgetter(1))
-            all_results.append((target,dict_to_sorted_string(we_params_dict,pretty=True),result))
+                    else:
+                        # The list is full already, assume ordering from least to most dist
+                        if current_dist < result[-1][1]:
+                            # The current dist is less than the previous
+                            result.append((row[0], current_dist))
+                            result=sorted(result, key=itemgetter(1))
+                            result=result[:count]
+                # Sort once more in case we never found 'count' items
+                result=sorted(result, key=itemgetter(1))
+                all_results.append((target,dict_to_sorted_string(we_params_dict,pretty=True),measure,result))
     return all_results
 
 
