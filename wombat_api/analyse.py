@@ -458,7 +458,8 @@ def get_most_similar(wb, we_param_grid_string, target, count=10, measure=dist.co
             #retrieved = emb_db.DB.cursor().execute('Select word, vector from VECTORS')
             retrieved = wb.get_all_vectors(we_params_dict,as_tuple=True)
             print(retrieved)
-            retrieved=retrieved[0][1]
+            retrieved=retrieved[0][1][0]
+            print(retrieved)
         for row in retrieved:
             print(row)
             # Each row is a flat (w,v) tuple
