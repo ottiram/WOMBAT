@@ -40,16 +40,57 @@ class preprocessor(object):
         line = line.strip().replace("--"," -- ")
         line = re.sub(self.TAGS_RE,'', html.unescape(line))
 
-        if no_phrases==True:
-            if unit     =="token": return self.tokenize(line, sw_symbol=sw_symbol, conflate=conflate)
-            elif unit   == "stem": return self.stem(self.tokenize(line,sw_symbol=sw_symbol, conflate=conflate))
-        elif self.PHRASESPOTTER != None:
-            if unit     =="token": return self.PHRASESPOTTER.extract(self.tokenize(line, sw_symbol=sw_symbol, conflate=conflate))
-            elif unit   == "stem": return self.PHRASESPOTTER.extract(self.stem(self.tokenize(line,sw_symbol=sw_symbol, conflate=conflate)))
+        if no_phrases==True or self.PHRASESPOTTER==None:
+            # Do sw-removal here
+            if unit     == "token": return self.tokenize(line, sw_symbol=sw_symbol, conflate=conflate)
+            elif unit   == "stem":  return self.stem(self.tokenize(line,sw_symbol=sw_symbol, conflate=conflate))
+        #elif self.PHRASESPOTTER != None:
         else:
-            #print("No phrases for this preprocessor, ignoring input phrases.")
-            if unit     =="token": return self.tokenize(line, sw_symbol=sw_symbol, conflate=conflate)
-            elif unit   == "stem": return self.stem(self.tokenize(line,sw_symbol=sw_symbol, conflate=conflate))
+            if unit == "token":
+                # Do prelim tokenization w/o stop word removal
+                pre_tokens = self.tokenize(line, sw_symbol=None, conflate=conflate)
+                # Find phrases, based on full forms
+                p = self.PHRASESPOTTER.extract(pre_tokens)
+#                print(p)
+                # Replace stop words (This is clumsy ...)
+                r=[]
+                for i in p:
+                    if i in self.STOPWORDS:
+                        try:
+                            if r[-1] != sw_symbol: r.append(sw_symbol)
+                        except IndexError:
+                            r.append(sw_symbol)
+                    else: r.append(i)                   
+#                print(r)
+                return r
+            elif unit == "stem":
+                # Do prelim tokenization w/o stop word removal
+                pre_tokens = self.tokenize(line, sw_symbol=None, conflate=conflate)
+                # This might destroy stop words ...
+                pre_stems = self.stem(pre_tokens)
+#                print(pre_stems)
+                # Find phrases, based on stemmed forms
+                p = self.PHRASESPOTTER.extract(pre_stems)
+#                print(p)
+                # Replace stop words (This is clumsy ...)
+                r=[]
+                for i in p:
+                    if i in self.STOPWORDS:
+                        try:
+                            if r[-1] != sw_symbol: r.append(sw_symbol)
+                        except IndexError:
+                            r.append(sw_symbol)
+                    else: r.append(i)                   
+#                print(r)
+                return r
+
+            else:
+                print("Unknown unit: %s"%unit)
+                return None
+                               
+
+#            if unit     =="token": return self.PHRASESPOTTER.extract(self.tokenize(line, sw_symbol=sw_symbol, conflate=conflate), verbose=verbose)
+#            elif unit   == "stem": return self.PHRASESPOTTER.extract(self.stem(self.tokenize(line,sw_symbol=sw_symbol, conflate=conflate)), verbose=verbose)
      
 
 
@@ -59,6 +100,7 @@ class preprocessor(object):
         for t in temp_tokens:
             # Get each raw token
             t = t.strip()
+#            print(t)
             # With each token
             while(True):            
                 modified=False
