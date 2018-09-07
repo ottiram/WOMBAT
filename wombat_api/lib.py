@@ -6,7 +6,7 @@ MASTER_DB_NAME  =   "wombat_master.sqlite"
 PROGBARWIDTH    =   70
 CHUNKSIZE       =   300
 
-NAMED_DISTANCE_MEASURES = {'cosine' : dist.cosine}
+NAMED_DISTANCE_MEASURES = {'cosine':dist.cosine, 'euclidean':dist.euclidean, 'cityblock':dist.cityblock, 'canberra':dist.canberra}
 
 def expand_parameter_grids(we_params, base_figsize=(5,5)):
     """ Receives a string of the form "att1:val;att2:{vala,valb};att3:{,valc}"
