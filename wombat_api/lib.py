@@ -1,9 +1,12 @@
 import itertools, io, re, sys, sqlite3, copy
 import numpy as np
+import scipy.spatial.distance as dist
 
 MASTER_DB_NAME  =   "wombat_master.sqlite"
 PROGBARWIDTH    =   70
 CHUNKSIZE       =   300
+
+NAMED_DISTANCE_MEASURES = {'cosine' : dist.cosine}
 
 def expand_parameter_grids(we_params, base_figsize=(5,5)):
     """ Receives a string of the form "att1:val;att2:{vala,valb};att3:{,valc}"
