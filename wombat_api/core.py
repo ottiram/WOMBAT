@@ -11,7 +11,7 @@ sqlite3.register_converter("BLOB", output_array_converter)
 The connector class is the single entry point for all emb db accesses.
 """
 class connector(object):
-    def __init__(self, path="", create_if_missing=False, list_contents=True):
+    def __init__(self, path="", create_if_missing=False, list_contents=False):
         self.WM     = None
         self.PATH   = ""
         version     = "2.0"
