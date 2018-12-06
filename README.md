@@ -774,6 +774,7 @@ for wec_index in range(len(vecs)):
             print("Unit:   %s\nVector: %s\n"%(w,str(v)))
 ```
 <p>
+
 ```ignore_oov=True``` suppresses empty default vectors in the output for oov words (incl. *sw* (stop words) produced by the preprocessor).
 If the original input ordering need not be preserved (e.g. because vectors of a sentence are averaged anyway), use ```in_order=False``` in order to speed up the retrieval.
 Executing this code with
@@ -783,6 +784,7 @@ $ python tools/test_get_vectors_from_raw.py
 ```
 
 from the WOMBAT directory returns (abbreviated)
+
 </p>
 
 <pre>
