@@ -1181,6 +1181,7 @@ Calling this script produces the following output:
 
 <h4>Most Similar Words</h4>
 <p>
+
 WOMBAT provides the script ```tools/get_most_similar.py``` for computing the most similar words to a given list of target words. The script uses the method ```wombat_api.analyse.get_most_similar```.
 
 
@@ -1214,10 +1215,169 @@ Executing the script with
 ```shell
 $ python tools/get_most_similar.py "data/wombat-data/" "algo:glove;dataset:6b;dims:{50,100};fold:1;norm:{none,abtt};unit:token" car,bike
 ```
-
 from the WOMBAT directory returns 
 
+<pre>
+algo:glove;dataset:6b;dims:50;fold:1;norm:none;unit:token
+cosine(car, truck)	0.07914144136184864
+cosine(car, cars)	0.11298109069525497
+cosine(car, vehicle)	0.11663159684321234
+cosine(car, driver)	0.15359811852812422
+cosine(car, driving)	0.16158120657580843
+cosine(car, bus)	0.17894889497726807
+cosine(car, vehicles)	0.18250077858745317
+cosine(car, parked)	0.2097811084657102
+cosine(car, motorcycle)	0.2133497199448282
+cosine(car, taxi)	0.21660710099093428
 
+algo:glove;dataset:6b;dims:50;fold:1;norm:none;unit:token
+cosine(bike, bicycle)	0.07540862422613559
+cosine(bike, rides)	0.12897087378541827
+cosine(bike, bikes)	0.15252882825561032
+cosine(bike, ride)	0.16029085596645365
+cosine(bike, cart)	0.20388619664671093
+cosine(bike, bicycles)	0.22393171208065155
+cosine(bike, riding)	0.2297407298062787
+cosine(bike, motorcycle)	0.24199681247288152
+cosine(bike, skateboard)	0.24562024322931186
+cosine(bike, wheel)	0.24976224925775947
 
+algo:glove;dataset:6b;dims:50;fold:1;norm:abtt;unit:token
+cosine(car, truck)	0.0806001419007456
+cosine(car, driver)	0.12179994387193638
+cosine(car, vehicle)	0.1385399783711604
+cosine(car, cars)	0.14205120673399707
+cosine(car, tractor)	0.19330317428597177
+cosine(car, cab)	0.19371578595889627
+cosine(car, driving)	0.1967477518121835
+cosine(car, taxi)	0.19764512986360383
+cosine(car, parked)	0.2024978715831982
+cosine(car, forklift)	0.21243824560524704
+
+algo:glove;dataset:6b;dims:50;fold:1;norm:abtt;unit:token
+cosine(bike, bicycle)	0.08398014976833035
+cosine(bike, rides)	0.1430640377058503
+cosine(bike, bikes)	0.16369354577451944
+cosine(bike, ride)	0.17653528980791744
+cosine(bike, limo)	0.1823194282582885
+cosine(bike, skateboard)	0.2085667400501673
+cosine(bike, cart)	0.21514646350843625
+cosine(bike, bicycles)	0.23932357247389668
+cosine(bike, riding)	0.25687287619295995
+cosine(bike, biking)	0.26260029724823075
+
+algo:glove;dataset:6b;dims:100;fold:1;norm:none;unit:token
+cosine(car, vehicle)	0.13691616910455218
+cosine(car, truck)	0.1402122094746816
+cosine(car, cars)	0.16283305313114194
+cosine(car, driver)	0.18140894723421486
+cosine(car, driving)	0.21873640792744087
+cosine(car, motorcycle)	0.2446842503669403
+cosine(car, vehicles)	0.25377434558164547
+cosine(car, parked)	0.2540535380120613
+cosine(car, bus)	0.26272929599923434
+cosine(car, taxi)	0.28447302367774396
+
+algo:glove;dataset:6b;dims:100;fold:1;norm:none;unit:token
+cosine(bike, bicycle)	0.10315127761665555
+cosine(bike, bikes)	0.20443421876273637
+cosine(bike, ride)	0.22046929133315563
+cosine(bike, rides)	0.2638311426114084
+cosine(bike, riding)	0.27133477109461057
+cosine(bike, motorcycle)	0.27805119727347305
+cosine(bike, biking)	0.2816471833865629
+cosine(bike, horseback)	0.31557397925187236
+cosine(bike, bicycles)	0.3187722929261676
+cosine(bike, riders)	0.3254949790131334
+
+algo:glove;dataset:6b;dims:100;fold:1;norm:abtt;unit:token
+cosine(car, truck)	0.15238329488374347
+cosine(car, vehicle)	0.15575847257407438
+cosine(car, cars)	0.19167657709380725
+cosine(car, driver)	0.20033349172277293
+cosine(car, parked)	0.24794750003421806
+cosine(car, motorcycle)	0.2510652900482522
+cosine(car, driving)	0.25658421356403294
+cosine(car, suv)	0.2881546903629949
+cosine(car, bus)	0.2910614135644427
+cosine(car, vehicles)	0.29615907557187104
+
+algo:glove;dataset:6b;dims:100;fold:1;norm:abtt;unit:token
+cosine(bike, bicycle)	0.1088470577560825
+cosine(bike, bikes)	0.21590419939848782
+cosine(bike, ride)	0.23369856648438625
+cosine(bike, rides)	0.27806636584727484
+cosine(bike, biking)	0.2832740671069537
+cosine(bike, riding)	0.28638550538216256
+cosine(bike, motorcycle)	0.2913097546696938
+cosine(bike, horseback)	0.324846874936749
+cosine(bike, bicycles)	0.3404461149572644
+cosine(bike, wagon)	0.3443322594384779
+
+</pre>
+The above code takes some time, though.
 
 </p>
+
+<p>
+Things are a lot different when only a small list of words is to be ranked according to their similarity to one or more target words.
+Executing the above script with an additional list of words like this
+
+```shell
+$ python tools/get_most_similar.py "data/wombat-data/" "algo:glove;dataset:6b;dims:{50,100};fold:1;norm:{none,abtt};unit:token" car,bike trolley,bus,vehicle,transporter
+```
+from the WOMBAT directory returns 
+
+<pre>
+algo:glove;dataset:6b;dims:50;fold:1;norm:none;unit:token
+cosine(car, vehicle)	0.11663159684321234
+cosine(car, bus)	0.17894889497726807
+cosine(car, trolley)	0.48697765622473255
+cosine(car, transporter)	0.6139896275893459
+
+algo:glove;dataset:6b;dims:50;fold:1;norm:none;unit:token
+cosine(bike, vehicle)	0.3427957759292295
+cosine(bike, bus)	0.34365947338677905
+cosine(bike, trolley)	0.3602480028404018
+cosine(bike, transporter)	0.7320497642797394
+
+algo:glove;dataset:6b;dims:50;fold:1;norm:abtt;unit:token
+cosine(car, vehicle)	0.1385399783711604
+cosine(car, bus)	0.2158960678290227
+cosine(car, trolley)	0.46696018041448584
+cosine(car, transporter)	0.5406758968293157
+
+algo:glove;dataset:6b;dims:50;fold:1;norm:abtt;unit:token
+cosine(bike, trolley)	0.3678464886357319
+cosine(bike, vehicle)	0.3874397902633365
+cosine(bike, bus)	0.3921970555479769
+cosine(bike, transporter)	0.7319556230922035
+
+algo:glove;dataset:6b;dims:100;fold:1;norm:none;unit:token
+cosine(car, vehicle)	0.13691616910455218
+cosine(car, bus)	0.26272929599923434
+cosine(car, trolley)	0.5475087400049348
+cosine(car, transporter)	0.7290820977867609
+
+algo:glove;dataset:6b;dims:100;fold:1;norm:none;unit:token
+cosine(bike, trolley)	0.38364037699224673
+cosine(bike, bus)	0.44165326460377197
+cosine(bike, vehicle)	0.4536933011117086
+cosine(bike, transporter)	0.8071001886680546
+
+algo:glove;dataset:6b;dims:100;fold:1;norm:abtt;unit:token
+cosine(car, vehicle)	0.15575847257407438
+cosine(car, bus)	0.2910614135644427
+cosine(car, trolley)	0.5404368768171397
+cosine(car, transporter)	0.6956990227076467
+
+algo:glove;dataset:6b;dims:100;fold:1;norm:abtt;unit:token
+cosine(bike, trolley)	0.3900553987623596
+cosine(bike, bus)	0.4667747849371262
+cosine(bike, vehicle)	0.48185728456605526
+cosine(bike, transporter)	0.807988795692304
+
+</pre>
+
+</p>
+
