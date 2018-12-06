@@ -202,7 +202,7 @@ class connector(object):
                             default=np.nan, 
                             as_tuple=True, # If True, result will consist of (w,v) tuples, (v) otherwise.
                             in_order=False, # If True, result tuples will be returned in theit org. discourse order, undefined otherwise.
-                            ignore_oov=False, # If True, oov words will be replaced by dummy vectors of type <default>, ignored otherwise.
+                            ignore_oov=False, # If False, oov words will be replaced by dummy vectors of type <default>, ignored otherwise.
                             no_phrases=False, # If True, phrase detection will be ignored even if phrases were available. 
                             verbose=False):
             
