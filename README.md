@@ -474,7 +474,7 @@ Executing this code with
 $ python tools/test_get_matching_vectors.py "data/wombat-data/" "algo:glove;dataset:6b;dims:50;fold:1;norm:none;unit:token" "*comput*" "*_*"
 ```
 
-from the WOMBAT directory returns a list of tuples for all words matching the substring <b>comput</b>, but excluding those with an underscore.
+from the WOMBAT directory returns from the GloVe embeddings a list of tuples for all words matching the substring <b>comput</b>, but excluding those with an underscore.
 </p>
 
 <pre>
@@ -675,7 +675,6 @@ Vector: [ 0.086849   -0.17321     1.00810003  0.21253    -0.5334     -0.13697
  -0.1048      0.41510001 -0.505      -0.89828998  0.14026999 -0.075739
  -0.23270001  0.2129     -0.094783   -0.04949    -0.60021001 -0.24270999
   0.34661001  0.23172   ]
-
 </pre>
 
 
@@ -723,29 +722,23 @@ class preprocessor(object):
 
 <p>
 
-However, WOMBAT also provides the ready-to-use standard preprocessor ```wombat_api.preprocessors.standard_preprocessor.py``` (based on NLTK 3.2.5). In order to link it (or <b>any other preprocessing code</b> based on the above stub!!) to one or more WECs in WOMBAT, a pickled instance has to be created first, and then linked to one or more WECs. The following code is available in ```tools/assign_preprocessor.py```
+However, WOMBAT also provides the ready-to-use standard preprocessor ```wombat_api.preprocessors.standard_preprocessor.py``` (based on NLTK 3.2.5). In order to link it (or <b>any other preprocessing code</b> based on the above stub!!) to one or more WECs in WOMBAT, a pickled instance has to be created first, and then linked to one or more WECs. The following code is available in ```tools/assign_preprocessor_to_glove.py```
 
 </p>
 
 ```python
-from wombat_api.preprocessors import standard_preprocessor
+from wombat_api.preprocessors.standard_preprocessor import preprocessor
 from wombat_api.core import connector as wb_conn
 
-# Create instance 
-prepro=standard_preprocessor.preprocessor(name="my_standard_preprocessor", phrasefile="")
-prepro.pickle("temp/my_standard_preprocessor.pkl")
+prepro=preprocessor(name="wombat_standard_preprocessor", phrasefile="")
+prepro.pickle("temp/wombat_standard_preprocessor.pkl")
 
-# Connect to WOMBAT
 wbpath="data/wombat-data/"
-wbc = wb_conn(path=wbpath, create_if_missing=True)
-# Assign pickled instance to GloVe WECs
-wbc.assign_preprocessor("algo:glove;dataset:6b;dims:{50,100,200,300};fold:1;unit:token", 
-                        "temp/my_standard_preprocessor.pkl")
+wbc = wb_conn(path=wbpath, create_if_missing=False)
+wbc.assign_preprocessor("algo:glove;dataset:6b;dims:{50,100,200,300};fold:1;unit:token;norm:{none,abtt}", "temp/wombat_standard_preprocessor.pkl")
 
 # Calling this method with an empty string as pickle file name removes the preprocessor.
-# wbc.assign_preprocessor("algo:glove;dataset:6b;dims:{50,100,200,300};fold:1;unit:token", "")
-
-
+# wbc.assign_preprocessor("algo:glove;dataset:6b;dims:{50,100,200,300};fold:1;unit:token;norm:{none,abtt}", "")
 ```
 
 <p>
