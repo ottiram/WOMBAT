@@ -775,7 +775,7 @@ for wec_index in range(len(vecs)):
 ```
 <p>
 
-```ignore_oov=True``` suppresses empty default vectors in the output for oov words (incl. *sw* (stop words) produced by the preprocessor).
+```ignore_oov=True``` suppresses empty default vectors in the output for oov words (incl. \*sw\* (stop words) produced by the preprocessor).
 If the original input ordering need not be preserved (e.g. because vectors of a sentence are averaged anyway), use ```in_order=False``` in order to speed up the retrieval.
 Executing this code with
 
