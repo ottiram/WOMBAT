@@ -436,8 +436,7 @@ def plot_heatmap(matrix, xwords, ywords, xstring="", ystring="", plot_name="", c
 Return from the word embeddings specified by 'we_param_grid_string' the 'count' (default 10) items 
 most similar to each word in 'targets', from most to least similar (=least to most distant). 
 Use two-place function 'measure' (default scipy.spatial.distance.cosine) for computing the similarity.
-If 'to_rank' is a list of strings, only their similarity to 'target' is 
-computed and returned, sorted from most to least similar.
+If 'to_rank' is a list of strings, only their similarity to 'target' is computed and returned, sorted from most to least similar.
 Returns a list of <result, target, we_desc> tuples, where result is itself a list of <word, sim> tuples.
 """
 def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measures=[dist.cosine], to_rank=[], verbose=False):
@@ -448,8 +447,8 @@ def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measures=[d
         print("Getting vectors from %s *once*!"%dict_to_sorted_string(we_params_dict, pretty=True))
         current_emb=None
         if len(to_rank)>0:
-            #retrieved=wb.get_vectors(for_input=[to_rank], as_tuple=True, verbose=verbose)
-            pass
+            current_emb=wb.get_vectors(for_input=[to_rank], as_tuple=True, verbose=verbose)
+            #pass
             # TODO
         else:
             current_emb = wb.get_all_vectors(we_params_dict,as_tuple=True)[0][1][0][2]
