@@ -117,7 +117,7 @@ class connector(object):
         emb_db = self.WM._get_embdb(we_param_dict, create=True)
         emb_db.DB.cursor().execute('PRAGMA temp_store = 2;')
         normalize=normalize.lower()
-        if normalize=="":
+        if normalize=="none":
             print("Doing direct DB insert ... ")
             b = tqdm(total=lines_to_read, ncols=PROGBARWIDTH)
             # Do single insert to track constraint violations
