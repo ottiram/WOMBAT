@@ -81,7 +81,6 @@ def expand_parameter_grids(we_params, base_figsize=(5,5)):
 
 
 def abtt_postproc(V, dtype=np.float32, D=0):
-    print(dtype)
     assert D >= 1
     V_ = V - V.mean(0)
     pca = PCA()

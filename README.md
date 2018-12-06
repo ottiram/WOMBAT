@@ -173,6 +173,9 @@ for d in ['50', '100', '200', '300']:
                              prepro_picklefile="")
 ```
 </p>
+Using ```norm:abtt``` creates a normalized version as described in <a href="https://arxiv.org/abs/1702.01417" target=_new>this</a> paper. Parameter D ist set to dim/100, at least 1.
+
+
 <p>
 To execute this code, run 
 
