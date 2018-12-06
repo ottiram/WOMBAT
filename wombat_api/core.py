@@ -89,8 +89,7 @@ class connector(object):
     Plain streaming import for large files. Will be more memory-intensive if normalize is used.
     we_param_grid_string can use the list form, but must specify exactly one wec: algo:glove;dataset:6b;dims:50;fold:1;unit:token
     """
-    def import_from_file(self, import_file_name, wec_identifier, dtype=np.float32, prepro_picklefile="", normalize=""):
-
+    def import_from_file(self, import_file_name, wec_identifier, dtype=np.float32, prepro_picklefile="", normalize="none"):
         we_param_dict_list,_,_,_,_ = expand_parameter_grids(wec_identifier)
         if len(we_param_dict_list) > 1:
             print("import_from_file() supports single file import only.")
