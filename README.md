@@ -1179,8 +1179,10 @@ Calling this script produces the following output:
 
 </p>
 
-<h4>Most Similar</h4>
+<h4>Most Similar Words</h4>
 <p>
+WOMBAT provides the script ```tools/get_most_similar.py``` for computing the most similar words to a given list of target words. The script uses the method ```wombat_api.analyse.get_most_similar```.
+
 
 ```python
 import sys
@@ -1205,6 +1207,16 @@ for (w, wec, mes, simlist) in sims:
         print("%s(%s, %s)\t%s"%(mes,w,t,s))
 
 ```
+Computing the similarity of a given list of target words to *all* words in an embedding set is a task that does not benefit from Wombat's lazy loading philosophy, because it involves iterating over a lot of single items. The above code compensates this by accepting several target words at once, while loading the words in the embedding set only once.
+
+Executing the script with
+
+```shell
+$ python tools/get_most_similar.py "data/wombat-data/" "algo:glove;dataset:6b;dims:{50,100};fold:1;norm:{none,abtt};unit:token" car,bike
+```
+
+from the WOMBAT directory returns 
+
 
 
 
