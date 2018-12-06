@@ -116,6 +116,7 @@ class connector(object):
 
         emb_db = self.WM._get_embdb(we_param_dict, create=True)
         emb_db.DB.cursor().execute('PRAGMA temp_store = 2;')
+        normalize=normalize.lower()
         if normalize=="":
             print("Doing direct DB insert ... ")
             b = tqdm(total=lines_to_read, ncols=PROGBARWIDTH)
@@ -131,8 +132,8 @@ class connector(object):
                     continue
                 b.update(1)
             b.close()
-        else:        
-            print("Normalizing to norm %s. Reading file ... "%normalize)            
+        else:
+            print("Normalizing with %s. Reading file ... "%normalize)
             b = tqdm(total=lines_to_read, ncols=PROGBARWIDTH)
             vectors=[]
             words=[]
@@ -144,10 +145,11 @@ class connector(object):
                 b.update(1)
             print("\nNormalizing ...")
             b = tqdm(total=lines_to_read, ncols=PROGBARWIDTH)
-            #print(vectors)
-            n=preprocessing.normalize(vectors,norm=normalize,axis=1)#,copy=True,return_norm=True)
-#            print(type(n))
-#            print(n.shape)
+            if normalize in ('l1','l2','max'):
+                n=preprocessing.normalize(vectors,norm=normalize,axis=1, dtype=dtype)#,copy=True,return_norm=True)
+            elif normalize == "abtt":
+                dim=int(we_param_dict['dims']) # get dim for D
+                n=abtt_postproc(np.vstack(vectors),D=max(1,int(dim/100)), dtype=dtype)
             for word, vector in zip(words,n):
                 try: emb_db.DB.cursor().execute('INSERT INTO vectors (word, vector) values (?,?)', (word,vector))
                 except sqlite3.IntegrityError as ex:

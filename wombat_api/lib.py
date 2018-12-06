@@ -1,12 +1,14 @@
 import itertools, io, re, sys, sqlite3, copy
 import numpy as np
 import scipy.spatial.distance as dist
+from sklearn.decomposition import PCA
+
 
 MASTER_DB_NAME  =   "wombat_master.sqlite"
 PROGBARWIDTH    =   70
 CHUNKSIZE       =   300
 
-NAMED_DISTANCE_MEASURES = {'cosine':dist.cosine, 'euclidean':dist.euclidean, 'cityblock':dist.cityblock, 'canberra':dist.canberra}
+NAMED_DISTANCE_MEASURES = {'cosine':dist.cosine, 'euclidean':dist.euclidean, 'cityblock':dist.cityblock, 'canberra':dist.canberra, 'chebyshev':dist.chebyshev}
 
 def expand_parameter_grids(we_params, base_figsize=(5,5)):
     """ Receives a string of the form "att1:val;att2:{vala,valb};att3:{,valc}"
@@ -78,7 +80,16 @@ def expand_parameter_grids(we_params, base_figsize=(5,5)):
     return (param_dict_list, plot_coords, rows, cols, pages)
 
 
-
+def abtt_postproc(V, dtype=np.float32, D=0):
+    print(dtype)
+    assert D >= 1
+    V_ = V - V.mean(0)
+    pca = PCA()
+    pca.fit(V_)
+    s = np.zeros(V.shape, dtype=dtype)
+    for i in range(D):
+        s += np.repeat((pca.components_[i] * V_).sum(1)[:, None], V.shape[1], 1) * pca.components_[i]
+    return V_ - s
 
 
 """
