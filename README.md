@@ -1112,7 +1112,6 @@ Train embedding vectors on the preprocessed training data, using your favourite 
 <h4>Pairwise Distance</h4>
 
 <p>
-
 The computation of pairwise semantic distance is a standard task in NLP. One common application is computing the <b>similarity of pre-defined sentence pairs</b>. WOMBAT provides the script ```tools/sentence_pair_similarity.py``` for this task, which uses the method ```wombat_api.analyse.plot_pairwise_distances```.
 
  ```python
@@ -1177,5 +1176,36 @@ pd = plot_pairwise_distances(vecs1, None, arrange_by=wec_ids,
 Calling this script produces the following output:
 
 ![Wombat full list similarity plot](https://github.com/nlpAThits/WOMBAT/blob/master/data/images/wombat_full_pair_similarity.png)
+
+</p>
+
+<h4>Most Similar</h4>
+<p>
+
+```python
+import sys
+from wombat_api.core import connector as wb_conn
+from wombat_api.analyse import get_most_similar
+import scipy.spatial.distance as dist
+
+wbpath=sys.argv[1]
+wec_ids=sys.argv[2]
+targets=sys.argv[3].split(",")
+try:
+    to_rank=sys.argv[4].split(",")
+except IndexError:
+    to_rank=[]
+
+wbc = wb_conn(path=wbpath, create_if_missing=False)
+
+sims = get_most_similar(wbc, wec_ids, targets=targets, measures=[dist.cosine], to_rank=to_rank)
+for (w, wec, mes, simlist) in sims:
+    print("\n%s"%(wec))
+    for (t,s) in simlist:
+        print("%s(%s, %s)\t%s"%(mes,w,t,s))
+
+```
+
+
 
 </p>

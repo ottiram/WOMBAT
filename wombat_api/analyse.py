@@ -8,17 +8,17 @@ from sklearn import manifold
 import scipy.spatial.distance as dist
 
 #####
-try:
-    import igraph as ig
-    from igraph.clustering import VertexClustering
-    from igraph.layout import Layout
-    from igraph import Edge
-    import plotly
-    import plotly.plotly as py
-    import plotly.graph_objs as go
-except ModuleNotFoundError as mne:
-    print(mne)
-    print("Skipping import for now")
+#try:
+#    import igraph as ig
+#    from igraph.clustering import VertexClustering
+#    from igraph.layout import Layout
+#    from igraph import Edge
+#    import plotly
+#    import plotly.plotly as py
+#    import plotly.graph_objs as go
+#except ModuleNotFoundError as mne:
+#    print(mne)
+#    print("Skipping import for now")
 
 
 
@@ -447,7 +447,7 @@ def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measures=[d
         print("Getting vectors from %s *once*!"%dict_to_sorted_string(we_params_dict, pretty=True))
         current_emb=None
         if len(to_rank)>0:
-            current_emb=wb.get_vectors(for_input=[to_rank], as_tuple=True, verbose=verbose)
+            current_emb=wb.get_vectors(we_params_dict, {}, for_input=[to_rank], as_tuple=True, verbose=verbose)[0][1][0][2]
             #pass
             # TODO
         else:

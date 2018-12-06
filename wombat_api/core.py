@@ -14,7 +14,7 @@ class connector(object):
     def __init__(self, path="", create_if_missing=False, list_contents=False):
         self.WM     = None
         self.PATH   = ""
-        version     = "2.0"
+        version     = "2.1"
         # This raises and passes on an exception if the masterdb does not exist, and we do not want to create one
         try: self.WM=masterdb(path=path, create_if_missing=create_if_missing)
         except NoSuchWombatMasterDBException as ex: raise
