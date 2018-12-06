@@ -264,8 +264,7 @@ class connector(object):
                             pattern="",
                             exclude_pattern="",  
                             as_tuple=True, 
-                            verbose=False,
-                            label=""):
+                            verbose=False):
         (we_params_dict_list, _, _, _, _)=expand_parameter_grids(wec_identifier)
         total_result = []
 
@@ -274,7 +273,7 @@ class connector(object):
             if verbose: print(we_id)
             embdb=self.WM._get_embdb(we_param_dict)
             vecs=embdb.get_matching_vectors(pattern=pattern, exclude_pattern=exclude_pattern, as_tuple=as_tuple)
-            we_id = we_id if label=="" else label+"@"+we_id
+            we_id = "P:"+pattern+"_XP:"+exclude_pattern+"@"+we_id
             result_for_we=(we_id,[('',[],vecs)])
             total_result.append(result_for_we)
         return total_result
@@ -525,20 +524,39 @@ class embeddingdb(object):
 
     def get_matching_vectors(self, as_tuple=True, verbose=False, pattern="", exclude_pattern=""):
         result = []
-        if as_tuple: # Retrieve tuples of (word, vector)
-            if pattern == "":
+        if as_tuple: # Retrieve tuples of (word, vector)        
+            if pattern == "" and exclude_pattern == "":
+                # Just get everything
                 for res in self.DB.cursor().execute('select word, vector from vectors '):
                     result.append(res)
-            else:
-                #for res in self.DB.cursor().execute("select word, vector from vectors where word glob ?  ", (pattern, )):
-                for res in self.DB.cursor().execute("select word, vector from vectors where word glob ? and not word glob ?", (pattern, exclude_pattern)):
+            elif pattern == "":
+                # Everything except exclude_pattern
+                for res in self.DB.cursor().execute("select word, vector from vectors where not word glob ?", (exclude_pattern, )):
+                    result.append(res)
+            elif exclude_pattern == "":
+                # Everything matching pattern
+                for res in self.DB.cursor().execute("select word, vector from vectors where word glob ?", (pattern, )):
                     result.append(res)                
+            else:
+                # Everything matching pattern, except except_pattern
+                for res in self.DB.cursor().execute("select word, vector from vectors where word glob ?  and not word glob ?", (pattern, exclude_pattern )):
+                    result.append(res)                
+                                                                    
         else: # Retrieve vectors only
-            if pattern == "":
+            if pattern == "" and exclude_pattern == "":
+                # Just get everything
                 for res in self.DB.cursor().execute('select vector from vectors '):
                     result.append(res)
+            elif pattern == "":
+                # Everything except exclude_pattern
+                for res in self.DB.cursor().execute("select vector from vectors where not word glob ?", (exclude_pattern, )):
+                    result.append(res)
+            elif exclude_pattern == "":
+                # Everything matching pattern
+                for res in self.DB.cursor().execute("select vector from vectors where word glob ?", (pattern, )):
+                    result.append(res)                
             else:
-                #for res in self.DB.cursor().execute("select vector from vectors where word glob ?  ", (pattern, )):
+                # Everything matching pattern, except except_pattern
                 for res in self.DB.cursor().execute("select vector from vectors where word glob ?  and not word glob ?", (pattern, exclude_pattern )):
                     result.append(res)                
         return result

@@ -1,13 +1,14 @@
 import sys
 from wombat_api.core import connector as wb_conn
 
-wbpath="data/wombat-data/"
+wbpath=sys.argv[1]
+wec_ids=sys.argv[2]
+pattern=sys.argv[3]
+try:                exclude_pattern=sys.argv[4]
+except IndexError:  exclude_pattern=""
+
 wbc = wb_conn(path=wbpath, create_if_missing=False)
-
-wec_ids="algo:glove;dataset:6b;dims:50;fold:1;unit:token"
-pattern=sys.argv[1]
-
-vecs = wbc.get_matching_vectors(wec_ids, pattern=pattern, label=pattern)
+vecs = wbc.get_matching_vectors(wec_ids, pattern=pattern, exclude_pattern=exclude_pattern)
 
 # One wec_result for each wec specified in wec_identifier
 for wec_index in range(len(vecs)):
