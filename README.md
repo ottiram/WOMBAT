@@ -150,8 +150,6 @@ conda install -c conda-forge nltk==3.2.5
 </p>
 
 
-
-
 <h3>Importing Pre-Trained Embeddings to WOMBAT: GloVe</h3>
 <p>
 
@@ -196,7 +194,7 @@ Extract them into ```data/embeddings ```. The WOMBAT master and embeddings data 
 
 <p>
 
-The above import assigns only the minimally required ```ATT:VAL``` pairs to the embeddings.
+The above import assigns the following <b>minimally required</b> ```ATT:VAL``` pairs to the embeddings.
 
 <table>
 <tr><td><b>Attribute</b></td><td><b>Meaning</b></td></tr>
@@ -204,8 +202,15 @@ The above import assigns only the minimally required ```ATT:VAL``` pairs to the 
 <tr><td>dataset</td><td>Descriptive label for the <b>data set</b> used for training these embedding vectors.</td></tr>
 <tr><td>dims</td><td><b>Dimensionality</b> of these embedding vectors. Required for description and for creating right-sized <b>empty</b> vectors for OOV words.</td></tr>
 <tr><td>fold</td><td>Indicates whether the embedding vectors are <b>case-sensitive</b> (fold=0) or not (fold=1). If fold=1, input words are lowercased before lookup.</td></tr>
-<tr><td>unit</td><td>Unit of representation used in the embedding vectors. Works as a descriptive label with pre-trained embeddings for which no custom preprocessing has been integrated into WOMBAT. If custom preprocessing exists, the value of this attribute is passed to the process() method. The current preprocessor modules support the values <b>stem</b> and <b>token</b>.</td></tr>
+<tr><td>unit</td><td>Unit of representation used in the embedding vectors. Works as a descriptive label with pre-trained embeddings for which no custom preprocessing has been integrated into WOMBAT. If custom preprocessing exists, the value of this attribute is passed to the process() method. The current preprocessor modules (cf. below) support the values <b>stem</b> and <b>token</b>.</td></tr>
 </table>
+
+In addition, the following user-defined ```ATT:VAL``` pair is assigned
+<table>
+<tr><td><b>Attribute</b></td><td><b>Meaning</b></td></tr>
+<tr><td>norm</td><td>Descriptive label for the <b>normalization</b> applied at input time. <b>none</b> or one of <b>l1</b>, <b>l2</b>, or <b>abtt</b></td></tr>
+</table>
+
 </p>
 
 <p>
