@@ -5,9 +5,9 @@ wbc = wb_conn(path=wbpath, create_if_missing=False)
 
 wec_ids="algo:glove;dataset:6b;dims:50;fold:1;unit:token;norm:{none,abtt}"
 
-vecs = wbc.get_vectors(wec_ids, {}, for_input=[['this','is','a', 'test'], ['yet', 'another', 'test']])
+vecs = wbc.get_vectors(wec_ids, {}, for_input=[['this','is','a', 'test'], ['yet', 'another', 'test']], in_order=False)
 
-# One wec_result for each wec specified in wec_identifier. {none,abtt} notation is expanded at execution time.
+# One wec_result for each wec specified in wec_identifier. norm:{none,abtt} notation is expanded at execution time.
 for wec_index in range(len(vecs)):
     # Index 0 element is the wec_id
     print("\nWEC: %s"%vecs[wec_index][0])
