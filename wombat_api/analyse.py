@@ -57,7 +57,7 @@ def plot_tsne(vector_result, pdf_name="", iters=250, size=(10,10), share_axes=('
                     vectors.append(v)
             x = np.asarray(vectors)
 #            print(x)
-            sys.stdout.write("Doing tsne magic ...")
+            sys.stdout.write("Doing tsne magic for %s units ..."%str(len(vectors)))
             sys.stdout.flush()
             tsne = manifold.TSNE(n_components=2, init='random', random_state=9, n_iter=iters)
 #            print(x)
