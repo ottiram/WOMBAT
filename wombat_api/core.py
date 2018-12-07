@@ -104,7 +104,8 @@ class connector(object):
             print(C.RED+C.BOLD+"Embedding DB already exists for descriptor\n"+\
                 desc+C.END+"\n"+C.YELLOW+"-->"+db_meta['db_path']+C.END)
             print("Updating DBs is not supported. DB will not be modified!\n")
-            sys.exit()
+##            sys.exit()
+            return
 
         lines_to_read=0
         print("Scanning number of lines to import ...")
