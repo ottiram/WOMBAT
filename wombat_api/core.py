@@ -274,14 +274,14 @@ class connector(object):
             if verbose: print(we_id)
             embdb=self.WM._get_embdb(we_param_dict)
             vecs=embdb.get_matching_vectors(pattern=pattern, exclude_pattern=exclude_pattern, as_tuple=as_tuple)
-            we_id = "P:"+pattern+"_XP:"+exclude_pattern+"@"+we_id
+            we_id = "P:"+pattern+";XP:"+exclude_pattern+";@"+we_id
             result_for_we=(we_id,[('',[],vecs)])
             total_result.append(result_for_we)
         return total_result
 
     def contents(self):
         if self.WM!=None:
-            for r in self.WM.DB.cursor().execute("select we_id, dims, unit, fold,descriptor, prepro_name from we_meta order by (we_id)"):
+            for r in self.WM.DB.cursor().execute("select we_id, dims, unit, fold, descriptor, prepro_name from we_meta order by (we_id)"):
                 print(C.BLUE+C.BOLD+str(r)+C.END)    
 
 # end connector class

@@ -25,6 +25,71 @@ import scipy.spatial.distance as dist
 from wombat_api.lib import *
 TITLE_WRAP=40
 
+def plot_tsne(vector_result, pdf_name="", iters=250, size=(10,10), share_axes=('none','none'), x_lim=None, y_lim=None, fontsize=14, arrange_by="", suppress="", silent=True):
+
+    (we_params_dict_list, plot_coords, plot_rows, plot_cols, plot_pages) = expand_parameter_grids(arrange_by)
+    
+    pdf_name=pdf_name if pdf_name!="" else str(psutil.Process().pid)+"_plot.pdf"
+    print("Writing plot to file %s ..."%pdf_name)
+    pdf=PdfPages(pdf_name)
+    x_to_share=share_axes[0]
+    y_to_share=share_axes[1]
+
+    if x_lim!=None:
+        x_to_share='all'
+    if y_lim!=None:
+        y_to_share='all'
+
+    # Iterate over pages (there is at least one)
+    for pages in range(plot_pages):
+        # Create container for current page
+        fig,axes = plt.subplots(nrows=plot_rows, ncols=plot_cols, 
+                        figsize=(size[0]*plot_cols, size[1]*plot_rows), 
+                        squeeze=False, sharex=x_to_share, sharey=y_to_share)        
+
+        for p,we_params_dict in enumerate(we_params_dict_list):
+            (row,col,page)=plot_coords[p]
+            if pages != page: continue
+            vectors,units=[],[]
+            for (_, _, tuples) in vector_result[p][1]:
+                for (w,v) in tuples:
+                    units.append(w)
+                    vectors.append(v)
+            x = np.asarray(vectors)
+#            print(x)
+            sys.stdout.write("Doing tsne magic ...")
+            sys.stdout.flush()
+            tsne = manifold.TSNE(n_components=2, init='random', random_state=9, n_iter=iters)
+#            print(x)
+#            print(tsne.get_params())
+            y = tsne.fit_transform(x)
+#            print(y)
+            sys.stdout.write(" done\n")
+            sys.stdout.flush()
+
+            if x_lim !=None:
+                axes[row,col].set_xlim(x_lim)
+            if y_lim !=None:
+                axes[row,col].set_ylim(y_lim)
+
+            axes[row,col].scatter(y[:, 0], y[:, 1], marker='.', c='w')
+            axes[row,col].set_title(vector_result[p][0])
+            for i, txt in enumerate(units):
+                if suppress != "" and re.match(suppress, txt)!=None:
+                    continue
+#                if highlight=="":
+#                    axes[row,col].annotate(txt, (y[:,0][i], y[:,1][i]), fontsize=fontsize, color='black', fontweight='normal')
+#                elif re.match( highlight, txt)!=None:
+#                    axes[row,col].annotate(txt, (y[:,0][i], y[:,1][i]), fontsize=fontsize, color='green', fontweight='bold')
+#                else:
+                axes[row,col].annotate(txt, (y[:,0][i], y[:,1][i]), fontsize=fontsize, color='black', fontweight='normal')
+        # end page
+
+        pdf.savefig()    
+    pdf.close()
+    if not silent: wb.open(pdf_name)
+
+
 def interpolate(start, end):
     mid =  (start+end)/2
     return([(start+mid)/2,mid,(mid+end)/2])
@@ -265,68 +330,6 @@ def plot_pairwise_distances(vector_result1, vector_result2, pdf_name="", size=(1
 
 
 
-def plot_tsne(vector_result, pdf_name="", iters=250, size=(10,10), share_axes=('none','none'), x_lim=None, y_lim=None, fontsize=14, arrange_by="", suppress="", silent=True):
-
-    (we_params_dict_list, plot_coords, plot_rows, plot_cols, plot_pages) = expand_parameter_grids(arrange_by)
-    
-    pdf_name=pdf_name if pdf_name!="" else str(psutil.Process().pid)+"_plot.pdf"
-    pdf=PdfPages(pdf_name)
-    x_to_share=share_axes[0]
-    y_to_share=share_axes[1]
-
-    if x_lim!=None:
-        x_to_share='all'
-    if y_lim!=None:
-        y_to_share='all'
-
-    # Iterate over pages (there is at least one)
-    for pages in range(plot_pages):
-        # Create container for current page
-        fig,axes = plt.subplots(nrows=plot_rows, ncols=plot_cols, 
-                        figsize=(size[0]*plot_cols, size[1]*plot_rows), 
-                        squeeze=False, sharex=x_to_share, sharey=y_to_share)        
-
-        for p,we_params_dict in enumerate(we_params_dict_list):
-            (row,col,page)=plot_coords[p]
-            if pages != page: continue
-            vectors,units=[],[]
-            for (_, _, tuples) in vector_result[p][1]:
-                for (w,v) in tuples:
-                    units.append(w)
-                    vectors.append(v)
-            x = np.asarray(vectors)
-#            print(x)
-            sys.stdout.write("Doing tsne magic ...")
-            sys.stdout.flush()
-            tsne = manifold.TSNE(n_components=2, init='random', random_state=9, n_iter=iters)
-#            print(x)
-#            print(tsne.get_params())
-            y = tsne.fit_transform(x)
-#            print(y)
-            sys.stdout.write(" done\n")
-            sys.stdout.flush()
-
-            if x_lim !=None:
-                axes[row,col].set_xlim(x_lim)
-            if y_lim !=None:
-                axes[row,col].set_ylim(y_lim)
-
-            axes[row,col].scatter(y[:, 0], y[:, 1], marker='.', c='w')
-            axes[row,col].set_title(vector_result[p][0])
-            for i, txt in enumerate(units):
-                if suppress != "" and re.match(suppress, txt)!=None:
-                    continue
-#                if highlight=="":
-#                    axes[row,col].annotate(txt, (y[:,0][i], y[:,1][i]), fontsize=fontsize, color='black', fontweight='normal')
-#                elif re.match( highlight, txt)!=None:
-#                    axes[row,col].annotate(txt, (y[:,0][i], y[:,1][i]), fontsize=fontsize, color='green', fontweight='bold')
-#                else:
-                axes[row,col].annotate(txt, (y[:,0][i], y[:,1][i]), fontsize=fontsize, color='black', fontweight='normal')
-        # end page
-
-        pdf.savefig()    
-    pdf.close()
-    if not silent: wb.open(pdf_name)
 
 
 def compute_unit_distance_matrices(vector_result1, vector_result2, metric=dist.cosine, ignore_matching=True, invert=False, ignore=['*sw*']):
