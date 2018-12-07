@@ -265,7 +265,7 @@ def plot_pairwise_distances(vector_result1, vector_result2, pdf_name="", size=(1
 
 
 
-def plot_tsne(vector_result, pdf_name="", iters=250, size=(10,10), share_axes=('none','none'), x_lim=None, y_lim=None, fontsize=14, arrange_by="", highlight="", suppress="", silent=True):
+def plot_tsne(vector_result, pdf_name="", iters=250, size=(10,10), share_axes=('none','none'), x_lim=None, y_lim=None, fontsize=14, arrange_by="", suppress="", silent=True):
 
     (we_params_dict_list, plot_coords, plot_rows, plot_cols, plot_pages) = expand_parameter_grids(arrange_by)
     
@@ -299,16 +299,10 @@ def plot_tsne(vector_result, pdf_name="", iters=250, size=(10,10), share_axes=('
             sys.stdout.write("Doing tsne magic ...")
             sys.stdout.flush()
             tsne = manifold.TSNE(n_components=2, init='random', random_state=9, n_iter=iters)
-            #tsne = manifold.TSNE(n_components=2, init='pca', n_iter=iters)
-#            print(x.shape)
-#            init=np.ones((len(vectors),2))
-#            init.fill(.1)
-#            print(init)
-            #tsne = manifold.TSNE(n_components=2, init=init, n_iter=iters, n_iter_without_progress=1000, learning_rate=500)
-            print(x)
-            print(tsne.get_params())
+#            print(x)
+#            print(tsne.get_params())
             y = tsne.fit_transform(x)
-            print(y)
+#            print(y)
             sys.stdout.write(" done\n")
             sys.stdout.flush()
 
@@ -322,12 +316,12 @@ def plot_tsne(vector_result, pdf_name="", iters=250, size=(10,10), share_axes=('
             for i, txt in enumerate(units):
                 if suppress != "" and re.match(suppress, txt)!=None:
                     continue
-                if highlight=="":
-                    axes[row,col].annotate(txt, (y[:,0][i], y[:,1][i]), fontsize=fontsize, color='black', fontweight='normal')
-                elif re.match( highlight, txt)!=None:
-                    axes[row,col].annotate(txt, (y[:,0][i], y[:,1][i]), fontsize=fontsize, color='green', fontweight='bold')
-                else:
-                    axes[row,col].annotate(txt, (y[:,0][i], y[:,1][i]), fontsize=fontsize, color='black', fontweight='normal')
+#                if highlight=="":
+#                    axes[row,col].annotate(txt, (y[:,0][i], y[:,1][i]), fontsize=fontsize, color='black', fontweight='normal')
+#                elif re.match( highlight, txt)!=None:
+#                    axes[row,col].annotate(txt, (y[:,0][i], y[:,1][i]), fontsize=fontsize, color='green', fontweight='bold')
+#                else:
+                axes[row,col].annotate(txt, (y[:,0][i], y[:,1][i]), fontsize=fontsize, color='black', fontweight='normal')
         # end page
 
         pdf.savefig()    
@@ -447,12 +441,9 @@ def get_most_similar(wb, we_param_grid_string, targets=[], count=10, measures=[d
         print("Getting vectors from %s *once*!"%dict_to_sorted_string(we_params_dict, pretty=True))
         current_emb=None
         if len(to_rank)>0:
-            current_emb=wb.get_vectors(we_params_dict, {}, for_input=[to_rank], as_tuple=True, verbose=verbose)[0][1][0][2]
-            #pass
-            # TODO
+            current_emb = wb.get_vectors(we_params_dict, {}, for_input=[to_rank], as_tuple=True, verbose=verbose)[0][1][0][2]
         else:
             current_emb = wb.get_all_vectors(we_params_dict,as_tuple=True)[0][1][0][2]
-            #retrieved=retrieved[0][1][0][2]
 
         # Iterate over the target words
         for target in targets:
