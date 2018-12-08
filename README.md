@@ -136,7 +136,7 @@ $ conda create --name wombat python=3.6 numpy tqdm psutil matplotlib scikit-lear
 $ source activate wombat
 $ git clone https://github.com/nlpAThits/WOMBAT.git
 $ cd WOMBAT
-$ pip install -e
+$ pip install .
 ```
 </p>
 
