@@ -165,6 +165,23 @@ class connector(object):
     # end import_from file
 
 
+    def sample_words(self, wec_identifier, seed=None, size="10%"):
+        (we_params_dict_list, _, _, _, _)=expand_parameter_grids(wec_identifier)
+        total_result = []
+
+        for we_param_dict in we_params_dict_list:
+            we_id = dict_to_sorted_string(we_param_dict, pretty=True)
+            result_for_we = []
+            try:
+                embdb=self.WM._get_embdb(we_param_dict)
+            except NoSuchWombatEmbeddingsException as ex:
+                print(ex)
+                continue
+#            result_for_we.append())
+            total_result.append((we_id, embdb.sample_words(seed=seed,size=size)))
+        return total_result
+    
+
     def get_all_vectors(self, wec_identifier, as_tuple=True, verbose=False):
         (we_params_dict_list, _, _, _, _)=expand_parameter_grids(wec_identifier)
         total_result = []
@@ -445,6 +462,18 @@ class embeddingdb(object):
         self.DB = sqlite3.connect(db_path, detect_types=sqlite3.PARSE_DECLTYPES)
         return
 
+
+    def sample_words(self, seed=None, size="10%"):
+        if seed != None: np.random.seed(seed)
+        result=[]
+        for word in self.DB.cursor().execute('select word from vectors'):
+            result.append(word[0])
+        result.sort()
+        np.random.shuffle(result)
+        if size.endswith("%"):
+            size = len(result)*(float(size[0:-1])/100)
+        return result[0:int(size)]
+
     def set_master(self,master):
         self.MASTER=master
 
@@ -460,6 +489,7 @@ class embeddingdb(object):
             query = 'select vector from vectors'
             result=cursor.execute(query)
         return result
+
 
     def get_vectors(self, prepro_cache, for_input=[[]], raw=True, as_tuple=True, in_order=False, ignore_oov=False, default=np.nan, verbose=False, no_phrases=False):
         """ Get word embedding vectors for the input in for_input. The result is a list of tuples.
