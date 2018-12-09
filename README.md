@@ -1,7 +1,7 @@
 # WOMBAT
 <p>
 
-See <a href="http://arxiv.org/abs/1807.00717" target="_blank">this paper</a> (to appear at <a href="http://coling2018.org/accepted-demo-papers/" target="_blank">COLING 2018</a>) for additional details. Please cite the COLING paper if you use WOMBAT.
+See our <a href="http://aclweb.org/anthology/C18-2012" target="_blank">COLING 2018 demo paper</a> for additional details. Please cite the paper if you use WOMBAT.
 </p>
 
 <p>
@@ -27,7 +27,7 @@ Note: Due to a name clash with another python package, the actual WOMBAT package
  |    `.   \;\    /;/    ;  /        |
  |      !    :   :     ,/  ;         |
  |       (`. : _ : ,/     ;          |
- |        \\\`"^" ` :    ;           |   This is WOMBAT, the WOrd eMBedding dATa base API (Version 2.0)
+ |        \\\`"^" ` :    ;           |   This is WOMBAT, the WOrd eMBedding dATa base API (Version 2.1)
  |                (    )             |
  |                 ////              |
  |                                   |
