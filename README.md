@@ -688,6 +688,13 @@ Vector: [ 0.086849   -0.17321     1.00810003  0.21253    -0.5334     -0.13697
   0.34661001  0.23172   ]
 </pre>
 
+<p>
+
+WOMBAT also supports random sampling from WEC vocabularies. Sample size can be specified as an absolute size or as percentage.
+
+</p>
+
+
 
 <h3>Integrating automatic preprocessing</h3>
 <h4>Simple preprocessing (no MWEs)</h4>
@@ -1117,6 +1124,12 @@ Train embedding vectors on the preprocessed training data, using your favourite 
 </li>
 
 </ol>
+</p>
+
+<p>
+
+
+
 </p>
 
 <h3>Use Cases</h3>
