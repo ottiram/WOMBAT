@@ -38,7 +38,7 @@ Note: Due to a name clash with another python package, the actual WOMBAT package
 
 <h3>Introduction</h3>
 <p>
-<b>WOMBAT</b>, the WOrd eMBedding dATabase, is a light-weight Python tool for more transparent, efficient, and robust access to potentially large numbers of word embedding collections (WECs). 
+<b>WOMBAT</b>, the <b>WO</b>rd e<b>MB</b>edding d<b>AT</b>abase, is a light-weight Python tool for more transparent, efficient, and robust access to potentially large numbers of word embedding collections (WECs). 
 It supports NLP researchers and practitioners in developing compact, efficient, and reusable code. 
 Key features of WOMBAT are
 <ol type="1">
