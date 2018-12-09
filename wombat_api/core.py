@@ -165,7 +165,7 @@ class connector(object):
     # end import_from file
 
 
-    def sample_words(self, wec_identifier, seed=None, size="10%"):
+    def sample_vocab(self, wec_identifier, seed=None, size="10%"):
         (we_params_dict_list, _, _, _, _)=expand_parameter_grids(wec_identifier)
         total_result = []
 
@@ -178,7 +178,7 @@ class connector(object):
                 print(ex)
                 continue
 #            result_for_we.append())
-            total_result.append((we_id, embdb.sample_words(seed=seed,size=size)))
+            total_result.append((we_id, embdb.sample_vocab(seed=seed,size=size)))
         return total_result
     
 
@@ -463,7 +463,7 @@ class embeddingdb(object):
         return
 
 
-    def sample_words(self, seed=None, size="10%"):
+    def sample_vocab(self, seed=None, size="10%"):
         if seed != None: np.random.seed(seed)
         result=[]
         for word in self.DB.cursor().execute('select word from vectors'):

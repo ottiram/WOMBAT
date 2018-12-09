@@ -14,6 +14,6 @@ for i in range(len(sys.argv)):
     
         
 wbc = wb_conn(path=wbpath, create_if_missing=False)
-vecs = wbc.sample_words(wec_ids, seed=seed, size=size)
+vecs = wbc.sample_vocab(wec_ids, seed=seed, size=size)
 print(vecs)
 
