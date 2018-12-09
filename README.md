@@ -1,7 +1,7 @@
 # WOMBAT
 <p>
 
-See our <a href="http://aclweb.org/anthology/C18-2012" target="_new">COLING 2018 demo paper</a> for additional details. Please cite the paper if you use WOMBAT.
+See our <a href="http://aclweb.org/anthology/C18-2012" target="new">COLING 2018 demo paper</a> for additional details. Please cite the paper if you use WOMBAT.
 </p>
 
 <p>
