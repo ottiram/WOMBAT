@@ -14,7 +14,7 @@ class connector(object):
     def __init__(self, path="", create_if_missing=False, list_contents=False):
         self.WM     = None
         self.PATH   = ""
-        version     = "2.1"
+        version     = "2.2"
         # This raises and passes on an exception if the masterdb does not exist, and we do not want to create one
         try: self.WM=masterdb(path=path, create_if_missing=create_if_missing)
         except NoSuchWombatMasterDBException as ex: raise
@@ -314,7 +314,7 @@ class masterdb(object):
         if not os.path.exists(self.PATH+MASTER_DB_NAME):
             if create_if_missing:
                 print("Creating new DB %s ... "%(self.PATH+MASTER_DB_NAME))
-                new_db = sqlite3.connect(self.PATH+MASTER_DB_NAME)
+                new_db = sqlite3.connect(self.PATH+MASTER_DB_NAME, check_same_thread=False)
                 cursor = new_db.cursor()
                 cursor.execute("CREATE TABLE we_meta(we_id INTEGER PRIMARY KEY,dims INTEGER,unit VARCHAR,fold INTEGER,descriptor VARCHAR,\
                 prepro_name VARCHAR,prepro_code VARCHAR,CONSTRAINT desc_unique UNIQUE (descriptor))") 
@@ -446,7 +446,7 @@ class embeddingdb(object):
         if not os.path.exists(db_path):
             if create:
                 if not silent: print("Creating new Embedding DB ...")
-                new_db = sqlite3.connect(db_path,detect_types=sqlite3.PARSE_DECLTYPES)
+                new_db = sqlite3.connect(db_path,detect_types=sqlite3.PARSE_DECLTYPES, check_same_thread=False)
                 new_db.cursor().execute("CREATE TABLE vectors ( word VARCHAR PRIMARY KEY, vector BLOB )")
                 new_db.cursor().execute("CREATE UNIQUE index word_index on vectors (word asc) ")
                 new_db.commit()
@@ -459,7 +459,7 @@ class embeddingdb(object):
                 "Word Embedding DB already exists\n"+C.BOLD+C.YELLOW+db_path+C.END))
 
         if not silent: print(C.BOLD+C.PURPLE+"Connecting to WOMBAT Embedding DB "+C.PURPLE+C.BOLD+db_path+" ... "+C.END)
-        self.DB = sqlite3.connect(db_path, detect_types=sqlite3.PARSE_DECLTYPES)
+        self.DB = sqlite3.connect(db_path, detect_types=sqlite3.PARSE_DECLTYPES, check_same_thread=False)
         return
 
 
